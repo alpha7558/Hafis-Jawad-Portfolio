@@ -1,597 +1,2907 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YOUR NAME — Brand & Identity Designer</title>
-<meta name="description" content="Logo, visual identity, and brand systems design portfolio.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@700;800;900&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:      #121212;
-    --ink-2:    #1c1c1c;
-    --bone:     #f6f3ec;
-    --bone-2:   #ece7db;
-    --flame:    #ff4d3d;
-    --citrine:  #ffc93d;
-    --electric: #6c4cff;
-    --teal:     #26d0b0;
-    --display:  'Archivo Expanded', ui-sans-serif, sans-serif;
-    --body:     'Manrope', ui-sans-serif, sans-serif;
-    --mono:     'IBM Plex Mono', ui-monospace, monospace;
-  }
-  *{ box-sizing:border-box; margin:0; padding:0; }
-  html{ scroll-behavior:smooth; }
-  body{
-    background:var(--ink);
-    color:var(--bone);
-    font-family:var(--body);
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  a{ color:inherit; }
-  ::selection{ background:var(--flame); color:var(--ink); }
-  .wrap{ max-width:1200px; margin:0 auto; padding:0 32px; }
-  @media (max-width:640px){ .wrap{ padding:0 20px; } }
-  :focus-visible{ outline:3px solid var(--citrine); outline-offset:3px; }
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
 
-  .eyebrow{
-    font-family:var(--mono); font-size:12.5px; font-weight:500;
-    letter-spacing:.14em; text-transform:uppercase; color:var(--teal);
-    display:flex; align-items:center; gap:10px;
-  }
-  .on-bone .eyebrow{ color:var(--electric); }
-  h1,h2,h3{ font-family:var(--display); line-height:1.02; letter-spacing:-.01em; }
+  <title>YOUR NAME — Creative Developer</title>
 
-  /* ============ NAV ============ */
-  header{
-    position:fixed; top:0; left:0; right:0; z-index:80;
-    background:rgba(18,18,18,.82); backdrop-filter:blur(10px);
-    border-bottom:1px solid rgba(246,243,236,.08);
-  }
-  header .wrap{ display:flex; align-items:center; justify-content:space-between; height:74px; }
-  .wordmark{ font-family:var(--display); font-weight:800; font-size:18px; }
-  .wordmark span{ color:var(--flame); }
-  nav ul{ list-style:none; display:flex; gap:28px; font-size:13.5px; font-family:var(--mono); }
-  nav a{ text-decoration:none; opacity:.75; transition:opacity .15s ease; }
-  nav a:hover{ opacity:1; color:var(--citrine); }
-  .nav-cta{
-    font-family:var(--mono); font-size:13px; font-weight:500;
-    background:var(--flame); color:var(--ink);
-    padding:10px 18px; border-radius:3px; text-decoration:none;
-    transition:transform .15s ease, background .15s ease;
-  }
-  .nav-cta:hover{ background:var(--citrine); transform:translateY(-1px); }
-  @media (max-width:800px){ nav ul{ display:none; } }
+  <meta
+    name="description"
+    content="YOUR NAME — Creative developer building thoughtful digital experiences."
+  />
 
-  /* ============ MARQUEE (signature) ============ */
-  .marquee-row{ overflow:hidden; white-space:nowrap; }
-  .marquee-track{
-    display:inline-flex;
-    animation:scroll-left 26s linear infinite;
-  }
-  .marquee-track span{
-    font-family:var(--display); font-weight:800;
-    font-size:clamp(46px,9vw,110px);
-    padding-right:.4em;
-    -webkit-text-stroke:1.5px var(--bone);
-    color:transparent;
-  }
-  .marquee-track span:nth-child(4n+1){ color:var(--flame); -webkit-text-stroke:0; }
-  .marquee-track span:nth-child(4n+2){ color:var(--citrine); -webkit-text-stroke:0; }
-  .marquee-track span:nth-child(4n+3){ color:var(--electric); -webkit-text-stroke:0; }
-  @keyframes scroll-left{
-    from{ transform:translateX(0); }
-    to{ transform:translateX(-50%); }
-  }
-  @media (prefers-reduced-motion: reduce){
-    .marquee-track{ animation:none; }
-  }
+  <!-- =========================================================
+       FONTS
+       Replace these with your own fonts if you want.
+  ========================================================== -->
 
-  /* Skill ticker — quieter secondary marquee */
-  .ticker{
-    border-top:1px solid rgba(246,243,236,.12);
-    border-bottom:1px solid rgba(246,243,236,.12);
-    padding:16px 0;
-  }
-  .ticker-track{
-    display:inline-flex; gap:40px;
-    animation:scroll-left 34s linear infinite;
-  }
-  .ticker-track span{
-    font-family:var(--mono); font-size:12.5px; letter-spacing:.1em;
-    text-transform:uppercase; opacity:.55; white-space:nowrap;
-  }
-  @media (prefers-reduced-motion: reduce){ .ticker-track{ animation:none; } }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  /* ============ HERO ============ */
-  .hero{ padding:150px 0 40px; }
-  .hero .lede{
-    font-size:17.5px; max-width:52ch; opacity:.75; margin:26px 0 34px;
-  }
-  .cta-row{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:50px; }
-  .btn{
-    font-family:var(--mono); font-weight:500; font-size:13.5px;
-    padding:14px 26px; border-radius:3px; text-decoration:none;
-    display:inline-flex; align-items:center; gap:8px;
-    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
-  }
-  .btn-solid{ background:var(--flame); color:var(--ink); }
-  .btn-solid:hover{ background:var(--citrine); transform:translateY(-2px); }
-  .btn-outline{ border:1.5px solid rgba(246,243,236,.4); }
-  .btn-outline:hover{ border-color:var(--bone); transform:translateY(-2px); }
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
 
-  .hero-meta{
-    display:grid; grid-template-columns:repeat(4,auto) 1fr;
-    gap:44px; align-items:start; padding-top:36px;
-    border-top:1px solid rgba(246,243,236,.12);
-  }
-  .hero-stat b{
-    font-family:var(--display); font-size:30px; font-weight:800; color:var(--citrine); display:block;
-  }
-  .hero-stat span{ font-family:var(--mono); font-size:11.5px; opacity:.6; text-transform:uppercase; letter-spacing:.06em; }
-  .traits{ display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start; justify-content:flex-end; }
-  .trait{
-    font-family:var(--mono); font-size:12px; padding:7px 13px;
-    border:1px solid rgba(246,243,236,.25); border-radius:20px; opacity:.85;
-  }
-  @media (max-width:900px){
-    .hero-meta{ grid-template-columns:repeat(2,1fr); row-gap:26px; }
-    .traits{ grid-column:1/-1; justify-content:flex-start; }
-  }
+  <!-- =========================================================
+       GSAP
+  ========================================================== -->
 
-  /* ============ ABOUT (bone) ============ */
-  .about{ background:var(--bone); color:var(--ink); padding:90px 0; }
-  .about .wrap{ display:grid; grid-template-columns:1fr 1.4fr; gap:56px; }
-  .about h2{ font-size:clamp(26px,3.4vw,38px); margin-top:14px; }
-  .about-copy p{ font-size:16.5px; margin-bottom:18px; max-width:56ch; opacity:.85; }
-  .about-copy .pull{
-    font-family:var(--display); font-weight:800; font-size:clamp(20px,2.2vw,26px);
-    line-height:1.25; margin:26px 0; color:var(--electric);
-  }
-  @media (max-width:780px){ .about .wrap{ grid-template-columns:1fr; } }
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
 
-  /* ============ WORK ============ */
-  .work{ padding:96px 0; }
-  .section-head{ max-width:64ch; margin-bottom:50px; }
-  .section-head h2{ font-size:clamp(28px,3.6vw,42px); margin-top:14px; }
-  .section-head p{ margin-top:16px; font-size:15.5px; opacity:.65; max-width:60ch; }
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
 
-  .gallery{ display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:rgba(246,243,236,.1); }
-  .card{
-    background:var(--ink); position:relative; overflow:hidden;
-    border:1px solid rgba(246,243,236,.1);
-  }
-  .card-art{
-    aspect-ratio:1/1; background:var(--accent, var(--flame));
-    display:flex; align-items:center; justify-content:center;
-    transition:transform .35s ease;
-  }
-  .card:hover .card-art{ transform:scale(1.06); }
-  .card-art svg{ width:46%; height:46%; }
-  .card-body{ padding:22px 24px 26px; }
-  .card-body .num{ font-family:var(--mono); font-size:11.5px; opacity:.5; }
-  .card-body h3{ font-size:19px; font-weight:800; margin:8px 0 4px; }
-  .card-body .kind{ font-family:var(--mono); font-size:12px; opacity:.55; }
-  .card-tags{ display:flex; flex-wrap:wrap; gap:7px; margin-top:14px; }
-  .card-tags span{
-    font-family:var(--mono); font-size:10.5px; padding:4px 10px;
-    border:1px solid rgba(246,243,236,.25); border-radius:20px; opacity:.75;
-  }
-  @media (max-width:900px){ .gallery{ grid-template-columns:repeat(2,1fr); } }
-  @media (max-width:600px){ .gallery{ grid-template-columns:1fr; } }
+  <style>
 
-  /* ============ JOURNEY (bone) ============ */
-  .journey{ background:var(--bone); color:var(--ink); padding:96px 0; }
-  .journey .section-head p{ opacity:.6; }
-  .timeline{ display:flex; flex-direction:column; }
-  .tl-item{
-    display:grid; grid-template-columns:110px 1fr; gap:28px;
-    padding:26px 0; border-top:1.5px solid rgba(18,18,18,.14);
-  }
-  .tl-item:last-child{ border-bottom:1.5px solid rgba(18,18,18,.14); }
-  .tl-year{ font-family:var(--display); font-weight:800; font-size:22px; color:var(--flame); }
-  .tl-item h3{ font-size:18px; font-weight:800; margin-bottom:6px; }
-  .tl-item p{ font-size:14.5px; opacity:.75; max-width:60ch; }
-  @media (max-width:600px){ .tl-item{ grid-template-columns:1fr; gap:8px; } }
+    /* =========================================================
+       VARIABLES
+    ========================================================== */
 
-  /* ============ CAPABILITIES ============ */
-  .capabilities{ padding:96px 0; }
-  .cap-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(246,243,236,.1); }
-  .cap{ background:var(--ink); padding:32px 26px; }
-  .cap .mk{ width:34px; height:34px; border-radius:50%; margin-bottom:18px; }
-  .cap h3{ font-size:17.5px; font-weight:800; margin-bottom:10px; }
-  .cap p{ font-size:14px; opacity:.65; }
-  @media (max-width:900px){ .cap-grid{ grid-template-columns:repeat(2,1fr); } }
-  @media (max-width:600px){ .cap-grid{ grid-template-columns:1fr; } }
+    :root {
+      --bg: #f1f0eb;
+      --paper: #e8e7e2;
+      --white: #f8f8f5;
+      --black: #111111;
+      --muted: #777770;
+      --line: rgba(17,17,17,.16);
 
-  /* ============ TESTIMONIALS (bone) ============ */
-  .testimonials{ background:var(--bone); color:var(--ink); padding:96px 0; }
-  .t-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
-  .t-card{
-    background:#fff; border-radius:14px; padding:28px 26px;
-    border:1.5px solid rgba(18,18,18,.1);
-  }
-  .t-card p{ font-size:14.5px; opacity:.85; margin-bottom:20px; }
-  .t-name{ font-family:var(--display); font-weight:800; font-size:14.5px; }
-  .t-role{ font-family:var(--mono); font-size:11.5px; opacity:.55; margin-top:2px; }
-  @media (max-width:900px){ .t-grid{ grid-template-columns:1fr 1fr; } }
-  @media (max-width:600px){ .t-grid{ grid-template-columns:1fr; } }
+      --accent: #d9ff45;
 
-  /* ============ FAQ ============ */
-  .faq{ padding:96px 0; }
-  .faq-list{ max-width:820px; }
-  details{
-    border-top:1.5px solid rgba(246,243,236,.16);
-    padding:22px 0;
-  }
-  details:last-child{ border-bottom:1.5px solid rgba(246,243,236,.16); }
-  summary{
-    cursor:pointer; list-style:none; font-family:var(--display); font-weight:700;
-    font-size:17px; display:flex; justify-content:space-between; align-items:center; gap:20px;
-  }
-  summary::-webkit-details-marker{ display:none; }
-  summary .plus{ font-family:var(--mono); font-size:20px; color:var(--citrine); transition:transform .2s ease; flex:none; }
-  details[open] summary .plus{ transform:rotate(45deg); }
-  details p{ font-size:14.5px; opacity:.7; margin-top:14px; max-width:70ch; }
+      --radius: 28px;
 
-  /* ============ PACKAGES (bone) ============ */
-  .packages{ background:var(--bone); color:var(--ink); padding:96px 0; }
-  .pkg-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
-  .pkg{
-    border:2px solid var(--ink); border-radius:18px; padding:34px 30px;
-    position:relative; background:#fff;
-  }
-  .pkg.featured{ background:var(--ink); color:var(--bone); }
-  .pkg .badge{
-    position:absolute; top:-13px; right:28px; background:var(--flame); color:var(--ink);
-    font-family:var(--mono); font-size:11px; font-weight:600; padding:5px 12px; border-radius:20px;
-  }
-  .pkg h3{ font-size:20px; font-weight:800; }
-  .pkg .price{ font-family:var(--display); font-size:34px; font-weight:800; margin:14px 0 6px; }
-  .pkg .price span{ font-family:var(--mono); font-size:13px; font-weight:400; opacity:.6; }
-  .pkg .desc{ font-size:14px; opacity:.7; margin-bottom:20px; }
-  .pkg ul{ list-style:none; display:flex; flex-direction:column; gap:10px; margin-bottom:26px; }
-  .pkg li{ font-size:13.5px; display:flex; gap:10px; opacity:.85; }
-  .pkg li::before{ content:'—'; opacity:.5; }
-  @media (max-width:760px){ .pkg-grid{ grid-template-columns:1fr; } }
+      --pad: clamp(18px, 2.4vw, 42px);
+    }
 
-  /* ============ CONTACT / FOOTER ============ */
-  .contact{ padding:110px 0 60px; }
-  .contact h2{
-    font-size:clamp(34px,7vw,84px); font-weight:800; max-width:14ch; margin:16px 0 40px;
-  }
-  .contact-links{ display:flex; flex-wrap:wrap; gap:14px; margin-bottom:70px; }
-  .contact-link{
-    font-family:var(--mono); font-size:14px; text-decoration:none;
-    border:1.5px solid rgba(246,243,236,.3); padding:14px 24px; border-radius:3px;
-    transition:border-color .15s ease, background .15s ease, color .15s ease;
-  }
-  .contact-link:hover{ background:var(--citrine); color:var(--ink); border-color:var(--citrine); }
-  footer{ border-top:1px solid rgba(246,243,236,.14); padding-top:26px; }
-  footer .wrap{
-    display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px;
-    font-family:var(--mono); font-size:12px; opacity:.5;
-  }
-</style>
+
+    /* =========================================================
+       RESET
+    ========================================================== */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--black);
+
+      font-family: "Inter", sans-serif;
+
+      overflow-x: hidden;
+
+      cursor: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+    }
+
+    button {
+      font: inherit;
+    }
+
+
+    /* =========================================================
+       CUSTOM CURSOR
+       
+       This is the PX-PUSH-inspired part.
+       
+       The cursor has:
+       - small dot
+       - trailing circle
+       - magnetic movement
+       - text when hovering interactive elements
+       - enlarged state
+       - click state
+    ========================================================== */
+
+    .cursor {
+      position: fixed;
+
+      width: 12px;
+      height: 12px;
+
+      border-radius: 50%;
+
+      background: var(--black);
+
+      pointer-events: none;
+
+      z-index: 99999;
+
+      transform: translate(-50%, -50%);
+
+      mix-blend-mode: difference;
+    }
+
+    .cursor-follower {
+      position: fixed;
+
+      width: 46px;
+      height: 46px;
+
+      border: 1px solid rgba(255,255,255,.75);
+
+      border-radius: 50%;
+
+      pointer-events: none;
+
+      z-index: 99998;
+
+      transform: translate(-50%, -50%);
+
+      mix-blend-mode: difference;
+
+      transition:
+        width .35s cubic-bezier(.22,1,.36,1),
+        height .35s cubic-bezier(.22,1,.36,1),
+        background .35s ease,
+        border .35s ease;
+    }
+
+    .cursor-label {
+      position: fixed;
+
+      left: 0;
+      top: 0;
+
+      padding: 10px 14px;
+
+      border-radius: 100px;
+
+      background: var(--black);
+      color: var(--white);
+
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+
+      text-transform: uppercase;
+      letter-spacing: .08em;
+
+      pointer-events: none;
+
+      z-index: 100000;
+
+      opacity: 0;
+
+      transform:
+        translate(-50%, -50%)
+        scale(.7);
+
+      white-space: nowrap;
+
+      transition:
+        opacity .25s ease,
+        transform .35s cubic-bezier(.22,1,.36,1);
+    }
+
+    body.cursor-hover .cursor-follower {
+      width: 80px;
+      height: 80px;
+
+      background: var(--white);
+
+      border-color: var(--white);
+
+      mix-blend-mode: normal;
+    }
+
+    body.cursor-hover .cursor {
+      opacity: 0;
+    }
+
+    body.cursor-label-visible .cursor-label {
+      opacity: 1;
+
+      transform:
+        translate(-50%, -50%)
+        scale(1);
+    }
+
+    body.cursor-click .cursor-follower {
+      width: 28px;
+      height: 28px;
+    }
+
+
+    /* =========================================================
+       LOADER
+    ========================================================== */
+
+    .loader {
+      position: fixed;
+
+      inset: 0;
+
+      background: var(--black);
+
+      color: var(--white);
+
+      z-index: 99990;
+
+      display: flex;
+
+      align-items: flex-end;
+
+      justify-content: space-between;
+
+      padding: var(--pad);
+
+      pointer-events: none;
+    }
+
+    .loader-name {
+      font-size: clamp(40px, 7vw, 110px);
+
+      font-weight: 600;
+
+      letter-spacing: -.06em;
+
+      line-height: .8;
+    }
+
+    .loader-percent {
+      font-family: "DM Mono", monospace;
+
+      font-size: 12px;
+    }
+
+
+    /* =========================================================
+       NAVIGATION
+    ========================================================== */
+
+    .nav {
+      position: fixed;
+
+      top: 0;
+      left: 0;
+
+      width: 100%;
+
+      z-index: 500;
+
+      padding: var(--pad);
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: flex-start;
+
+      pointer-events: none;
+    }
+
+    .nav > * {
+      pointer-events: auto;
+    }
+
+    .logo {
+      font-size: 16px;
+
+      font-weight: 600;
+
+      letter-spacing: -.04em;
+
+      line-height: 1;
+    }
+
+    .nav-right {
+      display: flex;
+
+      align-items: center;
+
+      gap: 24px;
+
+      font-family: "DM Mono", monospace;
+
+      font-size: 10px;
+
+      text-transform: uppercase;
+    }
+
+    .nav-link {
+      position: relative;
+
+      overflow: hidden;
+    }
+
+    .nav-link span {
+      display: block;
+
+      transition:
+        transform .5s cubic-bezier(.22,1,.36,1);
+    }
+
+    .nav-link span:last-child {
+      position: absolute;
+
+      top: 100%;
+      left: 0;
+    }
+
+    .nav-link:hover span:first-child {
+      transform: translateY(-100%);
+    }
+
+    .nav-link:hover span:last-child {
+      transform: translateY(-100%);
+    }
+
+
+    /* =========================================================
+       GENERAL
+    ========================================================== */
+
+    .section {
+      position: relative;
+
+      padding:
+        clamp(100px, 14vw, 220px)
+        var(--pad);
+    }
+
+    .section-number {
+      font-family: "DM Mono", monospace;
+
+      font-size: 10px;
+
+      text-transform: uppercase;
+
+      color: var(--muted);
+
+      letter-spacing: .08em;
+    }
+
+    .section-heading {
+      font-size: clamp(58px, 11vw, 180px);
+
+      font-weight: 500;
+
+      letter-spacing: -.075em;
+
+      line-height: .82;
+    }
+
+    .mono {
+      font-family: "DM Mono", monospace;
+    }
+
+
+    /* =========================================================
+       HERO
+    ========================================================== */
+
+    .hero {
+      min-height: 100svh;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: space-between;
+
+      padding:
+        150px
+        var(--pad)
+        30px;
+    }
+
+    .hero-top {
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 40px;
+    }
+
+    .hero-intro {
+      max-width: 390px;
+
+      font-size: 14px;
+
+      line-height: 1.45;
+    }
+
+    .hero-intro strong {
+      font-weight: 500;
+    }
+
+    .hero-title {
+      font-size: clamp(82px, 16vw, 280px);
+
+      font-weight: 500;
+
+      letter-spacing: -.09em;
+
+      line-height: .74;
+
+      margin-left: -.055em;
+
+      overflow: hidden;
+    }
+
+    .hero-title .line {
+      display: block;
+
+      overflow: hidden;
+    }
+
+    .hero-title .word {
+      display: inline-block;
+
+      transform: translateY(120%);
+    }
+
+    .hero-bottom {
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: flex-end;
+
+      gap: 40px;
+    }
+
+    .scroll-note {
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      font-family: "DM Mono", monospace;
+
+      font-size: 10px;
+
+      text-transform: uppercase;
+    }
+
+    .scroll-dot {
+      width: 8px;
+      height: 8px;
+
+      background: var(--black);
+
+      border-radius: 50%;
+    }
+
+    .hero-stats {
+      display: flex;
+
+      gap: 50px;
+    }
+
+    .stat strong {
+      display: block;
+
+      font-size: 32px;
+
+      font-weight: 500;
+
+      letter-spacing: -.05em;
+    }
+
+    .stat span {
+      font-family: "DM Mono", monospace;
+
+      font-size: 9px;
+
+      text-transform: uppercase;
+
+      color: var(--muted);
+    }
+
+
+    /* =========================================================
+       INTRO
+    ========================================================== */
+
+    .intro {
+      min-height: 100svh;
+
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 60px;
+
+      align-items: center;
+    }
+
+    .intro-title {
+      font-size: clamp(60px, 9vw, 150px);
+
+      letter-spacing: -.075em;
+
+      line-height: .85;
+
+      max-width: 850px;
+    }
+
+    .intro-copy {
+      max-width: 390px;
+
+      font-size: 15px;
+
+      line-height: 1.55;
+    }
+
+    .intro-copy p + p {
+      margin-top: 24px;
+    }
+
+
+    /* =========================================================
+       IMAGE CARD
+    ========================================================== */
+
+    .image-card {
+      position: relative;
+
+      overflow: hidden;
+
+      border-radius: var(--radius);
+
+      background: var(--paper);
+    }
+
+    .image-card img {
+      height: 100%;
+
+      object-fit: cover;
+
+      transform: scale(1.08);
+
+      transition:
+        transform 1.2s cubic-bezier(.22,1,.36,1);
+    }
+
+    .image-card:hover img {
+      transform: scale(1);
+    }
+
+    .image-label {
+      position: absolute;
+
+      top: 18px;
+      left: 18px;
+
+      z-index: 2;
+
+      padding: 8px 11px;
+
+      border-radius: 100px;
+
+      background: rgba(248,248,245,.88);
+
+      backdrop-filter: blur(10px);
+
+      font-family: "DM Mono", monospace;
+
+      font-size: 9px;
+
+      text-transform: uppercase;
+    }
+
+
+    /* =========================================================
+       JOURNEY
+    ========================================================== */
+
+    .journey-head {
+      display: grid;
+
+      grid-template-columns: 1fr 2fr;
+
+      gap: 30px;
+
+      margin-bottom: 100px;
+    }
+
+    .journey-head h2 {
+      font-size: clamp(58px, 9vw, 145px);
+
+      letter-spacing: -.075em;
+
+      line-height: .82;
+    }
+
+    .timeline {
+      position: relative;
+    }
+
+    .timeline::before {
+      content: "";
+
+      position: absolute;
+
+      top: 0;
+      bottom: 0;
+
+      left: 50%;
+
+      width: 1px;
+
+      background: var(--line);
+
+      transform: translateX(-50%);
+    }
+
+    .timeline-item {
+      position: relative;
+
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      min-height: 500px;
+
+      border-top: 1px solid var(--line);
+    }
+
+    .timeline-item:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .timeline-year {
+      padding: 30px;
+
+      font-family: "DM Mono", monospace;
+
+      font-size: 12px;
+    }
+
+    .timeline-content {
+      padding: 30px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: space-between;
+    }
+
+    .timeline-content h3 {
+      font-size: clamp(35px, 5vw, 70px);
+
+      letter-spacing: -.06em;
+
+      line-height: .9;
+
+      max-width: 500px;
+    }
+
+    .timeline-content p {
+      max-width: 390px;
+
+      font-size: 14px;
+
+      line-height: 1.5;
+
+      color: var(--muted);
+    }
+
+
+    /* =========================================================
+       WORK
+    ========================================================== */
+
+    .work-head {
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: flex-end;
+
+      margin-bottom: 90px;
+    }
+
+    .work-head h2 {
+      font-size: clamp(65px, 11vw, 180px);
+
+      letter-spacing: -.08em;
+
+      line-height: .8;
+    }
+
+    .work-head p {
+      max-width: 320px;
+
+      font-size: 14px;
+
+      line-height: 1.5;
+    }
+
+    .projects {
+      display: grid;
+
+      grid-template-columns: repeat(2, 1fr);
+
+      gap: 20px;
+    }
+
+    .project {
+      position: relative;
+
+      display: block;
+    }
+
+    .project:nth-child(even) {
+      margin-top: 160px;
+    }
+
+    .project-image {
+      aspect-ratio: 1 / 1.12;
+
+      overflow: hidden;
+
+      border-radius: var(--radius);
+
+      background: var(--paper);
+    }
+
+    .project-image img {
+      height: 100%;
+
+      object-fit: cover;
+
+      transform: scale(1.08);
+
+      transition:
+        transform 1.1s cubic-bezier(.22,1,.36,1);
+    }
+
+    .project:hover .project-image img {
+      transform: scale(1);
+    }
+
+    .project-info {
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 20px;
+
+      padding: 18px 4px;
+    }
+
+    .project-title {
+      font-size: 20px;
+
+      letter-spacing: -.04em;
+    }
+
+    .project-meta {
+      font-family: "DM Mono", monospace;
+
+      font-size: 9px;
+
+      text-transform: uppercase;
+
+      color: var(--muted);
+
+      text-align: right;
+    }
+
+
+    /* =========================================================
+       CAPABILITIES
+    ========================================================== */
+
+    .capabilities {
+      background: var(--black);
+
+      color: var(--white);
+
+      border-radius: 40px 40px 0 0;
+    }
+
+    .capabilities .section-number {
+      color: rgba(255,255,255,.45);
+    }
+
+    .cap-head {
+      display: grid;
+
+      grid-template-columns: 1fr 2fr;
+
+      gap: 40px;
+
+      margin-bottom: 120px;
+    }
+
+    .cap-head h2 {
+      font-size: clamp(65px, 10vw, 165px);
+
+      letter-spacing: -.08em;
+
+      line-height: .8;
+    }
+
+    .cap-description {
+      max-width: 480px;
+
+      font-size: clamp(20px, 2.4vw, 38px);
+
+      line-height: 1.08;
+
+      letter-spacing: -.04em;
+    }
+
+    .cap-list {
+      border-top: 1px solid rgba(255,255,255,.2);
+    }
+
+    .cap-item {
+      position: relative;
+
+      display: grid;
+
+      grid-template-columns: 80px 1fr 1fr;
+
+      gap: 30px;
+
+      padding: 30px 0;
+
+      border-bottom: 1px solid rgba(255,255,255,.2);
+
+      transition:
+        padding .6s cubic-bezier(.22,1,.36,1);
+    }
+
+    .cap-item:hover {
+      padding-left: 20px;
+      padding-right: 20px;
+
+      background: rgba(255,255,255,.035);
+    }
+
+    .cap-number {
+      font-family: "DM Mono", monospace;
+
+      font-size: 10px;
+
+      color: rgba(255,255,255,.45);
+    }
+
+    .cap-item h3 {
+      font-size: clamp(28px, 4vw, 55px);
+
+      letter-spacing: -.06em;
+
+      line-height: .9;
+    }
+
+    .cap-item p {
+      max-width: 390px;
+
+      font-size: 13px;
+
+      line-height: 1.5;
+
+      color: rgba(255,255,255,.55);
+    }
+
+
+    /* =========================================================
+       SERVICES
+    ========================================================== */
+
+    .services-head {
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: flex-end;
+
+      margin-bottom: 100px;
+    }
+
+    .services-head h2 {
+      font-size: clamp(70px, 12vw, 190px);
+
+      letter-spacing: -.085em;
+
+      line-height: .77;
+    }
+
+    .service-list {
+      border-top: 1px solid var(--line);
+    }
+
+    .service {
+      display: grid;
+
+      grid-template-columns: 70px 1fr 220px;
+
+      gap: 30px;
+
+      padding: 35px 0;
+
+      border-bottom: 1px solid var(--line);
+
+      align-items: start;
+    }
+
+    .service-number {
+      font-family: "DM Mono", monospace;
+
+      font-size: 10px;
+
+      color: var(--muted);
+    }
+
+    .service h3 {
+      font-size: clamp(35px, 5vw, 70px);
+
+      letter-spacing: -.065em;
+
+      line-height: .85;
+    }
+
+    .service-price {
+      font-family: "DM Mono", monospace;
+
+      font-size: 11px;
+
+      text-align: right;
+
+      color: var(--muted);
+    }
+
+
+    /* =========================================================
+       TESTIMONIAL
+    ========================================================== */
+
+    .testimonial-section {
+      min-height: 100svh;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: center;
+
+      background: var(--accent);
+
+      border-radius: 40px;
+    }
+
+    .testimonial-mark {
+      font-size: 100px;
+
+      line-height: .5;
+
+      margin-bottom: 40px;
+    }
+
+    .testimonial {
+      max-width: 1100px;
+
+      font-size: clamp(40px, 6vw, 90px);
+
+      letter-spacing: -.07em;
+
+      line-height: .92;
+    }
+
+    .testimonial-author {
+      margin-top: 70px;
+
+      font-family: "DM Mono", monospace;
+
+      font-size: 11px;
+
+      text-transform: uppercase;
+    }
+
+
+    /* =========================================================
+       FAQ
+    ========================================================== */
+
+    .faq-head {
+      margin-bottom: 90px;
+    }
+
+    .faq-head h2 {
+      font-size: clamp(70px, 12vw, 190px);
+
+      letter-spacing: -.08em;
+
+      line-height: .8;
+    }
+
+    .faq-list {
+      border-top: 1px solid var(--line);
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .faq-question {
+      width: 100%;
+
+      padding: 30px 0;
+
+      border: 0;
+
+      background: none;
+
+      color: inherit;
+
+      cursor: none;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      text-align: left;
+    }
+
+    .faq-question h3 {
+      font-size: clamp(25px, 3vw, 48px);
+
+      font-weight: 500;
+
+      letter-spacing: -.05em;
+    }
+
+    .faq-icon {
+      font-size: 30px;
+
+      transition:
+        transform .5s cubic-bezier(.22,1,.36,1);
+    }
+
+    .faq-answer {
+      display: grid;
+
+      grid-template-rows: 0fr;
+
+      transition:
+        grid-template-rows .7s cubic-bezier(.22,1,.36,1);
+    }
+
+    .faq-answer > div {
+      overflow: hidden;
+    }
+
+    .faq-answer p {
+      max-width: 700px;
+
+      padding-bottom: 30px;
+
+      font-size: 15px;
+
+      line-height: 1.55;
+
+      color: var(--muted);
+    }
+
+    .faq-item.open .faq-answer {
+      grid-template-rows: 1fr;
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+    }
+
+
+    /* =========================================================
+       FOOTER
+    ========================================================== */
+
+    footer {
+      min-height: 80svh;
+
+      background: var(--black);
+
+      color: var(--white);
+
+      padding: var(--pad);
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: space-between;
+
+      border-radius: 40px 40px 0 0;
+    }
+
+    .footer-top {
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 40px;
+    }
+
+    .footer-small {
+      font-family: "DM Mono", monospace;
+
+      font-size: 10px;
+
+      color: rgba(255,255,255,.45);
+
+      text-transform: uppercase;
+    }
+
+    .footer-title {
+      font-size: clamp(70px, 15vw, 240px);
+
+      letter-spacing: -.09em;
+
+      line-height: .72;
+
+      max-width: 1200px;
+    }
+
+    .footer-bottom {
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: flex-end;
+
+      gap: 30px;
+    }
+
+    .footer-email {
+      font-size: clamp(20px, 3vw, 40px);
+
+      letter-spacing: -.05em;
+    }
+
+    .socials {
+      display: flex;
+
+      gap: 20px;
+
+      font-family: "DM Mono", monospace;
+
+      font-size: 10px;
+
+      text-transform: uppercase;
+    }
+
+
+    /* =========================================================
+       REVEAL ANIMATIONS
+    ========================================================== */
+
+    .reveal {
+      opacity: 0;
+
+      transform: translateY(80px);
+    }
+
+    .reveal-line {
+      overflow: hidden;
+    }
+
+    .reveal-line > span {
+      display: block;
+
+      transform: translateY(110%);
+    }
+
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================== */
+
+    @media (max-width: 800px) {
+
+      body {
+        cursor: auto;
+      }
+
+      .cursor,
+      .cursor-follower,
+      .cursor-label {
+        display: none;
+      }
+
+      .nav-right a:not(:last-child) {
+        display: none;
+      }
+
+      .hero {
+        min-height: 90svh;
+
+        padding-top: 130px;
+      }
+
+      .hero-top {
+        flex-direction: column;
+      }
+
+      .hero-title {
+        font-size: clamp(70px, 19vw, 150px);
+      }
+
+      .hero-bottom {
+        flex-direction: column;
+
+        align-items: flex-start;
+      }
+
+      .hero-stats {
+        gap: 25px;
+      }
+
+      .intro {
+        grid-template-columns: 1fr;
+
+        min-height: auto;
+      }
+
+      .journey-head {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline::before {
+        display: none;
+      }
+
+      .timeline-item {
+        grid-template-columns: 70px 1fr;
+
+        min-height: 420px;
+      }
+
+      .timeline-year {
+        padding: 20px 0;
+      }
+
+      .timeline-content {
+        padding: 20px 0;
+      }
+
+      .work-head {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 30px;
+      }
+
+      .projects {
+        grid-template-columns: 1fr;
+      }
+
+      .project:nth-child(even) {
+        margin-top: 0;
+      }
+
+      .cap-head {
+        grid-template-columns: 1fr;
+      }
+
+      .cap-item {
+        grid-template-columns: 45px 1fr;
+      }
+
+      .cap-item p {
+        grid-column: 2;
+      }
+
+      .service {
+        grid-template-columns: 45px 1fr;
+      }
+
+      .service-price {
+        grid-column: 2;
+
+        text-align: left;
+      }
+
+      .testimonial-section {
+        min-height: 75svh;
+      }
+
+      .footer-top {
+        flex-direction: column;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+
+        align-items: flex-start;
+      }
+    }
+
+  </style>
 </head>
+
+
 <body>
 
-<header>
-  <div class="wrap">
-    <div class="wordmark">YOUR<span>·</span>NAME</div>
-    <nav>
-      <ul>
-        <li><a href="#work">Work</a></li>
-        <li><a href="#journey">Journey</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#faq">FAQ</a></li>
-      </ul>
-    </nav>
-    <a href="#contact" class="nav-cta">Start a project</a>
+  <!-- =========================================================
+       CUSTOM CURSOR
+  ========================================================== -->
+
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+  <div class="cursor-label">View</div>
+
+
+  <!-- =========================================================
+       LOADER
+  ========================================================== -->
+
+  <div class="loader">
+
+    <div class="loader-name">
+      YOUR<br>
+      NAME
+    </div>
+
+    <div class="loader-percent">
+      <span id="loaderPercent">0</span>%
+    </div>
+
   </div>
-</header>
 
-<section class="hero">
-  <div class="wrap">
-    <div class="eyebrow">Nº000 / Index — Visual Identity Designer</div>
 
-    <div class="marquee-row" aria-hidden="true">
-      <div class="marquee-track">
-        <span>IDENTITIES THAT MOVE ●</span><span>IDENTITIES THAT MOVE ●</span>
-        <span>IDENTITIES THAT MOVE ●</span><span>IDENTITIES THAT MOVE ●</span>
-        <span>IDENTITIES THAT MOVE ●</span><span>IDENTITIES THAT MOVE ●</span>
+  <!-- =========================================================
+       NAVIGATION
+  ========================================================== -->
+
+  <nav class="nav">
+
+    <a href="#top" class="logo magnetic">
+      YOUR NAME
+    </a>
+
+    <div class="nav-right">
+
+      <a href="#work" class="nav-link magnetic">
+        <span>Work</span>
+        <span>Work</span>
+      </a>
+
+      <a href="#about" class="nav-link magnetic">
+        <span>About</span>
+        <span>About</span>
+      </a>
+
+      <a href="#contact" class="nav-link magnetic">
+        <span>Contact</span>
+        <span>Contact</span>
+      </a>
+
+    </div>
+
+  </nav>
+
+
+  <main id="top">
+
+
+    <!-- =======================================================
+         HERO
+    ======================================================== -->
+
+    <section class="hero">
+
+      <div class="hero-top">
+
+        <div class="section-number">
+          Portfolio / 2026
+        </div>
+
+        <div class="hero-intro reveal">
+          <strong>
+            Creative developer & digital designer.
+          </strong>
+
+          <br><br>
+
+          I build digital experiences that combine
+          strong visual direction, thoughtful interaction
+          and clean technology.
+        </div>
+
       </div>
-    </div>
 
-    <p class="lede">I design logos, visual identities, and brand systems for founders who need to look serious on day one. Replace this line with your own positioning statement.</p>
 
-    <div class="cta-row">
-      <a href="#work" class="btn btn-solid">View the work ↓</a>
-      <a href="#contact" class="btn btn-outline">Start a project ↗</a>
-    </div>
+      <h1 class="hero-title">
 
-    <div class="hero-meta">
-      <div class="hero-stat"><b>80+</b><span>Projects</span></div>
-      <div class="hero-stat"><b>6</b><span>Years Exp.</span></div>
-      <div class="hero-stat"><b>40+</b><span>Clients</span></div>
-      <div class="hero-stat"><b>12</b><span>Industries</span></div>
-      <div class="traits">
-        <span class="trait">Bold</span>
-        <span class="trait">Precise</span>
-        <span class="trait">Strategic</span>
-        <span class="trait">Obsessive</span>
+        <span class="line">
+          <span class="word">DIGITAL</span>
+        </span>
+
+        <span class="line">
+          <span class="word">MAKER</span>
+        </span>
+
+      </h1>
+
+
+      <div class="hero-bottom">
+
+        <div class="scroll-note">
+
+          <span class="scroll-dot"></span>
+
+          Scroll to explore
+
+        </div>
+
+
+        <div class="hero-stats">
+
+          <div class="stat">
+
+            <strong>25+</strong>
+
+            <span>
+              Projects
+            </span>
+
+          </div>
+
+
+          <div class="stat">
+
+            <strong>04</strong>
+
+            <span>
+              Years Experience
+            </span>
+
+          </div>
+
+        </div>
+
       </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         ABOUT
+    ======================================================== -->
+
+    <section class="section intro" id="about">
+
+      <div>
+
+        <div class="section-number">
+          001 / About
+        </div>
+
+        <h2 class="intro-title reveal">
+          I make the internet feel a little more human.
+        </h2>
+
+      </div>
+
+
+      <div class="intro-copy reveal">
+
+        <p>
+          I'm YOUR NAME — a designer and developer focused
+          on creating digital experiences with personality.
+        </p>
+
+        <p>
+          From visual identity and art direction to
+          interaction and development, I like working
+          across the entire experience.
+        </p>
+
+        <p>
+          My work sits somewhere between design,
+          technology and experimentation.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         JOURNEY
+    ======================================================== -->
+
+    <section class="section">
+
+      <div class="journey-head">
+
+        <div class="section-number">
+          002 / Journey
+        </div>
+
+        <h2 class="reveal">
+          The<br>
+          Journey
+        </h2>
+
+      </div>
+
+
+      <div class="timeline">
+
+
+        <article class="timeline-item reveal">
+
+          <div class="timeline-year">
+            '22
+          </div>
+
+          <div class="timeline-content">
+
+            <h3>
+              Started creating
+              for the web.
+            </h3>
+
+            <p>
+              My first experiments with design,
+              development and digital products.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <article class="timeline-item reveal">
+
+          <div class="timeline-year">
+            '23
+          </div>
+
+          <div class="timeline-content">
+
+            <h3>
+              First real
+              projects.
+            </h3>
+
+            <p>
+              Started working with real clients and
+              learned how to turn ideas into experiences.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <article class="timeline-item reveal">
+
+          <div class="timeline-year">
+            '24
+          </div>
+
+          <div class="timeline-content">
+
+            <h3>
+              Motion became
+              part of my work.
+            </h3>
+
+            <p>
+              Began exploring advanced interaction,
+              animation and creative development.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <article class="timeline-item reveal">
+
+          <div class="timeline-year">
+            '26
+          </div>
+
+          <div class="timeline-content">
+
+            <h3>
+              Building what
+              comes next.
+            </h3>
+
+            <p>
+              Continuing to experiment with technology,
+              design and new ways of communicating online.
+            </p>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         WORK
+    ======================================================== -->
+
+    <section class="section" id="work">
+
+      <div class="work-head">
+
+        <div>
+
+          <div class="section-number">
+            003 / Selected Work
+          </div>
+
+          <h2 class="reveal">
+            Selected<br>
+            Work
+          </h2>
+
+        </div>
+
+
+        <p class="reveal">
+
+          A selection of projects across
+          websites, identities, digital products
+          and interactive experiences.
+
+        </p>
+
+      </div>
+
+
+      <div class="projects">
+
+
+        <!-- PROJECT 01 -->
+
+        <a
+          href="#"
+          class="project magnetic"
+          data-cursor="Open"
+        >
+
+          <div class="project-image">
+
+            <!-- CHANGE THIS IMAGE -->
+
+            <img
+              src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1600&q=85"
+              alt="Project one"
+            >
+
+          </div>
+
+          <div class="project-info">
+
+            <div class="project-title">
+              Project One
+            </div>
+
+            <div class="project-meta">
+              Identity / Web
+              <br>
+              2026
+            </div>
+
+          </div>
+
+        </a>
+
+
+        <!-- PROJECT 02 -->
+
+        <a
+          href="#"
+          class="project magnetic"
+          data-cursor="Open"
+        >
+
+          <div class="project-image">
+
+            <!-- CHANGE THIS IMAGE -->
+
+            <img
+              src="https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=1600&q=85"
+              alt="Project two"
+            >
+
+          </div>
+
+          <div class="project-info">
+
+            <div class="project-title">
+              Project Two
+            </div>
+
+            <div class="project-meta">
+              Digital / Motion
+              <br>
+              2026
+            </div>
+
+          </div>
+
+        </a>
+
+
+        <!-- PROJECT 03 -->
+
+        <a
+          href="#"
+          class="project magnetic"
+          data-cursor="Open"
+        >
+
+          <div class="project-image">
+
+            <!-- CHANGE THIS IMAGE -->
+
+            <img
+              src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1600&q=85"
+              alt="Project three"
+            >
+
+          </div>
+
+          <div class="project-info">
+
+            <div class="project-title">
+              Project Three
+            </div>
+
+            <div class="project-meta">
+              Art Direction / Web
+              <br>
+              2025
+            </div>
+
+          </div>
+
+        </a>
+
+
+        <!-- PROJECT 04 -->
+
+        <a
+          href="#"
+          class="project magnetic"
+          data-cursor="Open"
+        >
+
+          <div class="project-image">
+
+            <!-- CHANGE THIS IMAGE -->
+
+            <img
+              src="https://images.unsplash.com/photo-1497215842964-222b430dc094?auto=format&fit=crop&w=1600&q=85"
+              alt="Project four"
+            >
+
+          </div>
+
+          <div class="project-info">
+
+            <div class="project-title">
+              Project Four
+            </div>
+
+            <div class="project-meta">
+              Creative Development
+              <br>
+              2025
+            </div>
+
+          </div>
+
+        </a>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         CAPABILITIES
+    ======================================================== -->
+
+    <section class="section capabilities">
+
+      <div class="cap-head">
+
+        <div class="section-number">
+          004 / Capabilities
+        </div>
+
+        <div>
+
+          <h2 class="reveal">
+            What<br>
+            I Do
+          </h2>
+
+          <p class="cap-description reveal">
+
+            Strategy, design and development
+            combined to create digital experiences
+            that feel effortless.
+
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="cap-list">
+
+
+        <article class="cap-item reveal">
+
+          <div class="cap-number">
+            001
+          </div>
+
+          <h3>
+            Creative Development
+          </h3>
+
+          <p>
+            Building expressive websites and
+            interactive experiences with modern
+            front-end technology.
+          </p>
+
+        </article>
+
+
+        <article class="cap-item reveal">
+
+          <div class="cap-number">
+            002
+          </div>
+
+          <h3>
+            Web Design
+          </h3>
+
+          <p>
+            Designing clear, distinctive interfaces
+            with a strong visual system and thoughtful
+            interaction.
+          </p>
+
+        </article>
+
+
+        <article class="cap-item reveal">
+
+          <div class="cap-number">
+            003
+          </div>
+
+          <h3>
+            Motion & Interaction
+          </h3>
+
+          <p>
+            Creating subtle and expressive motion
+            systems that make interfaces feel alive.
+          </p>
+
+        </article>
+
+
+        <article class="cap-item reveal">
+
+          <div class="cap-number">
+            004
+          </div>
+
+          <h3>
+            Art Direction
+          </h3>
+
+          <p>
+            Developing visual direction, imagery,
+            typography and digital identities.
+          </p>
+
+        </article>
+
+
+        <article class="cap-item reveal">
+
+          <div class="cap-number">
+            005
+          </div>
+
+          <h3>
+            Technical Strategy
+          </h3>
+
+          <p>
+            Helping teams choose the right tools,
+            architecture and approach for their
+            digital products.
+          </p>
+
+        </article>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         SERVICES
+    ======================================================== -->
+
+    <section class="section">
+
+      <div class="services-head">
+
+        <div>
+
+          <div class="section-number">
+            005 / Services
+          </div>
+
+          <h2 class="reveal">
+            Ways<br>
+            to Work
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="service-list">
+
+
+        <article class="service reveal">
+
+          <div class="service-number">
+            001
+          </div>
+
+          <h3>
+            Website Build
+          </h3>
+
+          <div class="service-price">
+            CUSTOM PROJECT
+          </div>
+
+        </article>
+
+
+        <article class="service reveal">
+
+          <div class="service-number">
+            002
+          </div>
+
+          <h3>
+            Creative Development
+          </h3>
+
+          <div class="service-price">
+            CUSTOM PROJECT
+          </div>
+
+        </article>
+
+
+        <article class="service reveal">
+
+          <div class="service-number">
+            003
+          </div>
+
+          <h3>
+            Brand & Digital Identity
+          </h3>
+
+          <div class="service-price">
+            CUSTOM PROJECT
+          </div>
+
+        </article>
+
+
+        <article class="service reveal">
+
+          <div class="service-number">
+            004
+          </div>
+
+          <h3>
+            Ongoing Support
+          </h3>
+
+          <div class="service-price">
+            MONTHLY
+          </div>
+
+        </article>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         TESTIMONIAL
+    ======================================================== -->
+
+    <section class="section testimonial-section">
+
+      <div class="section-number">
+        006 / Client Words
+      </div>
+
+      <div class="testimonial-mark">
+        “
+      </div>
+
+      <blockquote class="testimonial reveal">
+
+        YOUR NAME doesn't just build websites —
+        he thinks about the entire experience.
+        The result feels intentional, polished
+        and completely alive.
+
+      </blockquote>
+
+      <div class="testimonial-author">
+
+        — Client Name / Creative Director
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         FAQ
+    ======================================================== -->
+
+    <section class="section">
+
+      <div class="faq-head">
+
+        <div class="section-number">
+          007 / FAQ
+        </div>
+
+        <h2 class="reveal">
+          Questions
+        </h2>
+
+      </div>
+
+
+      <div class="faq-list">
+
+
+        <article class="faq-item">
+
+          <button
+            class="faq-question magnetic"
+            data-cursor="Open"
+          >
+
+            <h3>
+              What do you specialize in?
+            </h3>
+
+            <span class="faq-icon">
+              +
+            </span>
+
+          </button>
+
+          <div class="faq-answer">
+
+            <div>
+
+              <p>
+                I specialize in creative development,
+                web design, interaction design and
+                digital experiences.
+              </p>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <article class="faq-item">
+
+          <button
+            class="faq-question magnetic"
+            data-cursor="Open"
+          >
+
+            <h3>
+              Do you work with existing designs?
+            </h3>
+
+            <span class="faq-icon">
+              +
+            </span>
+
+          </button>
+
+          <div class="faq-answer">
+
+            <div>
+
+              <p>
+                Yes. I can work from Figma designs,
+                existing design systems or rough
+                creative direction.
+              </p>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <article class="faq-item">
+
+          <button
+            class="faq-question magnetic"
+            data-cursor="Open"
+          >
+
+            <h3>
+              Can you build custom animations?
+            </h3>
+
+            <span class="faq-icon">
+              +
+            </span>
+
+          </button>
+
+          <div class="faq-answer">
+
+            <div>
+
+              <p>
+                Yes. Interaction and motion can be
+                designed specifically around the
+                personality of the project.
+              </p>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <article class="faq-item">
+
+          <button
+            class="faq-question magnetic"
+            data-cursor="Open"
+          >
+
+            <h3>
+              How can we work together?
+            </h3>
+
+            <span class="faq-icon">
+              +
+            </span>
+
+          </button>
+
+          <div class="faq-answer">
+
+            <div>
+
+              <p>
+                Send me a message with your project,
+                goals and timeline. I'll get back to you
+                with the best way to approach it.
+              </p>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+  <!-- =========================================================
+       FOOTER
+  ========================================================== -->
+
+  <footer id="contact">
+
+    <div class="footer-top">
+
+      <div class="footer-small">
+        Available for selected projects
+      </div>
+
+      <div class="footer-small">
+        Dubai / UAE
+      </div>
+
     </div>
-  </div>
-</section>
 
-<div class="ticker" aria-hidden="true">
-  <div class="ticker-track">
-    <span>Logo Design</span><span>·</span><span>Visual Identity</span><span>·</span>
-    <span>Brand Strategy</span><span>·</span><span>Packaging</span><span>·</span>
-    <span>Style Guides</span><span>·</span><span>Art Direction</span><span>·</span>
-    <span>Logo Design</span><span>·</span><span>Visual Identity</span><span>·</span>
-    <span>Brand Strategy</span><span>·</span><span>Packaging</span><span>·</span>
-    <span>Style Guides</span><span>·</span><span>Art Direction</span><span>·</span>
-  </div>
-</div>
 
-<section class="about on-bone" id="about">
-  <div class="wrap">
     <div>
-      <div class="eyebrow">Nº001 / Intro</div>
-      <h2>About the studio</h2>
-    </div>
-    <div class="about-copy">
-      <p>Replace this with your friend's real introduction — a couple of paragraphs on how they work, what kind of brands they take on, and what makes their process different from a typical freelancer or agency.</p>
-      <p class="pull">"Good identity design isn't decoration — it's the fastest way a brand tells the truth about itself."</p>
-      <p>Write a second short paragraph here on the kind of clients they love working with, or a specific belief about design that shapes how they approach every project.</p>
-    </div>
-  </div>
-</section>
 
-<section class="work" id="work">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Nº002 / Works</div>
-      <h2>Selected identity work.</h2>
-      <p>Swap each artwork square for a real project photo, rename the project, and update the tags. Keep one signature colour per project.</p>
+      <div class="section-number footer-small">
+        Have something in mind?
+      </div>
+
+      <h2 class="footer-title">
+        LET'S<br>
+        TALK.
+      </h2>
+
     </div>
 
-    <div class="gallery">
-      <div class="card">
-        <div class="card-art" style="--accent:#ff4d3d">
-          <svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="38" r="26" fill="#121212"/><rect x="30" y="64" width="40" height="10" rx="5" fill="#121212"/></svg>
-        </div>
-        <div class="card-body">
-          <div class="num">01 / Café</div>
-          <h3>Amaro &amp; Co.</h3>
-          <div class="kind">Logo &amp; brand system</div>
-          <div class="card-tags"><span>Logo</span><span>Packaging</span></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-art" style="--accent:#6c4cff">
-          <svg viewBox="0 0 100 100" fill="none"><path d="M50 15 L82 78 H18 Z" fill="#121212"/><circle cx="50" cy="55" r="9" fill="#6c4cff"/></svg>
-        </div>
-        <div class="card-body">
-          <div class="num">02 / Tech</div>
-          <h3>Northline</h3>
-          <div class="kind">Visual identity</div>
-          <div class="card-tags"><span>Identity</span><span>Type</span></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-art" style="--accent:#ffc93d">
-          <svg viewBox="0 0 100 100" fill="none"><circle cx="38" cy="50" r="22" fill="#121212"/><circle cx="66" cy="50" r="22" fill="#fff" fill-opacity=".9"/></svg>
-        </div>
-        <div class="card-body">
-          <div class="num">03 / Fashion</div>
-          <h3>Solene</h3>
-          <div class="kind">Logo &amp; identity</div>
-          <div class="card-tags"><span>Logo</span><span>Lookbook</span></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-art" style="--accent:#26d0b0">
-          <svg viewBox="0 0 100 100" fill="none"><path d="M20 60 Q50 20 80 60 Q50 45 20 60Z" fill="#121212"/></svg>
-        </div>
-        <div class="card-body">
-          <div class="num">04 / Wellness</div>
-          <h3>Hollow &amp; Pine</h3>
-          <div class="kind">Brand system</div>
-          <div class="card-tags"><span>Identity</span><span>Guidelines</span></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-art" style="--accent:#ff4d3d">
-          <svg viewBox="0 0 100 100" fill="none"><rect x="26" y="26" width="48" height="48" rx="14" fill="#121212" transform="rotate(20 50 50)"/></svg>
-        </div>
-        <div class="card-body">
-          <div class="num">05 / Restaurant</div>
-          <h3>Table Nine</h3>
-          <div class="kind">Logo &amp; menu system</div>
-          <div class="card-tags"><span>Logo</span><span>Menu</span></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-art" style="--accent:#6c4cff">
-          <svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="30" stroke="#121212" stroke-width="7"/><circle cx="50" cy="50" r="9" fill="#121212"/></svg>
-        </div>
-        <div class="card-body">
-          <div class="num">06 / Music</div>
-          <h3>Halide Fest</h3>
-          <div class="kind">Identity &amp; posters</div>
-          <div class="card-tags"><span>Identity</span><span>Posters</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section class="journey on-bone" id="journey">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Nº003 / Journey</div>
-      <h2>How it started, where it's at.</h2>
-      <p>Replace these milestones with your friend's real story — first client, first big break, the project that changed how they work.</p>
-    </div>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-year">2019</div>
-        <div><h3>Picked up a design tool for the first time</h3><p>Add a line about how they got started — self-taught, design school, a mentor, whatever's true.</p></div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">2021</div>
-        <div><h3>First paying client</h3><p>The project that made it feel real. Swap in the actual story.</p></div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">2023</div>
-        <div><h3>The project that changed everything</h3><p>A brief that pushed their skills further than anything before it.</p></div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">2026</div>
-        <div><h3>Where things stand now</h3><p>A short note on what they're focused on today and where they want to take it next.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
+    <div class="footer-bottom">
 
-<section class="capabilities" id="services">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Nº004 / What You Get</div>
-      <h2>Every identity, built to last.</h2>
-    </div>
-    <div class="cap-grid">
-      <div class="cap"><div class="mk" style="background:#ff4d3d"></div><h3>Logo Design</h3><p>A distinct mark built to work at any size, on any surface, for years — not just this quarter's trend.</p></div>
-      <div class="cap"><div class="mk" style="background:#ffc93d"></div><h3>Brand Strategy</h3><p>Positioning and messaging that gives the visual identity something true to stand on.</p></div>
-      <div class="cap"><div class="mk" style="background:#6c4cff"></div><h3>Visual Identity Systems</h3><p>Colour, type, and layout rules that keep a brand consistent across every touchpoint.</p></div>
-      <div class="cap"><div class="mk" style="background:#26d0b0"></div><h3>Packaging &amp; Print</h3><p>Labels, boxes, business cards, and collateral that carry the identity into the physical world.</p></div>
-      <div class="cap"><div class="mk" style="background:#ff4d3d"></div><h3>Brand Guidelines</h3><p>A clear documentation set so anyone on the team can use the identity correctly.</p></div>
-      <div class="cap"><div class="mk" style="background:#6c4cff"></div><h3>Social &amp; Digital Assets</h3><p>Templates and components that keep the brand sharp across every platform.</p></div>
-    </div>
-  </div>
-</section>
+      <a
+        href="mailto:hello@example.com"
+        class="footer-email magnetic"
+        data-cursor="Email"
+      >
+        hello@example.com
+      </a>
 
-<section class="testimonials on-bone" id="clients">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Nº005 / Clients</div>
-      <h2>From people they've worked with.</h2>
-      <p>Swap in real quotes once you have them — even two or three genuine ones do more than a dozen generic ones.</p>
-    </div>
-    <div class="t-grid">
-      <div class="t-card">
-        <p>"Replace this with a real quote about the working relationship, turnaround time, or the quality of the final identity."</p>
-        <div class="t-name">Client Name</div>
-        <div class="t-role">Founder, Company</div>
-      </div>
-      <div class="t-card">
-        <p>"Replace this with a real quote — specific details land better than generic praise. What exactly did they deliver well?"</p>
-        <div class="t-name">Client Name</div>
-        <div class="t-role">Marketing Lead, Company</div>
-      </div>
-      <div class="t-card">
-        <p>"Replace this with a real quote. Even a short, honest sentence works better than a long generic one."</p>
-        <div class="t-name">Client Name</div>
-        <div class="t-role">Co-Founder, Company</div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section class="faq" id="faq">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Nº006 / FAQ</div>
-      <h2>Got any questions?</h2>
-    </div>
-    <div class="faq-list">
-      <details open>
-        <summary>What's the process from start to launch?<span class="plus">+</span></summary>
-        <p>Describe your friend's real process here — discovery call, research, concept exploration, refinement, delivery. Two or three sentences is enough.</p>
-      </details>
-      <details>
-        <summary>How long does a project take?<span class="plus">+</span></summary>
-        <p>Give a realistic range, e.g. "Most logo and identity projects take 3–5 weeks from kickoff to final files."</p>
-      </details>
-      <details>
-        <summary>Do you offer ongoing support after launch?<span class="plus">+</span></summary>
-        <p>Explain whether they offer a retainer, one-off touch-ups, or nothing after handoff.</p>
-      </details>
-      <details>
-        <summary>What do I need to prepare before we start?<span class="plus">+</span></summary>
-        <p>List anything you ask clients for upfront — references, existing brand materials, a completed brief, etc.</p>
-      </details>
-    </div>
-  </div>
-</section>
+      <div class="socials">
 
-<section class="packages on-bone" id="pricing">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Nº007 / Packages</div>
-      <h2>Simple, transparent pricing.</h2>
-      <p>Replace these placeholder tiers and prices with real numbers once you've decided on them.</p>
-    </div>
-    <div class="pkg-grid">
-      <div class="pkg">
-        <h3>Identity Sprint</h3>
-        <div class="price">$X,XXX <span>/ project</span></div>
-        <div class="desc">A complete logo and visual identity, delivered in 3–5 weeks.</div>
-        <ul>
-          <li>Logo design (2–3 concepts)</li>
-          <li>Colour palette &amp; typography</li>
-          <li>Brand guidelines document</li>
-          <li>Source files, all formats</li>
-        </ul>
-        <a href="#contact" class="btn btn-outline" style="color:#121212;border-color:#121212;">Get started ↗</a>
-      </div>
-      <div class="pkg featured">
-        <span class="badge">Popular</span>
-        <h3>Full Brand System</h3>
-        <div class="price">$X,XXX <span>/ project</span></div>
-        <div class="desc">Identity plus the applications a growing brand actually needs.</div>
-        <ul>
-          <li>Everything in Identity Sprint</li>
-          <li>Packaging &amp; print collateral</li>
-          <li>Social &amp; digital templates</li>
-          <li>One round of post-launch revisions</li>
-        </ul>
-        <a href="#contact" class="btn btn-solid">Get started ↗</a>
-      </div>
-    </div>
-  </div>
-</section>
+        <a href="#" class="magnetic">
+          Instagram
+        </a>
 
-<section class="contact" id="contact">
-  <div class="wrap">
-    <div class="eyebrow">Nº008 / Contact</div>
-    <h2>Got a brand that needs a face?</h2>
-    <div class="contact-links">
-      <a class="contact-link" href="mailto:you@example.com">you@example.com</a>
-      <a class="contact-link" href="https://instagram.com/yourname" target="_blank" rel="noopener">Instagram ↗</a>
-      <a class="contact-link" href="https://behance.net/yourname" target="_blank" rel="noopener">Behance ↗</a>
-      <a class="contact-link" href="https://linkedin.com/in/yourname" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a href="#" class="magnetic">
+          LinkedIn
+        </a>
+
+        <a href="#" class="magnetic">
+          Behance
+        </a>
+
+      </div>
+
     </div>
 
-    <footer>
-      <div class="wrap" style="padding:0;">
-        <div>Your Name Studio · Your City, Country</div>
-        <div>&copy; <span id="year"></span> — Built with a bold palette, not a template.</div>
-      </div>
-    </footer>
-  </div>
-</section>
+  </footer>
 
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+
+  <!-- =========================================================
+       JAVASCRIPT
+  ========================================================== -->
+
+  <script>
+
+    gsap.registerPlugin(ScrollTrigger);
+
+
+    /* =========================================================
+       LOADER
+    ========================================================== */
+
+    const loader = document.querySelector(".loader");
+    const loaderPercent = document.querySelector("#loaderPercent");
+
+    let loadProgress = 0;
+
+    const loadingInterval = setInterval(() => {
+
+      loadProgress += Math.floor(Math.random() * 9) + 2;
+
+      if (loadProgress >= 100) {
+
+        loadProgress = 100;
+
+        clearInterval(loadingInterval);
+
+        loaderPercent.textContent = loadProgress;
+
+        gsap.to(loader, {
+
+          yPercent: -100,
+
+          duration: 1.2,
+
+          delay: .25,
+
+          ease: "power4.inOut",
+
+          onComplete: () => {
+
+            loader.remove();
+
+            startHero();
+
+          }
+
+        });
+
+      } else {
+
+        loaderPercent.textContent = loadProgress;
+
+      }
+
+    }, 60);
+
+
+    /* =========================================================
+       HERO
+    ========================================================== */
+
+    function startHero() {
+
+      const words =
+        document.querySelectorAll(".hero-title .word");
+
+      gsap.to(words, {
+
+        y: "0%",
+
+        duration: 1.5,
+
+        stagger: .1,
+
+        ease: "power4.out"
+
+      });
+
+
+      gsap.from(".hero-intro", {
+
+        opacity: 0,
+
+        y: 40,
+
+        duration: 1.2,
+
+        delay: .5,
+
+        ease: "power3.out"
+
+      });
+
+
+      gsap.from(".hero-bottom", {
+
+        opacity: 0,
+
+        y: 30,
+
+        duration: 1,
+
+        delay: .8,
+
+        ease: "power3.out"
+
+      });
+
+    }
+
+
+    /* =========================================================
+       GENERAL SCROLL REVEALS
+    ========================================================== */
+
+    document.querySelectorAll(".reveal").forEach(element => {
+
+      gsap.to(element, {
+
+        opacity: 1,
+
+        y: 0,
+
+        duration: 1.1,
+
+        ease: "power3.out",
+
+        scrollTrigger: {
+
+          trigger: element,
+
+          start: "top 88%",
+
+          once: true
+
+        }
+
+      });
+
+    });
+
+
+    /* =========================================================
+       TEXT PARALLAX
+    ========================================================== */
+
+    document.querySelectorAll(
+      ".section-heading, .intro-title, .journey-head h2"
+    ).forEach(element => {
+
+      gsap.to(element, {
+
+        y: -40,
+
+        ease: "none",
+
+        scrollTrigger: {
+
+          trigger: element,
+
+          start: "top bottom",
+
+          end: "bottom top",
+
+          scrub: 1
+
+        }
+
+      });
+
+    });
+
+
+    /* =========================================================
+       PROJECT IMAGE PARALLAX
+    ========================================================== */
+
+    document.querySelectorAll(".project-image img").forEach(img => {
+
+      gsap.to(img, {
+
+        yPercent: -8,
+
+        ease: "none",
+
+        scrollTrigger: {
+
+          trigger: img,
+
+          start: "top bottom",
+
+          end: "bottom top",
+
+          scrub: true
+
+        }
+
+      });
+
+    });
+
+
+    /* =========================================================
+       MAGNETIC BUTTONS / LINKS
+       
+       This makes links subtly follow the pointer.
+    ========================================================== */
+
+    const magneticElements =
+      document.querySelectorAll(".magnetic");
+
+
+    magneticElements.forEach(element => {
+
+      element.addEventListener("mousemove", event => {
+
+        const rect = element.getBoundingClientRect();
+
+        const x =
+          event.clientX -
+          (rect.left + rect.width / 2);
+
+        const y =
+          event.clientY -
+          (rect.top + rect.height / 2);
+
+
+        gsap.to(element, {
+
+          x: x * .15,
+
+          y: y * .15,
+
+          duration: .4,
+
+          ease: "power3.out"
+
+        });
+
+      });
+
+
+      element.addEventListener("mouseleave", () => {
+
+        gsap.to(element, {
+
+          x: 0,
+
+          y: 0,
+
+          duration: .7,
+
+          ease: "elastic.out(1,.4)"
+
+        });
+
+      });
+
+    });
+
+
+    /* =========================================================
+       CUSTOM CURSOR
+    ========================================================== */
+
+    const cursor =
+      document.querySelector(".cursor");
+
+    const follower =
+      document.querySelector(".cursor-follower");
+
+    const cursorLabel =
+      document.querySelector(".cursor-label");
+
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+
+    let followerX = mouseX;
+    let followerY = mouseY;
+
+
+    window.addEventListener("mousemove", event => {
+
+      mouseX = event.clientX;
+
+      mouseY = event.clientY;
+
+
+      gsap.to(cursor, {
+
+        x: mouseX,
+
+        y: mouseY,
+
+        duration: .08,
+
+        ease: "none"
+
+      });
+
+
+      gsap.to(cursorLabel, {
+
+        x: mouseX,
+
+        y: mouseY,
+
+        duration: .12,
+
+        ease: "power2.out"
+
+      });
+
+    });
+
+
+    function animateFollower() {
+
+      followerX +=
+        (mouseX - followerX) * .13;
+
+      followerY +=
+        (mouseY - followerY) * .13;
+
+
+      follower.style.transform =
+        `translate(${followerX}px, ${followerY}px) translate(-50%, -50%)`;
+
+
+      requestAnimationFrame(animateFollower);
+
+    }
+
+    animateFollower();
+
+
+    /* =========================================================
+       CURSOR HOVER STATES
+    ========================================================== */
+
+    document.querySelectorAll(
+      "a, button, .project"
+    ).forEach(element => {
+
+      element.addEventListener("mouseenter", () => {
+
+        document.body.classList.add(
+          "cursor-hover"
+        );
+
+
+        const label =
+          element.dataset.cursor;
+
+        if (label) {
+
+          cursorLabel.textContent = label;
+
+          document.body.classList.add(
+            "cursor-label-visible"
+          );
+
+        }
+
+      });
+
+
+      element.addEventListener("mouseleave", () => {
+
+        document.body.classList.remove(
+          "cursor-hover"
+        );
+
+        document.body.classList.remove(
+          "cursor-label-visible"
+        );
+
+      });
+
+    });
+
+
+    /* =========================================================
+       CLICK CURSOR
+    ========================================================== */
+
+    window.addEventListener("mousedown", () => {
+
+      document.body.classList.add(
+        "cursor-click"
+      );
+
+    });
+
+
+    window.addEventListener("mouseup", () => {
+
+      document.body.classList.remove(
+        "cursor-click"
+      );
+
+    });
+
+
+    /* =========================================================
+       FAQ ACCORDION
+    ========================================================== */
+
+    document.querySelectorAll(".faq-question")
+      .forEach(button => {
+
+        button.addEventListener("click", () => {
+
+          const item =
+            button.closest(".faq-item");
+
+
+          const wasOpen =
+            item.classList.contains("open");
+
+
+          document.querySelectorAll(".faq-item")
+            .forEach(other => {
+
+              other.classList.remove("open");
+
+            });
+
+
+          if (!wasOpen) {
+
+            item.classList.add("open");
+
+          }
+
+        });
+
+      });
+
+
+    /* =========================================================
+       NAV COLOR CHANGE
+    ========================================================== */
+
+    ScrollTrigger.create({
+
+      trigger: ".capabilities",
+
+      start: "top 10%",
+
+      end: "bottom 10%",
+
+      onEnter: () => {
+
+        document.querySelector(".nav")
+          .style.color = "#fff";
+
+      },
+
+      onLeave: () => {
+
+        document.querySelector(".nav")
+          .style.color = "";
+
+      },
+
+      onEnterBack: () => {
+
+        document.querySelector(".nav")
+          .style.color = "#fff";
+
+      },
+
+      onLeaveBack: () => {
+
+        document.querySelector(".nav")
+          .style.color = "";
+
+      }
+
+    });
+
+
+    /* =========================================================
+       IMAGE TILT
+       
+       Subtle movement when hovering project cards.
+    ========================================================== */
+
+    document.querySelectorAll(".project")
+      .forEach(project => {
+
+        const image =
+          project.querySelector("img");
+
+
+        project.addEventListener(
+          "mousemove",
+          event => {
+
+            const rect =
+              project.getBoundingClientRect();
+
+
+            const x =
+              (event.clientX - rect.left)
+              / rect.width
+              - .5;
+
+
+            const y =
+              (event.clientY - rect.top)
+              / rect.height
+              - .5;
+
+
+            gsap.to(image, {
+
+              rotateY: x * 5,
+
+              rotateX: y * -5,
+
+              scale: 1.03,
+
+              duration: .5,
+
+              ease: "power3.out"
+
+            });
+
+          }
+        );
+
+
+        project.addEventListener(
+          "mouseleave",
+          () => {
+
+            gsap.to(image, {
+
+              rotateY: 0,
+
+              rotateX: 0,
+
+              scale: 1,
+
+              duration: .8,
+
+              ease: "power3.out"
+
+            });
+
+          }
+        );
+
+      });
+
+
+    /* =========================================================
+       REDUCED MOTION
+    ========================================================== */
+
+    if (
+      window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches
+    ) {
+
+      gsap.globalTimeline.timeScale(100);
+
+    }
+
+  </script>
 
 </body>
 </html>
