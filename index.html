@@ -1,1480 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
-  />
+  >
 
-  <title>Hafis Jawad — Graphical Designer </title>
+  <title>YOUR NAME — Creative Developer</title>
 
   <meta
     name="description"
-    content="YOUR NAME — Creative developer building thoughtful digital experiences."
-  />
+    content="YOUR NAME — Creative developer and digital designer."
+  >
 
-  <!-- =========================================================
-       FONTS
-       Replace these with your own fonts if you want.
-  ========================================================== -->
-
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap"
     rel="stylesheet"
-  />
+  >
 
-  <!-- =========================================================
-       GSAP
-  ========================================================== -->
+  <!-- GSAP -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js">
+  </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js">
+  </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
-
-  <style>
-
-    /* =========================================================
-       VARIABLES
-    ========================================================== */
-
-    :root {
-      --bg: #f1f0eb;
-      --paper: #e8e7e2;
-      --white: #f8f8f5;
-      --black: #111111;
-      --muted: #777770;
-      --line: rgba(17,17,17,.16);
-
-      --accent: #d9ff45;
-
-      --radius: 28px;
-
-      --pad: clamp(18px, 2.4vw, 42px);
-    }
-
-
-    /* =========================================================
-       RESET
-    ========================================================== */
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      background: var(--bg);
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--black);
-
-      font-family: "Inter", sans-serif;
-
-      overflow-x: hidden;
-
-      cursor: none;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      display: block;
-      width: 100%;
-    }
-
-    button {
-      font: inherit;
-    }
-
-
-    /* =========================================================
-       CUSTOM CURSOR
-       
-       This is the PX-PUSH-inspired part.
-       
-       The cursor has:
-       - small dot
-       - trailing circle
-       - magnetic movement
-       - text when hovering interactive elements
-       - enlarged state
-       - click state
-    ========================================================== */
-
-    .cursor {
-      position: fixed;
-
-      width: 12px;
-      height: 12px;
-
-      border-radius: 50%;
-
-      background: var(--black);
-
-      pointer-events: none;
-
-      z-index: 99999;
-
-      transform: translate(-50%, -50%);
-
-      mix-blend-mode: difference;
-    }
-
-    .cursor-follower {
-      position: fixed;
-
-      width: 46px;
-      height: 46px;
-
-      border: 1px solid rgba(255,255,255,.75);
-
-      border-radius: 50%;
-
-      pointer-events: none;
-
-      z-index: 99998;
-
-      transform: translate(-50%, -50%);
-
-      mix-blend-mode: difference;
-
-      transition:
-        width .35s cubic-bezier(.22,1,.36,1),
-        height .35s cubic-bezier(.22,1,.36,1),
-        background .35s ease,
-        border .35s ease;
-    }
-
-    .cursor-label {
-      position: fixed;
-
-      left: 0;
-      top: 0;
-
-      padding: 10px 14px;
-
-      border-radius: 100px;
-
-      background: var(--black);
-      color: var(--white);
-
-      font-family: "DM Mono", monospace;
-      font-size: 10px;
-
-      text-transform: uppercase;
-      letter-spacing: .08em;
-
-      pointer-events: none;
-
-      z-index: 100000;
-
-      opacity: 0;
-
-      transform:
-        translate(-50%, -50%)
-        scale(.7);
-
-      white-space: nowrap;
-
-      transition:
-        opacity .25s ease,
-        transform .35s cubic-bezier(.22,1,.36,1);
-    }
-
-    body.cursor-hover .cursor-follower {
-      width: 80px;
-      height: 80px;
-
-      background: var(--white);
-
-      border-color: var(--white);
-
-      mix-blend-mode: normal;
-    }
-
-    body.cursor-hover .cursor {
-      opacity: 0;
-    }
-
-    body.cursor-label-visible .cursor-label {
-      opacity: 1;
-
-      transform:
-        translate(-50%, -50%)
-        scale(1);
-    }
-
-    body.cursor-click .cursor-follower {
-      width: 28px;
-      height: 28px;
-    }
-
-
-    /* =========================================================
-       LOADER
-    ========================================================== */
-
-    .loader {
-      position: fixed;
-
-      inset: 0;
-
-      background: var(--black);
-
-      color: var(--white);
-
-      z-index: 99990;
-
-      display: flex;
-
-      align-items: flex-end;
-
-      justify-content: space-between;
-
-      padding: var(--pad);
-
-      pointer-events: none;
-    }
-
-    .loader-name {
-      font-size: clamp(40px, 7vw, 110px);
-
-      font-weight: 600;
-
-      letter-spacing: -.06em;
-
-      line-height: .8;
-    }
-
-    .loader-percent {
-      font-family: "DM Mono", monospace;
-
-      font-size: 12px;
-    }
-
-
-    /* =========================================================
-       NAVIGATION
-    ========================================================== */
-
-    .nav {
-      position: fixed;
-
-      top: 0;
-      left: 0;
-
-      width: 100%;
-
-      z-index: 500;
-
-      padding: var(--pad);
-
-      display: flex;
-
-      justify-content: space-between;
-
-      align-items: flex-start;
-
-      pointer-events: none;
-    }
-
-    .nav > * {
-      pointer-events: auto;
-    }
-
-    .logo {
-      font-size: 16px;
-
-      font-weight: 600;
-
-      letter-spacing: -.04em;
-
-      line-height: 1;
-    }
-
-    .nav-right {
-      display: flex;
-
-      align-items: center;
-
-      gap: 24px;
-
-      font-family: "DM Mono", monospace;
-
-      font-size: 10px;
-
-      text-transform: uppercase;
-    }
-
-    .nav-link {
-      position: relative;
-
-      overflow: hidden;
-    }
-
-    .nav-link span {
-      display: block;
-
-      transition:
-        transform .5s cubic-bezier(.22,1,.36,1);
-    }
-
-    .nav-link span:last-child {
-      position: absolute;
-
-      top: 100%;
-      left: 0;
-    }
-
-    .nav-link:hover span:first-child {
-      transform: translateY(-100%);
-    }
-
-    .nav-link:hover span:last-child {
-      transform: translateY(-100%);
-    }
-
-
-    /* =========================================================
-       GENERAL
-    ========================================================== */
-
-    .section {
-      position: relative;
-
-      padding:
-        clamp(100px, 14vw, 220px)
-        var(--pad);
-    }
-
-    .section-number {
-      font-family: "DM Mono", monospace;
-
-      font-size: 10px;
-
-      text-transform: uppercase;
-
-      color: var(--muted);
-
-      letter-spacing: .08em;
-    }
-
-    .section-heading {
-      font-size: clamp(58px, 11vw, 180px);
-
-      font-weight: 500;
-
-      letter-spacing: -.075em;
-
-      line-height: .82;
-    }
-
-    .mono {
-      font-family: "DM Mono", monospace;
-    }
-
-
-    /* =========================================================
-       HERO
-    ========================================================== */
-
-    .hero {
-      min-height: 100svh;
-
-      display: flex;
-
-      flex-direction: column;
-
-      justify-content: space-between;
-
-      padding:
-        150px
-        var(--pad)
-        30px;
-    }
-
-    .hero-top {
-      display: flex;
-
-      justify-content: space-between;
-
-      gap: 40px;
-    }
-
-    .hero-intro {
-      max-width: 390px;
-
-      font-size: 14px;
-
-      line-height: 1.45;
-    }
-
-    .hero-intro strong {
-      font-weight: 500;
-    }
-
-    .hero-title {
-      font-size: clamp(82px, 16vw, 280px);
-
-      font-weight: 500;
-
-      letter-spacing: -.09em;
-
-      line-height: .74;
-
-      margin-left: -.055em;
-
-      overflow: hidden;
-    }
-
-    .hero-title .line {
-      display: block;
-
-      overflow: hidden;
-    }
-
-    .hero-title .word {
-      display: inline-block;
-
-      transform: translateY(120%);
-    }
-
-    .hero-bottom {
-      display: flex;
-
-      justify-content: space-between;
-
-      align-items: flex-end;
-
-      gap: 40px;
-    }
-
-    .scroll-note {
-      display: flex;
-
-      align-items: center;
-
-      gap: 10px;
-
-      font-family: "DM Mono", monospace;
-
-      font-size: 10px;
-
-      text-transform: uppercase;
-    }
-
-    .scroll-dot {
-      width: 8px;
-      height: 8px;
-
-      background: var(--black);
-
-      border-radius: 50%;
-    }
-
-    .hero-stats {
-      display: flex;
-
-      gap: 50px;
-    }
-
-    .stat strong {
-      display: block;
-
-      font-size: 32px;
-
-      font-weight: 500;
-
-      letter-spacing: -.05em;
-    }
-
-    .stat span {
-      font-family: "DM Mono", monospace;
-
-      font-size: 9px;
-
-      text-transform: uppercase;
-
-      color: var(--muted);
-    }
-
-
-    /* =========================================================
-       INTRO
-    ========================================================== */
-
-    .intro {
-      min-height: 100svh;
-
-      display: grid;
-
-      grid-template-columns: 1fr 1fr;
-
-      gap: 60px;
-
-      align-items: center;
-    }
-
-    .intro-title {
-      font-size: clamp(60px, 9vw, 150px);
-
-      letter-spacing: -.075em;
-
-      line-height: .85;
-
-      max-width: 850px;
-    }
-
-    .intro-copy {
-      max-width: 390px;
-
-      font-size: 15px;
-
-      line-height: 1.55;
-    }
-
-    .intro-copy p + p {
-      margin-top: 24px;
-    }
-
-
-    /* =========================================================
-       IMAGE CARD
-    ========================================================== */
-
-    .image-card {
-      position: relative;
-
-      overflow: hidden;
-
-      border-radius: var(--radius);
-
-      background: var(--paper);
-    }
-
-    .image-card img {
-      height: 100%;
-
-      object-fit: cover;
-
-      transform: scale(1.08);
-
-      transition:
-        transform 1.2s cubic-bezier(.22,1,.36,1);
-    }
-
-    .image-card:hover img {
-      transform: scale(1);
-    }
-
-    .image-label {
-      position: absolute;
-
-      top: 18px;
-      left: 18px;
-
-      z-index: 2;
-
-      padding: 8px 11px;
-
-      border-radius: 100px;
-
-      background: rgba(248,248,245,.88);
-
-      backdrop-filter: blur(10px);
-
-      font-family: "DM Mono", monospace;
-
-      font-size: 9px;
-
-      text-transform: uppercase;
-    }
-
-
-    /* =========================================================
-       JOURNEY
-    ========================================================== */
-
-    .journey-head {
-      display: grid;
-
-      grid-template-columns: 1fr 2fr;
-
-      gap: 30px;
-
-      margin-bottom: 100px;
-    }
-
-    .journey-head h2 {
-      font-size: clamp(58px, 9vw, 145px);
-
-      letter-spacing: -.075em;
-
-      line-height: .82;
-    }
-
-    .timeline {
-      position: relative;
-    }
-
-    .timeline::before {
-      content: "";
-
-      position: absolute;
-
-      top: 0;
-      bottom: 0;
-
-      left: 50%;
-
-      width: 1px;
-
-      background: var(--line);
-
-      transform: translateX(-50%);
-    }
-
-    .timeline-item {
-      position: relative;
-
-      display: grid;
-
-      grid-template-columns: 1fr 1fr;
-
-      min-height: 500px;
-
-      border-top: 1px solid var(--line);
-    }
-
-    .timeline-item:last-child {
-      border-bottom: 1px solid var(--line);
-    }
-
-    .timeline-year {
-      padding: 30px;
-
-      font-family: "DM Mono", monospace;
-
-      font-size: 12px;
-    }
-
-    .timeline-content {
-      padding: 30px;
-
-      display: flex;
-
-      flex-direction: column;
-
-      justify-content: space-between;
-    }
-
-    .timeline-content h3 {
-      font-size: clamp(35px, 5vw, 70px);
-
-      letter-spacing: -.06em;
-
-      line-height: .9;
-
-      max-width: 500px;
-    }
-
-    .timeline-content p {
-      max-width: 390px;
-
-      font-size: 14px;
-
-      line-height: 1.5;
-
-      color: var(--muted);
-    }
-
-
-    /* =========================================================
-       WORK
-    ========================================================== */
-
-    .work-head {
-      display: flex;
-
-      justify-content: space-between;
-
-      align-items: flex-end;
-
-      margin-bottom: 90px;
-    }
-
-    .work-head h2 {
-      font-size: clamp(65px, 11vw, 180px);
-
-      letter-spacing: -.08em;
-
-      line-height: .8;
-    }
-
-    .work-head p {
-      max-width: 320px;
-
-      font-size: 14px;
-
-      line-height: 1.5;
-    }
-
-    .projects {
-      display: grid;
-
-      grid-template-columns: repeat(2, 1fr);
-
-      gap: 20px;
-    }
-
-    .project {
-      position: relative;
-
-      display: block;
-    }
-
-    .project:nth-child(even) {
-      margin-top: 160px;
-    }
-
-    .project-image {
-      aspect-ratio: 1 / 1.12;
-
-      overflow: hidden;
-
-      border-radius: var(--radius);
-
-      background: var(--paper);
-    }
-
-    .project-image img {
-      height: 100%;
-
-      object-fit: cover;
-
-      transform: scale(1.08);
-
-      transition:
-        transform 1.1s cubic-bezier(.22,1,.36,1);
-    }
-
-    .project:hover .project-image img {
-      transform: scale(1);
-    }
-
-    .project-info {
-      display: flex;
-
-      justify-content: space-between;
-
-      gap: 20px;
-
-      padding: 18px 4px;
-    }
-
-    .project-title {
-      font-size: 20px;
-
-      letter-spacing: -.04em;
-    }
-
-    .project-meta {
-      font-family: "DM Mono", monospace;
-
-      font-size: 9px;
-
-      text-transform: uppercase;
-
-      color: var(--muted);
-
-      text-align: right;
-    }
-
-
-    /* =========================================================
-       CAPABILITIES
-    ========================================================== */
-
-    .capabilities {
-      background: var(--black);
-
-      color: var(--white);
-
-      border-radius: 40px 40px 0 0;
-    }
-
-    .capabilities .section-number {
-      color: rgba(255,255,255,.45);
-    }
-
-    .cap-head {
-      display: grid;
-
-      grid-template-columns: 1fr 2fr;
-
-      gap: 40px;
-
-      margin-bottom: 120px;
-    }
-
-    .cap-head h2 {
-      font-size: clamp(65px, 10vw, 165px);
-
-      letter-spacing: -.08em;
-
-      line-height: .8;
-    }
-
-    .cap-description {
-      max-width: 480px;
-
-      font-size: clamp(20px, 2.4vw, 38px);
-
-      line-height: 1.08;
-
-      letter-spacing: -.04em;
-    }
-
-    .cap-list {
-      border-top: 1px solid rgba(255,255,255,.2);
-    }
-
-    .cap-item {
-      position: relative;
-
-      display: grid;
-
-      grid-template-columns: 80px 1fr 1fr;
-
-      gap: 30px;
-
-      padding: 30px 0;
-
-      border-bottom: 1px solid rgba(255,255,255,.2);
-
-      transition:
-        padding .6s cubic-bezier(.22,1,.36,1);
-    }
-
-    .cap-item:hover {
-      padding-left: 20px;
-      padding-right: 20px;
-
-      background: rgba(255,255,255,.035);
-    }
-
-    .cap-number {
-      font-family: "DM Mono", monospace;
-
-      font-size: 10px;
-
-      color: rgba(255,255,255,.45);
-    }
-
-    .cap-item h3 {
-      font-size: clamp(28px, 4vw, 55px);
-
-      letter-spacing: -.06em;
-
-      line-height: .9;
-    }
-
-    .cap-item p {
-      max-width: 390px;
-
-      font-size: 13px;
-
-      line-height: 1.5;
-
-      color: rgba(255,255,255,.55);
-    }
-
-
-    /* =========================================================
-       SERVICES
-    ========================================================== */
-
-    .services-head {
-      display: flex;
-
-      justify-content: space-between;
-
-      align-items: flex-end;
-
-      margin-bottom: 100px;
-    }
-
-    .services-head h2 {
-      font-size: clamp(70px, 12vw, 190px);
-
-      letter-spacing: -.085em;
-
-      line-height: .77;
-    }
-
-    .service-list {
-      border-top: 1px solid var(--line);
-    }
-
-    .service {
-      display: grid;
-
-      grid-template-columns: 70px 1fr 220px;
-
-      gap: 30px;
-
-      padding: 35px 0;
-
-      border-bottom: 1px solid var(--line);
-
-      align-items: start;
-    }
-
-    .service-number {
-      font-family: "DM Mono", monospace;
-
-      font-size: 10px;
-
-      color: var(--muted);
-    }
-
-    .service h3 {
-      font-size: clamp(35px, 5vw, 70px);
-
-      letter-spacing: -.065em;
-
-      line-height: .85;
-    }
-
-    .service-price {
-      font-family: "DM Mono", monospace;
-
-      font-size: 11px;
-
-      text-align: right;
-
-      color: var(--muted);
-    }
-
-
-    /* =========================================================
-       TESTIMONIAL
-    ========================================================== */
-
-    .testimonial-section {
-      min-height: 100svh;
-
-      display: flex;
-
-      flex-direction: column;
-
-      justify-content: center;
-
-      background: var(--accent);
-
-      border-radius: 40px;
-    }
-
-    .testimonial-mark {
-      font-size: 100px;
-
-      line-height: .5;
-
-      margin-bottom: 40px;
-    }
-
-    .testimonial {
-      max-width: 1100px;
-
-      font-size: clamp(40px, 6vw, 90px);
-
-      letter-spacing: -.07em;
-
-      line-height: .92;
-    }
-
-    .testimonial-author {
-      margin-top: 70px;
-
-      font-family: "DM Mono", monospace;
-
-      font-size: 11px;
-
-      text-transform: uppercase;
-    }
-
-
-    /* =========================================================
-       FAQ
-    ========================================================== */
-
-    .faq-head {
-      margin-bottom: 90px;
-    }
-
-    .faq-head h2 {
-      font-size: clamp(70px, 12vw, 190px);
-
-      letter-spacing: -.08em;
-
-      line-height: .8;
-    }
-
-    .faq-list {
-      border-top: 1px solid var(--line);
-    }
-
-    .faq-item {
-      border-bottom: 1px solid var(--line);
-    }
-
-    .faq-question {
-      width: 100%;
-
-      padding: 30px 0;
-
-      border: 0;
-
-      background: none;
-
-      color: inherit;
-
-      cursor: none;
-
-      display: flex;
-
-      justify-content: space-between;
-
-      align-items: center;
-
-      text-align: left;
-    }
-
-    .faq-question h3 {
-      font-size: clamp(25px, 3vw, 48px);
-
-      font-weight: 500;
-
-      letter-spacing: -.05em;
-    }
-
-    .faq-icon {
-      font-size: 30px;
-
-      transition:
-        transform .5s cubic-bezier(.22,1,.36,1);
-    }
-
-    .faq-answer {
-      display: grid;
-
-      grid-template-rows: 0fr;
-
-      transition:
-        grid-template-rows .7s cubic-bezier(.22,1,.36,1);
-    }
-
-    .faq-answer > div {
-      overflow: hidden;
-    }
-
-    .faq-answer p {
-      max-width: 700px;
-
-      padding-bottom: 30px;
-
-      font-size: 15px;
-
-      line-height: 1.55;
-
-      color: var(--muted);
-    }
-
-    .faq-item.open .faq-answer {
-      grid-template-rows: 1fr;
-    }
-
-    .faq-item.open .faq-icon {
-      transform: rotate(45deg);
-    }
-
-
-    /* =========================================================
-       FOOTER
-    ========================================================== */
-
-    footer {
-      min-height: 80svh;
-
-      background: var(--black);
-
-      color: var(--white);
-
-      padding: var(--pad);
-
-      display: flex;
-
-      flex-direction: column;
-
-      justify-content: space-between;
-
-      border-radius: 40px 40px 0 0;
-    }
-
-    .footer-top {
-      display: flex;
-
-      justify-content: space-between;
-
-      gap: 40px;
-    }
-
-    .footer-small {
-      font-family: "DM Mono", monospace;
-
-      font-size: 10px;
-
-      color: rgba(255,255,255,.45);
-
-      text-transform: uppercase;
-    }
-
-    .footer-title {
-      font-size: clamp(70px, 15vw, 240px);
-
-      letter-spacing: -.09em;
-
-      line-height: .72;
-
-      max-width: 1200px;
-    }
-
-    .footer-bottom {
-      display: flex;
-
-      justify-content: space-between;
-
-      align-items: flex-end;
-
-      gap: 30px;
-    }
-
-    .footer-email {
-      font-size: clamp(20px, 3vw, 40px);
-
-      letter-spacing: -.05em;
-    }
-
-    .socials {
-      display: flex;
-
-      gap: 20px;
-
-      font-family: "DM Mono", monospace;
-
-      font-size: 10px;
-
-      text-transform: uppercase;
-    }
-
-
-    /* =========================================================
-       REVEAL ANIMATIONS
-    ========================================================== */
-
-    .reveal {
-      opacity: 0;
-
-      transform: translateY(80px);
-    }
-
-    .reveal-line {
-      overflow: hidden;
-    }
-
-    .reveal-line > span {
-      display: block;
-
-      transform: translateY(110%);
-    }
-
-
-    /* =========================================================
-       RESPONSIVE
-    ========================================================== */
-
-    @media (max-width: 800px) {
-
-      body {
-        cursor: auto;
-      }
-
-      .cursor,
-      .cursor-follower,
-      .cursor-label {
-        display: none;
-      }
-
-      .nav-right a:not(:last-child) {
-        display: none;
-      }
-
-      .hero {
-        min-height: 90svh;
-
-        padding-top: 130px;
-      }
-
-      .hero-top {
-        flex-direction: column;
-      }
-
-      .hero-title {
-        font-size: clamp(70px, 19vw, 150px);
-      }
-
-      .hero-bottom {
-        flex-direction: column;
-
-        align-items: flex-start;
-      }
-
-      .hero-stats {
-        gap: 25px;
-      }
-
-      .intro {
-        grid-template-columns: 1fr;
-
-        min-height: auto;
-      }
-
-      .journey-head {
-        grid-template-columns: 1fr;
-      }
-
-      .timeline::before {
-        display: none;
-      }
-
-      .timeline-item {
-        grid-template-columns: 70px 1fr;
-
-        min-height: 420px;
-      }
-
-      .timeline-year {
-        padding: 20px 0;
-      }
-
-      .timeline-content {
-        padding: 20px 0;
-      }
-
-      .work-head {
-        flex-direction: column;
-
-        align-items: flex-start;
-
-        gap: 30px;
-      }
-
-      .projects {
-        grid-template-columns: 1fr;
-      }
-
-      .project:nth-child(even) {
-        margin-top: 0;
-      }
-
-      .cap-head {
-        grid-template-columns: 1fr;
-      }
-
-      .cap-item {
-        grid-template-columns: 45px 1fr;
-      }
-
-      .cap-item p {
-        grid-column: 2;
-      }
-
-      .service {
-        grid-template-columns: 45px 1fr;
-      }
-
-      .service-price {
-        grid-column: 2;
-
-        text-align: left;
-      }
-
-      .testimonial-section {
-        min-height: 75svh;
-      }
-
-      .footer-top {
-        flex-direction: column;
-      }
-
-      .footer-bottom {
-        flex-direction: column;
-
-        align-items: flex-start;
-      }
-    }
-
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 
 <body>
 
-  <!-- =========================================================
+  <!-- =====================================================
        CUSTOM CURSOR
-  ========================================================== -->
+  ====================================================== -->
 
-  <div class="cursor"></div>
-  <div class="cursor-follower"></div>
-  <div class="cursor-label">View</div>
-
-
-  <!-- =========================================================
-       LOADER
-  ========================================================== -->
-
-  <div class="loader">
-
-    <div class="loader-name">
-      YOUR<br>
-      NAME
-    </div>
-
-    <div class="loader-percent">
-      <span id="loaderPercent">0</span>%
-    </div>
-
+  <div class="cursor">
+    <span class="cursor-text">VIEW</span>
   </div>
 
 
-  <!-- =========================================================
+  <!-- =====================================================
        NAVIGATION
-  ========================================================== -->
+  ====================================================== -->
 
-  <nav class="nav">
+  <header class="nav">
 
-    <a href="#top" class="logo magnetic">
+    <a href="#home" class="nav-logo">
       YOUR NAME
     </a>
 
-    <div class="nav-right">
+    <nav class="nav-links">
 
-      <a href="#work" class="nav-link magnetic">
-        <span>Work</span>
-        <span>Work</span>
+      <a href="#about">
+        about me
       </a>
 
-      <a href="#about" class="nav-link magnetic">
-        <span>About</span>
-        <span>About</span>
+      <a href="#projects">
+        projects
       </a>
 
-      <a href="#contact" class="nav-link magnetic">
-        <span>Contact</span>
-        <span>Contact</span>
+      <a href="#services">
+        services
       </a>
 
-    </div>
+      <a href="#contact">
+        let's talk
+      </a>
 
-  </nav>
+    </nav>
+
+  </header>
 
 
-  <main id="top">
+  <main>
 
 
-    <!-- =======================================================
+    <!-- ===================================================
          HERO
-    ======================================================== -->
+    ==================================================== -->
 
-    <section class="hero">
+    <section
+      class="hero"
+      id="home"
+    >
 
       <div class="hero-top">
 
-        <div class="section-number">
-          Portfolio / 2026
+        <div class="eyebrow">
+          Creative Developer
         </div>
 
-        <div class="hero-intro reveal">
-          <strong>
-            Creative developer & digital designer.
-          </strong>
-
-          <br><br>
-
-          I build digital experiences that combine
-          strong visual direction, thoughtful interaction
-          and clean technology.
+        <div class="hero-description">
+          Working closely with ambitious teams
+          to create digital experiences that combine
+          creativity, technology and performance.
         </div>
 
       </div>
 
 
-      <h1 class="hero-title">
+      <div class="hero-title-wrap">
 
-        <span class="line">
-          <span class="word">DIGITAL</span>
-        </span>
+        <h1 class="hero-title">
 
-        <span class="line">
-          <span class="word">MAKER</span>
-        </span>
+          <span>
+            Digital
+          </span>
 
-      </h1>
+          <span>
+            Experiences.
+          </span>
+
+        </h1>
+
+      </div>
 
 
       <div class="hero-bottom">
 
-        <div class="scroll-note">
-
+        <div class="hero-scroll">
           <span class="scroll-dot"></span>
-
           Scroll to explore
-
         </div>
-
 
         <div class="hero-stats">
 
-          <div class="stat">
-
+          <div>
             <strong>25+</strong>
-
-            <span>
-              Projects
-            </span>
-
+            <span>Projects</span>
           </div>
 
-
-          <div class="stat">
-
+          <div>
             <strong>04</strong>
-
-            <span>
-              Years Experience
-            </span>
-
+            <span>Years experience</span>
           </div>
 
         </div>
@@ -1484,64 +150,96 @@
     </section>
 
 
-    <!-- =======================================================
+
+    <!-- ===================================================
          ABOUT
-    ======================================================== -->
+    ==================================================== -->
 
-    <section class="section intro" id="about">
+    <section
+      class="about section"
+      id="about"
+    >
 
-      <div>
+      <div class="section-label">
+        About me (&)
+      </div>
 
-        <div class="section-number">
-          001 / About
-        </div>
 
-        <h2 class="intro-title reveal">
-          I make the internet feel a little more human.
+      <div class="about-grid">
+
+        <h2 class="huge-heading reveal">
+          The Web
+          <br>
+          Developer.
+          <br>
+          That's Me.
         </h2>
 
+
+        <div class="about-copy">
+
+          <p class="large-copy reveal">
+            I design and build digital experiences
+            that balance strong visual direction,
+            thoughtful interaction and solid technology.
+          </p>
+
+          <p class="body-copy reveal">
+            From the first idea to the final interaction,
+            I enjoy working across design, development,
+            motion and digital strategy.
+          </p>
+
+          <a
+            href="#contact"
+            class="pill-button magnetic"
+          >
+            Let's talk
+          </a>
+
+        </div>
+
       </div>
 
 
-      <div class="intro-copy reveal">
+      <div class="about-image reveal">
 
-        <p>
-          I'm YOUR NAME — a designer and developer focused
-          on creating digital experiences with personality.
-        </p>
-
-        <p>
-          From visual identity and art direction to
-          interaction and development, I like working
-          across the entire experience.
-        </p>
-
-        <p>
-          My work sits somewhere between design,
-          technology and experimentation.
-        </p>
+        <img
+          src="images/profile.jpg"
+          alt="YOUR NAME"
+        >
 
       </div>
 
     </section>
 
 
-    <!-- =======================================================
+
+    <!-- ===================================================
          JOURNEY
-    ======================================================== -->
+    ==================================================== -->
 
-    <section class="section">
+    <section
+      class="journey section"
+    >
 
-      <div class="journey-head">
+      <div class="section-label">
+        Start small grow big
+      </div>
 
-        <div class="section-number">
-          002 / Journey
-        </div>
 
-        <h2 class="reveal">
-          The<br>
+      <div class="journey-heading">
+
+        <h2 class="huge-heading reveal">
+          My
+          <br>
           Journey
         </h2>
+
+        <p>
+          A few moments that shaped
+          how I approach the web today.
+        </p>
 
       </div>
 
@@ -1549,92 +247,135 @@
       <div class="timeline">
 
 
-        <article class="timeline-item reveal">
+        <!-- JOURNEY 01 -->
+
+        <article class="timeline-item">
 
           <div class="timeline-year">
             '22
           </div>
 
-          <div class="timeline-content">
+          <div class="timeline-main">
 
-            <h3>
-              Started creating
-              for the web.
-            </h3>
+            <div class="timeline-title">
+              Starting out
+            </div>
 
             <p>
-              My first experiments with design,
-              development and digital products.
+              The beginning of my journey into
+              digital design and development.
             </p>
+
+            <div class="timeline-image">
+
+              <img
+                src="images/journey-01.jpg"
+                alt="Journey 01"
+              >
+
+            </div>
 
           </div>
 
         </article>
 
 
-        <article class="timeline-item reveal">
+
+        <!-- JOURNEY 02 -->
+
+        <article class="timeline-item">
 
           <div class="timeline-year">
             '23
           </div>
 
-          <div class="timeline-content">
+          <div class="timeline-main">
 
-            <h3>
-              First real
-              projects.
-            </h3>
+            <div class="timeline-title">
+              First real projects
+            </div>
 
             <p>
-              Started working with real clients and
-              learned how to turn ideas into experiences.
+              Turning experiments into real
+              websites and digital products.
             </p>
+
+            <div class="timeline-image">
+
+              <img
+                src="images/journey-02.jpg"
+                alt="Journey 02"
+              >
+
+            </div>
 
           </div>
 
         </article>
 
 
-        <article class="timeline-item reveal">
+
+        <!-- JOURNEY 03 -->
+
+        <article class="timeline-item">
 
           <div class="timeline-year">
             '24
           </div>
 
-          <div class="timeline-content">
+          <div class="timeline-main">
 
-            <h3>
-              Motion became
-              part of my work.
-            </h3>
+            <div class="timeline-title">
+              Leveling up
+            </div>
 
             <p>
-              Began exploring advanced interaction,
-              animation and creative development.
+              Motion, interaction and more
+              ambitious creative development.
             </p>
+
+            <div class="timeline-image">
+
+              <img
+                src="images/journey-03.jpg"
+                alt="Journey 03"
+              >
+
+            </div>
 
           </div>
 
         </article>
 
 
-        <article class="timeline-item reveal">
+
+        <!-- JOURNEY 04 -->
+
+        <article class="timeline-item">
 
           <div class="timeline-year">
             '26
           </div>
 
-          <div class="timeline-content">
+          <div class="timeline-main">
 
-            <h3>
-              Building what
-              comes next.
-            </h3>
+            <div class="timeline-title">
+              The journey continues
+            </div>
 
             <p>
-              Continuing to experiment with technology,
-              design and new ways of communicating online.
+              Building bigger ideas and exploring
+              new technology.
             </p>
+
+            <div class="timeline-image">
+
+              <img
+                src="images/journey-04.jpg"
+                alt="Journey 04"
+              >
+
+            </div>
 
           </div>
 
@@ -1645,678 +386,759 @@
     </section>
 
 
-    <!-- =======================================================
-         WORK
-    ======================================================== -->
 
-    <section class="section" id="work">
+    <!-- ===================================================
+         PROJECTS
+    ==================================================== -->
 
-      <div class="work-head">
+    <section
+      class="projects section"
+      id="projects"
+    >
 
-        <div>
-
-          <div class="section-number">
-            003 / Selected Work
-          </div>
-
-          <h2 class="reveal">
-            Selected<br>
-            Work
-          </h2>
-
-        </div>
+      <div class="section-label">
+        Selected work
+      </div>
 
 
-        <p class="reveal">
+      <div class="projects-heading">
 
-          A selection of projects across
-          websites, identities, digital products
-          and interactive experiences.
+        <h2 class="huge-heading reveal">
+          Built to
+          <br>
+          Perform.
+        </h2>
 
+        <p>
+          A selection of projects I've worked on,
+          from websites to interactive digital
+          experiences.
         </p>
 
       </div>
 
 
-      <div class="projects">
+      <div class="project-grid">
 
 
         <!-- PROJECT 01 -->
 
         <a
           href="#"
-          class="project magnetic"
-          data-cursor="Open"
+          class="project-card"
+          data-cursor="VIEW"
         >
 
           <div class="project-image">
 
-            <!-- CHANGE THIS IMAGE -->
-
             <img
-              src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1600&q=85"
-              alt="Project one"
+              src="images/project-01.jpg"
+              alt="Project 01"
             >
+
+            <div class="project-number">
+              01
+            </div>
 
           </div>
 
           <div class="project-info">
 
-            <div class="project-title">
+            <div>
               Project One
             </div>
 
-            <div class="project-meta">
-              Identity / Web
-              <br>
-              2026
-            </div>
+            <span>
+              Web / Development
+            </span>
 
           </div>
 
         </a>
+
 
 
         <!-- PROJECT 02 -->
 
         <a
           href="#"
-          class="project magnetic"
-          data-cursor="Open"
+          class="project-card project-offset"
+          data-cursor="VIEW"
         >
 
           <div class="project-image">
 
-            <!-- CHANGE THIS IMAGE -->
-
             <img
-              src="https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=1600&q=85"
-              alt="Project two"
+              src="images/project-02.jpg"
+              alt="Project 02"
             >
+
+            <div class="project-number">
+              02
+            </div>
 
           </div>
 
           <div class="project-info">
 
-            <div class="project-title">
+            <div>
               Project Two
             </div>
 
-            <div class="project-meta">
-              Digital / Motion
-              <br>
-              2026
-            </div>
+            <span>
+              Design / Motion
+            </span>
 
           </div>
 
         </a>
+
 
 
         <!-- PROJECT 03 -->
 
         <a
           href="#"
-          class="project magnetic"
-          data-cursor="Open"
+          class="project-card"
+          data-cursor="VIEW"
         >
 
           <div class="project-image">
 
-            <!-- CHANGE THIS IMAGE -->
-
             <img
-              src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1600&q=85"
-              alt="Project three"
+              src="images/project-03.jpg"
+              alt="Project 03"
             >
+
+            <div class="project-number">
+              03
+            </div>
 
           </div>
 
           <div class="project-info">
 
-            <div class="project-title">
+            <div>
               Project Three
             </div>
 
-            <div class="project-meta">
-              Art Direction / Web
-              <br>
-              2025
-            </div>
+            <span>
+              Creative Development
+            </span>
 
           </div>
 
         </a>
+
 
 
         <!-- PROJECT 04 -->
 
         <a
           href="#"
-          class="project magnetic"
-          data-cursor="Open"
+          class="project-card project-offset"
+          data-cursor="VIEW"
         >
 
           <div class="project-image">
 
-            <!-- CHANGE THIS IMAGE -->
-
             <img
-              src="https://images.unsplash.com/photo-1497215842964-222b430dc094?auto=format&fit=crop&w=1600&q=85"
-              alt="Project four"
+              src="images/project-04.jpg"
+              alt="Project 04"
             >
+
+            <div class="project-number">
+              04
+            </div>
 
           </div>
 
           <div class="project-info">
 
-            <div class="project-title">
+            <div>
               Project Four
             </div>
 
-            <div class="project-meta">
-              Creative Development
-              <br>
-              2025
-            </div>
+            <span>
+              Web / Interaction
+            </span>
 
           </div>
 
         </a>
 
 
+
+        <!-- PROJECT 05 -->
+
+        <a
+          href="#"
+          class="project-card"
+          data-cursor="VIEW"
+        >
+
+          <div class="project-image">
+
+            <img
+              src="images/project-05.jpg"
+              alt="Project 05"
+            >
+
+            <div class="project-number">
+              05
+            </div>
+
+          </div>
+
+          <div class="project-info">
+
+            <div>
+              Project Five
+            </div>
+
+            <span>
+              Digital / Branding
+            </span>
+
+          </div>
+
+        </a>
+
+
+
+        <!-- PROJECT 06 -->
+
+        <a
+          href="#"
+          class="project-card project-offset"
+          data-cursor="VIEW"
+        >
+
+          <div class="project-image">
+
+            <img
+              src="images/project-06.jpg"
+              alt="Project 06"
+            >
+
+            <div class="project-number">
+              06
+            </div>
+
+          </div>
+
+          <div class="project-info">
+
+            <div>
+              Project Six
+            </div>
+
+            <span>
+              Web / Motion
+            </span>
+
+          </div>
+
+        </a>
+
       </div>
 
     </section>
 
 
-    <!-- =======================================================
+
+    <!-- ===================================================
          CAPABILITIES
-    ======================================================== -->
+    ==================================================== -->
 
-    <section class="section capabilities">
+    <section class="capabilities section">
 
-      <div class="cap-head">
+      <div class="section-label">
+        What you get
+      </div>
 
-        <div class="section-number">
-          004 / Capabilities
-        </div>
 
-        <div>
+      <div class="capabilities-heading">
 
-          <h2 class="reveal">
-            What<br>
-            I Do
-          </h2>
+        <h2 class="huge-heading reveal">
+          Strategy,
+          <br>
+          precision &
+          <br>
+          development.
+        </h2>
 
-          <p class="cap-description reveal">
-
-            Strategy, design and development
-            combined to create digital experiences
-            that feel effortless.
-
-          </p>
-
-        </div>
+        <p class="large-copy">
+          Everything needed to turn an idea
+          into a powerful digital experience
+          that feels effortless.
+        </p>
 
       </div>
 
 
-      <div class="cap-list">
+      <div class="capability-list">
 
 
-        <article class="cap-item reveal">
+        <article class="capability">
 
-          <div class="cap-number">
-            001
-          </div>
+          <span>
+            01
+          </span>
 
           <h3>
-            Creative Development
+            Web Development
           </h3>
 
           <p>
-            Building expressive websites and
-            interactive experiences with modern
-            front-end technology.
+            Fast, scalable websites with clean
+            structure and thoughtful implementation.
           </p>
 
         </article>
 
 
-        <article class="cap-item reveal">
+        <article class="capability">
 
-          <div class="cap-number">
-            002
-          </div>
+          <span>
+            02
+          </span>
 
           <h3>
-            Web Design
+            Custom Integrations
           </h3>
 
           <p>
-            Designing clear, distinctive interfaces
-            with a strong visual system and thoughtful
-            interaction.
+            APIs, third-party services and
+            custom functionality built around
+            your requirements.
           </p>
 
         </article>
 
 
-        <article class="cap-item reveal">
+        <article class="capability">
 
-          <div class="cap-number">
-            003
-          </div>
+          <span>
+            03
+          </span>
+
+          <h3>
+            SEO & Performance
+          </h3>
+
+          <p>
+            Technical optimization, speed,
+            accessibility and search-friendly
+            architecture.
+          </p>
+
+        </article>
+
+
+        <article class="capability">
+
+          <span>
+            04
+          </span>
 
           <h3>
             Motion & Interaction
           </h3>
 
           <p>
-            Creating subtle and expressive motion
-            systems that make interfaces feel alive.
+            Smooth animations and interactions
+            that make the experience feel alive.
           </p>
 
         </article>
 
 
-        <article class="cap-item reveal">
+        <article class="capability">
 
-          <div class="cap-number">
-            004
-          </div>
-
-          <h3>
-            Art Direction
-          </h3>
-
-          <p>
-            Developing visual direction, imagery,
-            typography and digital identities.
-          </p>
-
-        </article>
-
-
-        <article class="cap-item reveal">
-
-          <div class="cap-number">
-            005
-          </div>
-
-          <h3>
-            Technical Strategy
-          </h3>
-
-          <p>
-            Helping teams choose the right tools,
-            architecture and approach for their
-            digital products.
-          </p>
-
-        </article>
-
-
-      </div>
-
-    </section>
-
-
-    <!-- =======================================================
-         SERVICES
-    ======================================================== -->
-
-    <section class="section">
-
-      <div class="services-head">
-
-        <div>
-
-          <div class="section-number">
-            005 / Services
-          </div>
-
-          <h2 class="reveal">
-            Ways<br>
-            to Work
-          </h2>
-
-        </div>
-
-      </div>
-
-
-      <div class="service-list">
-
-
-        <article class="service reveal">
-
-          <div class="service-number">
-            001
-          </div>
-
-          <h3>
-            Website Build
-          </h3>
-
-          <div class="service-price">
-            CUSTOM PROJECT
-          </div>
-
-        </article>
-
-
-        <article class="service reveal">
-
-          <div class="service-number">
-            002
-          </div>
+          <span>
+            05
+          </span>
 
           <h3>
             Creative Development
           </h3>
 
-          <div class="service-price">
-            CUSTOM PROJECT
+          <p>
+            Experimental ideas translated into
+            polished, usable digital experiences.
+          </p>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         SERVICES
+    ==================================================== -->
+
+    <section
+      class="services section"
+      id="services"
+    >
+
+      <div class="section-label">
+        Services
+      </div>
+
+
+      <h2 class="huge-heading reveal">
+        Solutions
+        <br>
+        That Deliver.
+      </h2>
+
+
+      <p class="services-intro">
+        Same attention to detail.
+        Different approaches depending
+        on what your project needs.
+      </p>
+
+
+      <div class="service-list">
+
+
+        <article class="service">
+
+          <span>
+            01
+          </span>
+
+          <div>
+
+            <h3>
+              Starter Build
+            </h3>
+
+            <p>
+              A focused website for brands
+              that need a strong digital presence.
+            </p>
+
           </div>
+
+          <strong>
+            CUSTOM
+          </strong>
 
         </article>
 
 
-        <article class="service reveal">
+        <article class="service">
 
-          <div class="service-number">
-            003
+          <span>
+            02
+          </span>
+
+          <div>
+
+            <h3>
+              Custom Project
+            </h3>
+
+            <p>
+              Advanced interaction, animation,
+              integrations and complex experiences.
+            </p>
+
           </div>
 
-          <h3>
-            Brand & Digital Identity
-          </h3>
-
-          <div class="service-price">
-            CUSTOM PROJECT
-          </div>
+          <strong>
+            CUSTOM
+          </strong>
 
         </article>
 
 
-        <article class="service reveal">
+        <article class="service">
 
-          <div class="service-number">
-            004
+          <span>
+            03
+          </span>
+
+          <div>
+
+            <h3>
+              Ongoing Support
+            </h3>
+
+            <p>
+              Continuous improvements, maintenance,
+              new pages and performance optimization.
+            </p>
+
           </div>
 
-          <h3>
-            Ongoing Support
-          </h3>
-
-          <div class="service-price">
+          <strong>
             MONTHLY
-          </div>
+          </strong>
 
         </article>
 
-
       </div>
 
     </section>
 
 
-    <!-- =======================================================
-         TESTIMONIAL
-    ======================================================== -->
 
-    <section class="section testimonial-section">
+    <!-- ===================================================
+         CTA
+    ==================================================== -->
 
-      <div class="section-number">
-        006 / Client Words
+    <section class="cta section">
+
+      <div class="section-label">
+        Have something in mind?
       </div>
 
-      <div class="testimonial-mark">
-        “
-      </div>
 
-      <blockquote class="testimonial reveal">
+      <h2 class="cta-title reveal">
+        Let's
+        <br>
+        Talk.
+      </h2>
 
-        YOUR NAME doesn't just build websites —
-        he thinks about the entire experience.
-        The result feels intentional, polished
-        and completely alive.
 
-      </blockquote>
-
-      <div class="testimonial-author">
-
-        — Client Name / Creative Director
-
-      </div>
+      <a
+        href="mailto:hello@example.com"
+        class="cta-button magnetic"
+        data-cursor="EMAIL"
+      >
+        hello@example.com
+      </a>
 
     </section>
 
 
-    <!-- =======================================================
-         FAQ
-    ======================================================== -->
 
-    <section class="section">
+    <!-- ===================================================
+         TESTIMONIALS
+    ==================================================== -->
 
-      <div class="faq-head">
+    <section class="testimonials section">
 
-        <div class="section-number">
-          007 / FAQ
+      <div class="section-label">
+        From people I've worked with
+      </div>
+
+
+      <div class="testimonial">
+
+        <div class="quote-mark">
+          "
         </div>
 
-        <h2 class="reveal">
-          Questions
-        </h2>
+        <blockquote>
+          The work doesn't just look good.
+          It feels considered, intentional
+          and complete.
+        </blockquote>
+
+        <div class="testimonial-person">
+          CLIENT NAME
+          <br>
+          Creative Director
+        </div>
 
       </div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         FAQ
+    ==================================================== -->
+
+    <section class="faq section">
+
+      <div class="section-label">
+        FAQ
+      </div>
+
+
+      <h2 class="huge-heading reveal">
+        Got any
+        <br>
+        questions?
+      </h2>
 
 
       <div class="faq-list">
 
 
-        <article class="faq-item">
+        <div class="faq-item">
 
-          <button
-            class="faq-question magnetic"
-            data-cursor="Open"
-          >
+          <button class="faq-question">
 
-            <h3>
+            <span>
               What do you specialize in?
-            </h3>
-
-            <span class="faq-icon">
-              +
             </span>
+
+            <b>
+              +
+            </b>
 
           </button>
 
           <div class="faq-answer">
 
-            <div>
-
-              <p>
-                I specialize in creative development,
-                web design, interaction design and
-                digital experiences.
-              </p>
-
-            </div>
+            <p>
+              I specialize in creative development,
+              web design, motion and interactive
+              digital experiences.
+            </p>
 
           </div>
 
-        </article>
+        </div>
 
 
-        <article class="faq-item">
+        <div class="faq-item">
 
-          <button
-            class="faq-question magnetic"
-            data-cursor="Open"
-          >
+          <button class="faq-question">
 
-            <h3>
-              Do you work with existing designs?
-            </h3>
-
-            <span class="faq-icon">
-              +
+            <span>
+              Can you work from an existing design?
             </span>
+
+            <b>
+              +
+            </b>
 
           </button>
 
           <div class="faq-answer">
 
-            <div>
-
-              <p>
-                Yes. I can work from Figma designs,
-                existing design systems or rough
-                creative direction.
-              </p>
-
-            </div>
+            <p>
+              Yes. I can work from Figma,
+              an existing design system or
+              a rough creative direction.
+            </p>
 
           </div>
 
-        </article>
+        </div>
 
 
-        <article class="faq-item">
+        <div class="faq-item">
 
-          <button
-            class="faq-question magnetic"
-            data-cursor="Open"
-          >
+          <button class="faq-question">
 
-            <h3>
-              Can you build custom animations?
-            </h3>
-
-            <span class="faq-icon">
-              +
+            <span>
+              Do you create custom animations?
             </span>
+
+            <b>
+              +
+            </b>
 
           </button>
 
           <div class="faq-answer">
 
-            <div>
-
-              <p>
-                Yes. Interaction and motion can be
-                designed specifically around the
-                personality of the project.
-              </p>
-
-            </div>
+            <p>
+              Yes. Animations can be designed
+              around the personality and goals
+              of the project.
+            </p>
 
           </div>
 
-        </article>
+        </div>
 
 
-        <article class="faq-item">
+        <div class="faq-item">
 
-          <button
-            class="faq-question magnetic"
-            data-cursor="Open"
-          >
+          <button class="faq-question">
 
-            <h3>
+            <span>
               How can we work together?
-            </h3>
-
-            <span class="faq-icon">
-              +
             </span>
+
+            <b>
+              +
+            </b>
 
           </button>
 
           <div class="faq-answer">
 
-            <div>
-
-              <p>
-                Send me a message with your project,
-                goals and timeline. I'll get back to you
-                with the best way to approach it.
-              </p>
-
-            </div>
+            <p>
+              Send me a message describing your
+              project, goals and timeline.
+            </p>
 
           </div>
 
-        </article>
+        </div>
 
 
       </div>
 
     </section>
 
-
   </main>
 
 
-  <!-- =========================================================
-       FOOTER
-  ========================================================== -->
 
-  <footer id="contact">
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer
+    class="footer"
+    id="contact"
+  >
 
     <div class="footer-top">
 
-      <div class="footer-small">
-        Available for selected projects
-      </div>
+      <span>
+        YOUR NAME
+      </span>
 
-      <div class="footer-small">
-        Dubai / UAE
-      </div>
+      <span>
+        2026
+      </span>
 
     </div>
 
 
-    <div>
-
-      <div class="section-number footer-small">
-        Have something in mind?
-      </div>
-
-      <h2 class="footer-title">
-        LET'S<br>
-        TALK.
-      </h2>
-
+    <div class="footer-title">
+      Let's
+      <br>
+      Build.
     </div>
 
 
     <div class="footer-bottom">
 
-      <a
-        href="mailto:hello@example.com"
-        class="footer-email magnetic"
-        data-cursor="Email"
-      >
+      <a href="mailto:hello@example.com">
         hello@example.com
       </a>
 
+      <div>
 
-      <div class="socials">
-
-        <a href="#" class="magnetic">
+        <a href="#">
           Instagram
         </a>
 
-        <a href="#" class="magnetic">
+        <a href="#">
           LinkedIn
         </a>
 
-        <a href="#" class="magnetic">
-          Behance
+        <a href="#">
+          GitHub
         </a>
 
       </div>
@@ -2326,582 +1148,7 @@
   </footer>
 
 
-  <!-- =========================================================
-       JAVASCRIPT
-  ========================================================== -->
-
-  <script>
-
-    gsap.registerPlugin(ScrollTrigger);
-
-
-    /* =========================================================
-       LOADER
-    ========================================================== */
-
-    const loader = document.querySelector(".loader");
-    const loaderPercent = document.querySelector("#loaderPercent");
-
-    let loadProgress = 0;
-
-    const loadingInterval = setInterval(() => {
-
-      loadProgress += Math.floor(Math.random() * 9) + 2;
-
-      if (loadProgress >= 100) {
-
-        loadProgress = 100;
-
-        clearInterval(loadingInterval);
-
-        loaderPercent.textContent = loadProgress;
-
-        gsap.to(loader, {
-
-          yPercent: -100,
-
-          duration: 1.2,
-
-          delay: .25,
-
-          ease: "power4.inOut",
-
-          onComplete: () => {
-
-            loader.remove();
-
-            startHero();
-
-          }
-
-        });
-
-      } else {
-
-        loaderPercent.textContent = loadProgress;
-
-      }
-
-    }, 60);
-
-
-    /* =========================================================
-       HERO
-    ========================================================== */
-
-    function startHero() {
-
-      const words =
-        document.querySelectorAll(".hero-title .word");
-
-      gsap.to(words, {
-
-        y: "0%",
-
-        duration: 1.5,
-
-        stagger: .1,
-
-        ease: "power4.out"
-
-      });
-
-
-      gsap.from(".hero-intro", {
-
-        opacity: 0,
-
-        y: 40,
-
-        duration: 1.2,
-
-        delay: .5,
-
-        ease: "power3.out"
-
-      });
-
-
-      gsap.from(".hero-bottom", {
-
-        opacity: 0,
-
-        y: 30,
-
-        duration: 1,
-
-        delay: .8,
-
-        ease: "power3.out"
-
-      });
-
-    }
-
-
-    /* =========================================================
-       GENERAL SCROLL REVEALS
-    ========================================================== */
-
-    document.querySelectorAll(".reveal").forEach(element => {
-
-      gsap.to(element, {
-
-        opacity: 1,
-
-        y: 0,
-
-        duration: 1.1,
-
-        ease: "power3.out",
-
-        scrollTrigger: {
-
-          trigger: element,
-
-          start: "top 88%",
-
-          once: true
-
-        }
-
-      });
-
-    });
-
-
-    /* =========================================================
-       TEXT PARALLAX
-    ========================================================== */
-
-    document.querySelectorAll(
-      ".section-heading, .intro-title, .journey-head h2"
-    ).forEach(element => {
-
-      gsap.to(element, {
-
-        y: -40,
-
-        ease: "none",
-
-        scrollTrigger: {
-
-          trigger: element,
-
-          start: "top bottom",
-
-          end: "bottom top",
-
-          scrub: 1
-
-        }
-
-      });
-
-    });
-
-
-    /* =========================================================
-       PROJECT IMAGE PARALLAX
-    ========================================================== */
-
-    document.querySelectorAll(".project-image img").forEach(img => {
-
-      gsap.to(img, {
-
-        yPercent: -8,
-
-        ease: "none",
-
-        scrollTrigger: {
-
-          trigger: img,
-
-          start: "top bottom",
-
-          end: "bottom top",
-
-          scrub: true
-
-        }
-
-      });
-
-    });
-
-
-    /* =========================================================
-       MAGNETIC BUTTONS / LINKS
-       
-       This makes links subtly follow the pointer.
-    ========================================================== */
-
-    const magneticElements =
-      document.querySelectorAll(".magnetic");
-
-
-    magneticElements.forEach(element => {
-
-      element.addEventListener("mousemove", event => {
-
-        const rect = element.getBoundingClientRect();
-
-        const x =
-          event.clientX -
-          (rect.left + rect.width / 2);
-
-        const y =
-          event.clientY -
-          (rect.top + rect.height / 2);
-
-
-        gsap.to(element, {
-
-          x: x * .15,
-
-          y: y * .15,
-
-          duration: .4,
-
-          ease: "power3.out"
-
-        });
-
-      });
-
-
-      element.addEventListener("mouseleave", () => {
-
-        gsap.to(element, {
-
-          x: 0,
-
-          y: 0,
-
-          duration: .7,
-
-          ease: "elastic.out(1,.4)"
-
-        });
-
-      });
-
-    });
-
-
-    /* =========================================================
-       CUSTOM CURSOR
-    ========================================================== */
-
-    const cursor =
-      document.querySelector(".cursor");
-
-    const follower =
-      document.querySelector(".cursor-follower");
-
-    const cursorLabel =
-      document.querySelector(".cursor-label");
-
-
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-
-    let followerX = mouseX;
-    let followerY = mouseY;
-
-
-    window.addEventListener("mousemove", event => {
-
-      mouseX = event.clientX;
-
-      mouseY = event.clientY;
-
-
-      gsap.to(cursor, {
-
-        x: mouseX,
-
-        y: mouseY,
-
-        duration: .08,
-
-        ease: "none"
-
-      });
-
-
-      gsap.to(cursorLabel, {
-
-        x: mouseX,
-
-        y: mouseY,
-
-        duration: .12,
-
-        ease: "power2.out"
-
-      });
-
-    });
-
-
-    function animateFollower() {
-
-      followerX +=
-        (mouseX - followerX) * .13;
-
-      followerY +=
-        (mouseY - followerY) * .13;
-
-
-      follower.style.transform =
-        `translate(${followerX}px, ${followerY}px) translate(-50%, -50%)`;
-
-
-      requestAnimationFrame(animateFollower);
-
-    }
-
-    animateFollower();
-
-
-    /* =========================================================
-       CURSOR HOVER STATES
-    ========================================================== */
-
-    document.querySelectorAll(
-      "a, button, .project"
-    ).forEach(element => {
-
-      element.addEventListener("mouseenter", () => {
-
-        document.body.classList.add(
-          "cursor-hover"
-        );
-
-
-        const label =
-          element.dataset.cursor;
-
-        if (label) {
-
-          cursorLabel.textContent = label;
-
-          document.body.classList.add(
-            "cursor-label-visible"
-          );
-
-        }
-
-      });
-
-
-      element.addEventListener("mouseleave", () => {
-
-        document.body.classList.remove(
-          "cursor-hover"
-        );
-
-        document.body.classList.remove(
-          "cursor-label-visible"
-        );
-
-      });
-
-    });
-
-
-    /* =========================================================
-       CLICK CURSOR
-    ========================================================== */
-
-    window.addEventListener("mousedown", () => {
-
-      document.body.classList.add(
-        "cursor-click"
-      );
-
-    });
-
-
-    window.addEventListener("mouseup", () => {
-
-      document.body.classList.remove(
-        "cursor-click"
-      );
-
-    });
-
-
-    /* =========================================================
-       FAQ ACCORDION
-    ========================================================== */
-
-    document.querySelectorAll(".faq-question")
-      .forEach(button => {
-
-        button.addEventListener("click", () => {
-
-          const item =
-            button.closest(".faq-item");
-
-
-          const wasOpen =
-            item.classList.contains("open");
-
-
-          document.querySelectorAll(".faq-item")
-            .forEach(other => {
-
-              other.classList.remove("open");
-
-            });
-
-
-          if (!wasOpen) {
-
-            item.classList.add("open");
-
-          }
-
-        });
-
-      });
-
-
-    /* =========================================================
-       NAV COLOR CHANGE
-    ========================================================== */
-
-    ScrollTrigger.create({
-
-      trigger: ".capabilities",
-
-      start: "top 10%",
-
-      end: "bottom 10%",
-
-      onEnter: () => {
-
-        document.querySelector(".nav")
-          .style.color = "#fff";
-
-      },
-
-      onLeave: () => {
-
-        document.querySelector(".nav")
-          .style.color = "";
-
-      },
-
-      onEnterBack: () => {
-
-        document.querySelector(".nav")
-          .style.color = "#fff";
-
-      },
-
-      onLeaveBack: () => {
-
-        document.querySelector(".nav")
-          .style.color = "";
-
-      }
-
-    });
-
-
-    /* =========================================================
-       IMAGE TILT
-       
-       Subtle movement when hovering project cards.
-    ========================================================== */
-
-    document.querySelectorAll(".project")
-      .forEach(project => {
-
-        const image =
-          project.querySelector("img");
-
-
-        project.addEventListener(
-          "mousemove",
-          event => {
-
-            const rect =
-              project.getBoundingClientRect();
-
-
-            const x =
-              (event.clientX - rect.left)
-              / rect.width
-              - .5;
-
-
-            const y =
-              (event.clientY - rect.top)
-              / rect.height
-              - .5;
-
-
-            gsap.to(image, {
-
-              rotateY: x * 5,
-
-              rotateX: y * -5,
-
-              scale: 1.03,
-
-              duration: .5,
-
-              ease: "power3.out"
-
-            });
-
-          }
-        );
-
-
-        project.addEventListener(
-          "mouseleave",
-          () => {
-
-            gsap.to(image, {
-
-              rotateY: 0,
-
-              rotateX: 0,
-
-              scale: 1,
-
-              duration: .8,
-
-              ease: "power3.out"
-
-            });
-
-          }
-        );
-
-      });
-
-
-    /* =========================================================
-       REDUCED MOTION
-    ========================================================== */
-
-    if (
-      window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      ).matches
-    ) {
-
-      gsap.globalTimeline.timeScale(100);
-
-    }
-
-  </script>
+  <script src="script.js"></script>
 
 </body>
 </html>
