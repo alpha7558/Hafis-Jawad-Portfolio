@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YOUR NAME — Brand & Identity Designer</title>
+<meta name="description" content="Logo, visual identity, and brand systems design portfolio.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:     #16130f;
+    --paper:   #fbf7ef;
+    --coral:   #ff4e3a;
+    --violet:  #6c3ce9;
+    --yellow:  #f5d400;
+    --teal:    #0e7c6b;
+    --display: 'Unbounded', ui-sans-serif, sans-serif;
+    --body:    'Space Grotesk', ui-sans-serif, sans-serif;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{ color:inherit; }
+  img,svg{ display:block; max-width:100%; }
+  .wrap{ max-width:1160px; margin:0 auto; padding:0 32px; }
+  @media (max-width:640px){ .wrap{ padding:0 20px; } }
+
+  .eyebrow{
+    font-family:var(--body);
+    font-weight:600;
+    font-size:12.5px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    opacity:.65;
+  }
+  h1,h2,h3{ font-family:var(--display); line-height:1.05; letter-spacing:-.01em; }
+
+  :focus-visible{ outline:3px solid var(--coral); outline-offset:3px; }
+
+  /* ---------- Nav ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:60;
+    background:rgba(251,247,239,.86);
+    backdrop-filter:blur(10px);
+  }
+  header .wrap{ display:flex; align-items:center; justify-content:space-between; height:76px; }
+  .wordmark{ font-family:var(--display); font-weight:700; font-size:19px; }
+  nav ul{ list-style:none; display:flex; gap:30px; font-size:14px; font-weight:500; }
+  nav a{ text-decoration:none; position:relative; }
+  nav a::after{
+    content:''; position:absolute; left:0; right:0; bottom:-4px; height:2px;
+    background:var(--coral); transform:scaleX(0); transform-origin:left;
+    transition:transform .2s ease;
+  }
+  nav a:hover::after{ transform:scaleX(1); }
+  .nav-cta{
+    font-size:13.5px; font-weight:600; background:var(--ink); color:var(--paper);
+    padding:11px 20px; border-radius:40px; text-decoration:none;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .nav-cta:hover{ background:var(--coral); transform:translateY(-1px); }
+  @media (max-width:760px){ nav ul{ display:none; } }
+
+  /* ---------- Hero ---------- */
+  .hero{ padding:150px 0 90px; }
+  .hero h1{
+    font-size:clamp(38px,6.2vw,80px);
+    font-weight:700;
+    max-width:14ch;
+  }
+  .cycle{
+    display:inline-block;
+    color:var(--accent-current, var(--coral));
+    transition:color .5s ease;
+  }
+  .mark{
+    background-image:linear-gradient(120deg, var(--yellow) 0%, var(--yellow) 100%);
+    background-repeat:no-repeat;
+    background-size:100% 40%;
+    background-position:0 88%;
+    padding:0 4px;
+  }
+  .hero .lede{
+    font-size:18px; max-width:46ch; margin:26px 0 40px; opacity:.8;
+  }
+  .cta-row{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:64px; }
+  .btn{
+    font-family:var(--body); font-weight:600; font-size:14.5px;
+    padding:15px 28px; border-radius:40px; text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-solid{ background:var(--ink); color:var(--paper); }
+  .btn-solid:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(22,19,15,.22); }
+  .btn-outline{ border:2px solid var(--ink); }
+  .btn-outline:hover{ transform:translateY(-2px); background:var(--ink); color:var(--paper); }
+
+  /* Palette chips — signature element */
+  .palette-block{ max-width:560px; }
+  .palette-label{ font-size:12.5px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; opacity:.6; margin-bottom:12px; }
+  .chips{ display:flex; flex-wrap:wrap; gap:10px; }
+  .chip{
+    display:flex; align-items:center; gap:9px;
+    font-family:var(--body); font-size:13px; font-weight:600;
+    background:var(--paper); border:2px solid var(--ink);
+    padding:8px 8px 8px 8px; border-radius:40px; cursor:pointer;
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .chip:hover{ transform:translateY(-2px) rotate(-1deg); box-shadow:0 6px 16px rgba(22,19,15,.16); }
+  .chip .swatch{ width:22px; height:22px; border-radius:50%; border:2px solid var(--ink); }
+  .chip .hex{ padding-right:4px; }
+  .chip .copied{ display:none; }
+  .chip.is-copied .hex{ display:none; }
+  .chip.is-copied .copied{ display:inline; color:var(--teal); }
+
+  /* ---------- About / dark spread ---------- */
+  .spread-dark{ background:var(--ink); color:var(--paper); padding:80px 0; }
+  .spread-dark .wrap{ display:grid; grid-template-columns:1fr 1.3fr; gap:56px; align-items:start; }
+  .spread-dark .eyebrow{ color:var(--yellow); opacity:1; }
+  .spread-dark h2{ font-size:clamp(24px,3vw,34px); margin-top:12px; }
+  .bio p{ font-size:16px; opacity:.82; max-width:44ch; }
+  .service-list{ list-style:none; display:flex; flex-direction:column; gap:0; }
+  .service-list li{
+    font-family:var(--display); font-weight:500; font-size:clamp(19px,2.4vw,26px);
+    padding:16px 0; border-bottom:1px solid rgba(251,247,239,.18);
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .service-list li span{ font-family:var(--body); font-size:12.5px; font-weight:600; opacity:.55; letter-spacing:.06em; }
+  @media (max-width:760px){ .spread-dark .wrap{ grid-template-columns:1fr; } }
+
+  /* ---------- Work / Gallery ---------- */
+  .work{ padding:90px 0; }
+  .section-head{ max-width:60ch; margin-bottom:48px; }
+  .section-head h2{ font-size:clamp(26px,3.4vw,38px); margin-top:12px; }
+  .section-head p{ margin-top:14px; font-size:15.5px; opacity:.7; }
+
+  .gallery{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:28px;
+  }
+  .card{
+    border-radius:22px;
+    overflow:hidden;
+    border:2px solid var(--ink);
+    background:var(--paper);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .card:hover{ transform:translateY(-6px) rotate(-.4deg); box-shadow:0 16px 34px rgba(22,19,15,.16); }
+  .card-art{
+    aspect-ratio:4/3;
+    background:var(--accent, var(--coral));
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+  }
+  .card-art svg{ width:52%; height:52%; }
+  .card-body{ padding:22px 24px 26px; }
+  .card-body h3{ font-size:19px; font-weight:700; }
+  .card-body .kind{ font-size:13px; opacity:.6; margin-top:4px; }
+  .card-tags{ display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 16px; }
+  .card-tags span{
+    font-size:11.5px; font-weight:600; padding:5px 11px; border-radius:20px;
+    border:1.5px solid var(--ink); opacity:.75;
+  }
+  .card-link{ font-size:13.5px; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:6px; }
+  .card-link:hover{ text-decoration:underline; }
+  .gallery-note{
+    grid-column:1/-1; font-size:13px; opacity:.55; border:1.5px dashed var(--ink);
+    border-radius:14px; padding:16px 20px;
+  }
+  @media (max-width:760px){ .gallery{ grid-template-columns:1fr; } }
+
+  /* ---------- Process — violet spread ---------- */
+  .spread-violet{ background:var(--violet); color:var(--paper); padding:86px 0; }
+  .spread-violet .eyebrow{ color:var(--yellow); opacity:1; }
+  .spread-violet h2{ font-size:clamp(26px,3.4vw,36px); margin-top:12px; margin-bottom:48px; max-width:20ch; }
+  .steps{ display:grid; grid-template-columns:repeat(4,1fr); gap:28px; }
+  .step{ border-top:2px solid rgba(251,247,239,.4); padding-top:18px; }
+  .step .num{ font-family:var(--display); font-size:15px; font-weight:700; opacity:.7; }
+  .step h3{ font-family:var(--display); font-size:19px; margin:10px 0 8px; }
+  .step p{ font-size:14px; opacity:.82; }
+  @media (max-width:760px){ .steps{ grid-template-columns:1fr 1fr; row-gap:36px; } }
+
+  /* ---------- Contact ---------- */
+  .contact{ background:var(--ink); color:var(--paper); padding:100px 0 70px; }
+  .contact .wrap{ text-align:left; }
+  .contact .eyebrow{ color:var(--yellow); opacity:1; }
+  .contact h2{ font-size:clamp(32px,6vw,64px); font-weight:700; margin:14px 0 34px; max-width:16ch; }
+  .contact-links{ display:flex; flex-wrap:wrap; gap:16px; }
+  .contact-link{
+    font-family:var(--display); font-weight:500; font-size:15px;
+    border:2px solid var(--paper); padding:14px 24px; border-radius:40px;
+    text-decoration:none; transition:background .15s ease, color .15s ease;
+  }
+  .contact-link:hover{ background:var(--paper); color:var(--ink); }
+
+  footer{ background:var(--ink); color:var(--paper); padding:0 0 40px; }
+  footer .wrap{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+    font-size:12.5px; opacity:.55; padding-top:30px; border-top:1px solid rgba(251,247,239,.15);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="wordmark">Your Name.</div>
+    <nav>
+      <ul>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#process">Process</a></li>
+      </ul>
+    </nav>
+    <a href="#contact" class="nav-cta">Start a project</a>
+  </div>
+</header>
+
+<section class="hero wrap">
+  <div class="eyebrow">Visual Identity &amp; Brand Design</div>
+  <h1>Identities that make people <span class="mark">stop</span> <span class="cycle" id="cycleWord">scrolling.</span></h1>
+  <p class="lede">I design logos, visual identities, and brand systems for founders who don't want to look like everyone else in their category.</p>
+
+  <div class="cta-row">
+    <a href="#work" class="btn btn-solid">See the work ↓</a>
+    <a href="#contact" class="btn btn-outline">Start a project</a>
+  </div>
+
+  <div class="palette-block">
+    <div class="palette-label">Studio palette — tap a swatch to copy</div>
+    <div class="chips" id="chips">
+      <button class="chip" data-hex="#FF4E3A" data-color="coral" type="button">
+        <span class="swatch" style="background:#FF4E3A"></span>
+        <span class="hex">#FF4E3A</span><span class="copied">Copied!</span>
+      </button>
+      <button class="chip" data-hex="#6C3CE9" data-color="violet" type="button">
+        <span class="swatch" style="background:#6C3CE9"></span>
+        <span class="hex">#6C3CE9</span><span class="copied">Copied!</span>
+      </button>
+      <button class="chip" data-hex="#F5D400" data-color="yellow" type="button">
+        <span class="swatch" style="background:#F5D400"></span>
+        <span class="hex">#F5D400</span><span class="copied">Copied!</span>
+      </button>
+      <button class="chip" data-hex="#0E7C6B" data-color="teal" type="button">
+        <span class="swatch" style="background:#0E7C6B"></span>
+        <span class="hex">#0E7C6B</span><span class="copied">Copied!</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="spread-dark" id="about">
+  <div class="wrap">
+    <div class="bio">
+      <div class="eyebrow">About</div>
+      <h2>A little about the studio.</h2>
+      <p>Replace this with your friend's real bio — a couple of sentences on their background, what kind of brands they love working with, and what makes their process different. Specific beats impressive.</p>
+    </div>
+    <ul class="service-list">
+      <li>Logo Design <span>MARK &amp; WORDMARK</span></li>
+      <li>Visual Identity <span>SYSTEMS</span></li>
+      <li>Brand Guidelines <span>DOCUMENTATION</span></li>
+      <li>Packaging &amp; Print <span>APPLICATIONS</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="work" id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Selected Work</div>
+      <h2>A few identities from the studio.</h2>
+      <p>Each project card below is a placeholder — swap the artwork square for a real project photo, rename it, and update the tags. Keep one signature colour per project, the way a real brand book would.</p>
+    </div>
+
+    <div class="gallery">
+
+      <div class="card" style="--accent:#FF4E3A">
+        <div class="card-art">
+          <svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="38" r="26" fill="#fff"/><rect x="30" y="64" width="40" height="10" rx="5" fill="#fff"/></svg>
+        </div>
+        <div class="card-body">
+          <h3>Amaro &amp; Co.</h3>
+          <div class="kind">Logo &amp; brand system — café</div>
+          <div class="card-tags"><span>Logo</span><span>Packaging</span><span>Signage</span></div>
+          <a class="card-link" href="#">View project →</a>
+        </div>
+      </div>
+
+      <div class="card" style="--accent:#6C3CE9">
+        <div class="card-art">
+          <svg viewBox="0 0 100 100" fill="none"><path d="M50 15 L82 78 H18 Z" fill="#fff"/><circle cx="50" cy="55" r="9" fill="#6C3CE9"/></svg>
+        </div>
+        <div class="card-body">
+          <h3>Northline</h3>
+          <div class="kind">Visual identity — tech startup</div>
+          <div class="card-tags"><span>Identity</span><span>Type System</span></div>
+          <a class="card-link" href="#">View project →</a>
+        </div>
+      </div>
+
+      <div class="card" style="--accent:#F5D400">
+        <div class="card-art">
+          <svg viewBox="0 0 100 100" fill="none"><circle cx="38" cy="50" r="22" fill="#fff"/><circle cx="66" cy="50" r="22" fill="#16130F" fill-opacity=".85"/></svg>
+        </div>
+        <div class="card-body">
+          <h3>Solene</h3>
+          <div class="kind">Logo &amp; identity — fashion label</div>
+          <div class="card-tags"><span>Logo</span><span>Lookbook</span></div>
+          <a class="card-link" href="#">View project →</a>
+        </div>
+      </div>
+
+      <div class="card" style="--accent:#0E7C6B">
+        <div class="card-art">
+          <svg viewBox="0 0 100 100" fill="none"><path d="M20 60 Q50 20 80 60 Q50 45 20 60Z" fill="#fff"/></svg>
+        </div>
+        <div class="card-body">
+          <h3>Hollow &amp; Pine</h3>
+          <div class="kind">Brand system — wellness studio</div>
+          <div class="card-tags"><span>Identity</span><span>Guidelines</span></div>
+          <a class="card-link" href="#">View project →</a>
+        </div>
+      </div>
+
+      <div class="card" style="--accent:#FF4E3A">
+        <div class="card-art">
+          <svg viewBox="0 0 100 100" fill="none"><rect x="26" y="26" width="48" height="48" rx="14" fill="#fff" transform="rotate(20 50 50)"/></svg>
+        </div>
+        <div class="card-body">
+          <h3>Table Nine</h3>
+          <div class="kind">Logo &amp; menu system — restaurant</div>
+          <div class="card-tags"><span>Logo</span><span>Menu Design</span></div>
+          <a class="card-link" href="#">View project →</a>
+        </div>
+      </div>
+
+      <div class="card" style="--accent:#6C3CE9">
+        <div class="card-art">
+          <svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="30" stroke="#fff" stroke-width="7"/><circle cx="50" cy="50" r="9" fill="#fff"/></svg>
+        </div>
+        <div class="card-body">
+          <h3>Halide Fest</h3>
+          <div class="kind">Identity &amp; posters — music festival</div>
+          <div class="card-tags"><span>Identity</span><span>Posters</span></div>
+          <a class="card-link" href="#">View project →</a>
+        </div>
+      </div>
+
+      <div class="gallery-note">Add more work by copying one of the cards above — swap the SVG mark for a real project photo, pick a signature colour, and update the title, tags, and link.</div>
+    </div>
+  </div>
+</section>
+
+<section class="spread-violet" id="process">
+  <div class="wrap">
+    <div class="eyebrow">How a project runs</div>
+    <h2>Four stages, every time.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="num">01</div>
+        <h3>Discover</h3>
+        <p>Understand the brand, the audience, and what the competition already looks like.</p>
+      </div>
+      <div class="step">
+        <div class="num">02</div>
+        <h3>Concept</h3>
+        <p>Explore directions through sketches and moodboards before touching a screen.</p>
+      </div>
+      <div class="step">
+        <div class="num">03</div>
+        <h3>Design</h3>
+        <p>Build out the logo, palette, type system, and core brand applications.</p>
+      </div>
+      <div class="step">
+        <div class="num">04</div>
+        <h3>Deliver</h3>
+        <p>Hand off a full guideline document and source files, ready to use.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="eyebrow">Get in touch</div>
+    <h2>Got a brand that needs a face?</h2>
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:you@example.com">you@example.com</a>
+      <a class="contact-link" href="https://instagram.com/yourname" target="_blank" rel="noopener">Instagram</a>
+      <a class="contact-link" href="https://behance.net/yourname" target="_blank" rel="noopener">Behance</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>&copy; <span id="year"></span> Your Name Studio.</div>
+    <div>Built with a bold palette, not a template.</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Cycling hero word color — signature motion moment
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const cycleEl = document.getElementById('cycleWord');
+  const colors = ['#FF4E3A', '#6C3CE9', '#0E7C6B'];
+  if (!reduceMotion) {
+    let i = 0;
+    setInterval(() => {
+      i = (i + 1) % colors.length;
+      cycleEl.style.setProperty('--accent-current', colors[i]);
+    }, 1600);
+  }
+
+  // Palette chips — click to copy hex
+  document.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', async () => {
+      const hex = chip.getAttribute('data-hex');
+      try {
+        await navigator.clipboard.writeText(hex);
+      } catch (e) { /* clipboard unavailable, still show state */ }
+      chip.classList.add('is-copied');
+      setTimeout(() => chip.classList.remove('is-copied'), 1400);
+    });
+  });
+</script>
+
+</body>
+</html>
