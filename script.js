@@ -1,2963 +1,1153 @@
 /* ============================================================
-   NESH GLASS — GLOBAL
+   NESH GLASS — JAVASCRIPT
 ============================================================ */
 
-:root {
+gsap.registerPlugin(ScrollTrigger);
 
-    --bg: #07080b;
-
-    --bg-soft: #0c0e13;
-
-    --glass:
-        rgba(255, 255, 255, 0.055);
-
-    --glass-strong:
-        rgba(255, 255, 255, 0.085);
-
-    --glass-border:
-        rgba(255, 255, 255, 0.14);
-
-    --glass-highlight:
-        rgba(255, 255, 255, 0.22);
-
-    --white: #f4f5f7;
-
-    --muted:
-        rgba(244, 245, 247, .55);
-
-    --dim:
-        rgba(244, 245, 247, .3);
-
-    --line:
-        rgba(255,255,255,.1);
-
-    --accent: #d9ff45;
-
-    --accent-blue: #66d9ff;
-
-    --accent-purple: #9d7cff;
-
-    --radius: 30px;
-
-    --padding:
-        clamp(18px, 3vw, 55px);
-
-}
-
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-
-html {
-    scroll-behavior: auto;
-}
-
-
-body {
-
-    background: var(--bg);
-
-    color: var(--white);
-
-    font-family:
-        "Inter",
-        Arial,
-        sans-serif;
-
-    overflow-x: hidden;
-
-    cursor: none;
-
-}
-
-
-body::before {
-
-    content: "";
-
-    position: fixed;
-
-    inset: 0;
-
-    pointer-events: none;
-
-    z-index: 9998;
-
-    opacity: .035;
-
-    background-image:
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
-
-}
-
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-
-button {
-    font: inherit;
-}
-
-
-img {
-    width: 100%;
-    display: block;
-}
 
 
 /* ============================================================
-   AMBIENT LIGHT
+   GLOBAL SETTINGS
 ============================================================ */
 
-.ambient {
+const prefersReducedMotion =
+    window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
 
-    position: fixed;
-
-    width: 650px;
-    height: 650px;
-
-    border-radius: 50%;
-
-    filter: blur(120px);
-
-    pointer-events: none;
-
-    z-index: -2;
-
-    opacity: .2;
-
-}
-
-
-.ambient-one {
-
-    top: -250px;
-    left: -180px;
-
-    background:
-        var(--accent-purple);
-
-}
-
-
-.ambient-two {
-
-    top: 35%;
-    right: -300px;
-
-    background:
-        var(--accent-blue);
-
-}
-
-
-.ambient-three {
-
-    bottom: -300px;
-    left: 35%;
-
-    background:
-        var(--accent);
-
-}
 
 
 /* ============================================================
-   CURSOR
+   CUSTOM CURSOR
 ============================================================ */
 
-.cursor {
+const cursor =
+    document.querySelector(".cursor");
 
-    position: fixed;
+const cursorLabel =
+    document.querySelector(".cursor-label");
 
-    top: 0;
-    left: 0;
 
-    width: 18px;
-    height: 18px;
+let mouseX = window.innerWidth / 2;
+let mouseY = window.innerHeight / 2;
 
-    border-radius: 50%;
+let cursorX = mouseX;
+let cursorY = mouseY;
 
-    pointer-events: none;
 
-    z-index: 10000;
+if (!prefersReducedMotion && cursor) {
 
-    transform:
-        translate(-50%, -50%);
+    window.addEventListener(
+        "mousemove",
+        (event) => {
 
-    background:
-        rgba(255,255,255,.9);
+            mouseX =
+                event.clientX;
 
-    box-shadow:
-        0 0 25px
-        rgba(255,255,255,.4);
+            mouseY =
+                event.clientY;
 
-    display: flex;
+        }
+    );
 
-    justify-content: center;
 
-    align-items: center;
+    function animateCursor() {
 
-    mix-blend-mode: difference;
+        cursorX +=
+            (mouseX - cursorX) * 0.14;
 
-    transition:
-        width .5s
-            cubic-bezier(.22,1,.36,1),
+        cursorY +=
+            (mouseY - cursorY) * 0.14;
 
-        height .5s
-            cubic-bezier(.22,1,.36,1),
 
-        border-radius .5s
-            cubic-bezier(.22,1,.36,1),
+        cursor.style.left =
+            `${cursorX}px`;
 
-        background .3s ease;
+        cursor.style.top =
+            `${cursorY}px`;
 
-}
 
-
-.cursor-ring {
-
-    position: absolute;
-
-    inset: -7px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.35);
-
-    border-radius: 50%;
-
-    transition:
-        inset .5s
-            cubic-bezier(.22,1,.36,1);
-
-}
-
-
-.cursor-label {
-
-    position: absolute;
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 8px;
-
-    letter-spacing: .08em;
-
-    opacity: 0;
-
-    white-space: nowrap;
-
-    transform: scale(.5);
-
-    transition:
-        opacity .3s ease,
-        transform .4s
-        cubic-bezier(.22,1,.36,1);
-
-}
-
-
-.cursor.active {
-
-    width: 88px;
-    height: 88px;
-
-    background:
-        rgba(255,255,255,.12);
-
-    backdrop-filter:
-        blur(15px);
-
-    -webkit-backdrop-filter:
-        blur(15px);
-
-    mix-blend-mode: normal;
-
-    border:
-        1px solid
-        rgba(255,255,255,.3);
-
-}
-
-
-.cursor.active .cursor-ring {
-
-    inset: 8px;
-
-    border-color:
-        rgba(255,255,255,.15);
-
-}
-
-
-.cursor.active .cursor-label {
-
-    opacity: 1;
-
-    transform: scale(1);
-
-}
-
-
-/* ============================================================
-   NAV
-============================================================ */
-
-.nav {
-
-    position: fixed;
-
-    top: 18px;
-    left: var(--padding);
-
-    width:
-        calc(100% - (var(--padding) * 2));
-
-    height: 62px;
-
-    z-index: 500;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    padding:
-        0 10px 0 20px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.12);
-
-    border-radius: 100px;
-
-    background:
-        rgba(10,11,15,.55);
-
-    backdrop-filter:
-        blur(25px);
-
-    -webkit-backdrop-filter:
-        blur(25px);
-
-    box-shadow:
-        0 15px 60px
-        rgba(0,0,0,.18);
-
-}
-
-
-.logo {
-
-    font-size: 14px;
-
-    font-weight: 600;
-
-    letter-spacing: -.04em;
-
-}
-
-
-.logo span {
-
-    color: var(--accent);
-
-    font-size: 8px;
-
-    vertical-align: top;
-
-}
-
-
-.nav-links {
-
-    display: flex;
-
-    gap: 26px;
-
-}
-
-
-.nav-links a {
-
-    position: relative;
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 9px;
-
-    text-transform: uppercase;
-
-    color: var(--muted);
-
-    transition:
-        color .3s ease;
-
-}
-
-
-.nav-links a:hover {
-    color: white;
-}
-
-
-.nav-links a::after {
-
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    bottom: -7px;
-
-    width: 100%;
-    height: 1px;
-
-    background: var(--accent);
-
-    transform:
-        scaleX(0);
-
-    transform-origin: right;
-
-    transition:
-        transform .5s
-        cubic-bezier(.22,1,.36,1);
-
-}
-
-
-.nav-links a:hover::after {
-
-    transform:
-        scaleX(1);
-
-    transform-origin: left;
-
-}
-
-
-.nav-cta {
-
-    height: 44px;
-
-    padding:
-        0 20px;
-
-    border-radius: 100px;
-
-    display: flex;
-
-    align-items: center;
-
-    background:
-        var(--accent);
-
-    color: #0b0d08;
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 9px;
-
-    text-transform: uppercase;
-
-    transition:
-        transform .4s ease;
-
-}
-
-
-.nav-cta:hover {
-    transform: scale(1.04);
-}
-
-
-/* ============================================================
-   GENERAL
-============================================================ */
-
-.section {
-
-    position: relative;
-
-    padding:
-        clamp(130px, 17vw, 260px)
-        var(--padding);
-
-}
-
-
-.section-meta {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    margin-bottom:
-        clamp(65px, 9vw, 130px);
-
-    padding-bottom: 15px;
-
-    border-bottom:
-        1px solid var(--line);
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 9px;
-
-    text-transform: uppercase;
-
-    color: var(--dim);
-
-}
-
-
-.section-meta span:last-child {
-
-    color: var(--muted);
-
-}
-
-
-.huge-title {
-
-    font-size:
-        clamp(70px, 11.5vw, 185px);
-
-    line-height: .78;
-
-    letter-spacing: -.09em;
-
-    font-weight: 400;
-
-}
-
-
-.large-text {
-
-    font-size:
-        clamp(25px, 3.4vw, 52px);
-
-    line-height: .98;
-
-    letter-spacing: -.055em;
-
-}
-
-
-.intro-text {
-
-    max-width: 450px;
-
-    font-size: 14px;
-
-    line-height: 1.6;
-
-    color: var(--muted);
-
-}
-
-
-/* ============================================================
-   GLASS
-============================================================ */
-
-.glass-card {
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.09),
-            rgba(255,255,255,.025)
+        requestAnimationFrame(
+            animateCursor
         );
 
-    border:
-        1px solid
-        var(--glass-border);
-
-    box-shadow:
-        0 30px 100px
-        rgba(0,0,0,.25),
-
-        inset 0 1px 0
-        rgba(255,255,255,.12);
-
-    backdrop-filter:
-        blur(28px)
-        saturate(120%);
-
-    -webkit-backdrop-filter:
-        blur(28px)
-        saturate(120%);
-
-}
-
-
-.glass-mini {
-
-    background:
-        rgba(255,255,255,.045);
-
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-
-    backdrop-filter:
-        blur(20px);
-
-    -webkit-backdrop-filter:
-        blur(20px);
-
-}
-
-
-/* ============================================================
-   HERO
-============================================================ */
-
-.hero {
-
-    min-height: 100svh;
-
-    padding:
-        140px
-        var(--padding)
-        30px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: space-between;
-
-    position: relative;
-
-}
-
-
-.hero-top {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: flex-start;
-
-}
-
-
-.hero-intro {
-
-    width: 330px;
-
-    padding: 20px;
-
-    border-radius: 18px;
-
-}
-
-
-.eyebrow {
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 9px;
-
-    text-transform: uppercase;
-
-    color: var(--muted);
-
-}
-
-
-.hero-intro p {
-
-    margin-top: 18px;
-
-    font-size: 12px;
-
-    line-height: 1.5;
-
-    color: var(--muted);
-
-}
-
-
-.hero-stats {
-
-    display: flex;
-
-    gap: 10px;
-
-}
-
-
-.stat {
-
-    width: 125px;
-
-    padding: 18px;
-
-    border-radius: 18px;
-
-}
-
-
-.stat strong {
-
-    display: block;
-
-    font-size: 30px;
-
-    letter-spacing: -.07em;
-
-    font-weight: 400;
-
-}
-
-
-.stat span {
-
-    display: block;
-
-    margin-top: 4px;
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 8px;
-
-    text-transform: uppercase;
-
-    color: var(--dim);
-
-}
-
-
-.hero-title-container {
-
-    position: relative;
-
-}
-
-
-.hero-kicker {
-
-    margin-bottom: 25px;
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 10px;
-
-    text-transform: uppercase;
-
-    color: var(--accent);
-
-}
-
-
-.hero-title {
-
-    position: relative;
-
-    z-index: 2;
-
-    font-size:
-        clamp(80px, 16vw, 270px);
-
-    line-height: .68;
-
-    letter-spacing: -.11em;
-
-    font-weight: 400;
-
-}
-
-
-.hero-title span {
-
-    display: block;
-
-    overflow: hidden;
-
-    transform:
-        translateY(120%);
-
-}
-
-
-.hero-orb {
-
-    position: absolute;
-
-    right: 8%;
-
-    top: 20%;
-
-    width:
-        clamp(130px, 16vw, 260px);
-
-    height:
-        clamp(130px, 16vw, 260px);
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle at 35% 30%,
-            rgba(255,255,255,.9),
-            rgba(217,255,69,.65) 20%,
-            rgba(102,217,255,.4) 45%,
-            rgba(157,124,255,.2) 70%,
-            transparent 72%
-        );
-
-    filter:
-        blur(1px);
-
-    opacity: .7;
-
-    animation:
-        orbFloat 7s ease-in-out infinite;
-
-}
-
-
-.orb-inner {
-
-    position: absolute;
-
-    inset: 20%;
-
-    border-radius: 50%;
-
-    background:
-        rgba(255,255,255,.08);
-
-    backdrop-filter:
-        blur(20px);
-
-}
-
-
-@keyframes orbFloat {
-
-    0%,
-    100% {
-        transform:
-            translate3d(0,0,0)
-            scale(1);
     }
 
-    50% {
-        transform:
-            translate3d(-30px,30px,0)
-            scale(1.08);
+
+    animateCursor();
+
+}
+
+
+
+/* ============================================================
+   CURSOR STATES
+============================================================ */
+
+const cursorTargets =
+    document.querySelectorAll(
+        "a, button, .project-card, .service-card"
+    );
+
+
+cursorTargets.forEach(
+    (element) => {
+
+        element.addEventListener(
+            "mouseenter",
+            () => {
+
+                if (!cursor) return;
+
+                cursor.classList.add(
+                    "active"
+                );
+
+
+                const customLabel =
+                    element.dataset.cursor;
+
+
+                if (customLabel) {
+
+                    cursorLabel.textContent =
+                        customLabel;
+
+                }
+
+                else {
+
+                    cursorLabel.textContent =
+                        "VIEW";
+
+                }
+
+            }
+        );
+
+
+        element.addEventListener(
+            "mouseleave",
+            () => {
+
+                if (!cursor) return;
+
+                cursor.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+    }
+);
+
+
+
+/* ============================================================
+   CLICK CURSOR
+============================================================ */
+
+window.addEventListener(
+    "mousedown",
+    () => {
+
+        if (!cursor) return;
+
+        gsap.to(
+            cursor,
+            {
+                scale: .72,
+                duration: .15
+            }
+        );
+
+    }
+);
+
+
+window.addEventListener(
+    "mouseup",
+    () => {
+
+        if (!cursor) return;
+
+        gsap.to(
+            cursor,
+            {
+                scale: 1,
+                duration: .55,
+                ease:
+                    "elastic.out(1,.5)"
+            }
+        );
+
+    }
+);
+
+
+
+/* ============================================================
+   MAGNETIC ELEMENTS
+============================================================ */
+
+if (!prefersReducedMotion) {
+
+    document
+        .querySelectorAll(".magnetic")
+        .forEach((element) => {
+
+
+            element.addEventListener(
+                "mousemove",
+                (event) => {
+
+                    const rect =
+                        element.getBoundingClientRect();
+
+
+                    const x =
+                        event.clientX -
+                        rect.left -
+                        rect.width / 2;
+
+
+                    const y =
+                        event.clientY -
+                        rect.top -
+                        rect.height / 2;
+
+
+                    gsap.to(
+                        element,
+                        {
+                            x: x * .16,
+                            y: y * .16,
+                            duration: .45,
+                            ease: "power3.out"
+                        }
+                    );
+
+                }
+            );
+
+
+            element.addEventListener(
+                "mouseleave",
+                () => {
+
+                    gsap.to(
+                        element,
+                        {
+                            x: 0,
+                            y: 0,
+                            duration: .7,
+                            ease:
+                                "elastic.out(1,.4)"
+                        }
+                    );
+
+                }
+            );
+
+        });
+
+}
+
+
+
+/* ============================================================
+   HERO INTRO
+============================================================ */
+
+const heroTimeline =
+    gsap.timeline();
+
+
+heroTimeline
+
+    .to(
+        ".hero-title span",
+        {
+            y: "0%",
+            duration: 1.35,
+            stagger: .13,
+            ease:
+                "power4.out"
+        }
+    )
+
+    .from(
+        ".hero-kicker",
+        {
+            opacity: 0,
+            y: 25,
+            duration: .8,
+            ease: "power3.out"
+        },
+        "-=.8"
+    )
+
+    .from(
+        ".hero-intro",
+        {
+            opacity: 0,
+            y: 30,
+            duration: .8,
+            ease: "power3.out"
+        },
+        "-=.6"
+    )
+
+    .from(
+        ".stat",
+        {
+            opacity: 0,
+            y: 25,
+            stagger: .1,
+            duration: .7,
+            ease: "power3.out"
+        },
+        "-=.6"
+    )
+
+    .from(
+        ".hero-bottom > *",
+        {
+            opacity: 0,
+            y: 25,
+            stagger: .1,
+            duration: .7,
+            ease: "power3.out"
+        },
+        "-=.4"
+    );
+
+
+
+/* ============================================================
+   SCROLL REVEALS
+============================================================ */
+
+if (!prefersReducedMotion) {
+
+    document
+        .querySelectorAll(".reveal")
+        .forEach((element) => {
+
+            gsap.to(
+                element,
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.15,
+                    ease:
+                        "power3.out",
+
+                    scrollTrigger: {
+                        trigger: element,
+                        start:
+                            "top 85%",
+                        once: true
+                    }
+                }
+            );
+
+        });
+
+}
+
+
+
+/* ============================================================
+   HERO PARALLAX
+============================================================ */
+
+if (!prefersReducedMotion) {
+
+    gsap.to(
+        ".hero-title",
+        {
+            yPercent: -15,
+            ease: "none",
+
+            scrollTrigger: {
+                trigger: ".hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: 1
+            }
+        }
+    );
+
+
+    gsap.to(
+        ".hero-orb",
+        {
+            yPercent: 80,
+            rotation: 80,
+            ease: "none",
+
+            scrollTrigger: {
+                trigger: ".hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: 1.5
+            }
+        }
+    );
+
+}
+
+
+
+/* ============================================================
+   ABOUT IMAGE PARALLAX
+============================================================ */
+
+if (!prefersReducedMotion) {
+
+    gsap.to(
+        ".about-image-wrap img",
+        {
+            yPercent: -10,
+            scale: 1,
+            ease: "none",
+
+            scrollTrigger: {
+                trigger:
+                    ".about-image-wrap",
+                start:
+                    "top bottom",
+                end:
+                    "bottom top",
+                scrub: 1
+            }
+        }
+    );
+
+}
+
+
+
+/* ============================================================
+   JOURNEY IMAGES
+============================================================ */
+
+if (!prefersReducedMotion) {
+
+    document
+        .querySelectorAll(
+            ".journey-image img"
+        )
+        .forEach(
+            (image) => {
+
+                gsap.to(
+                    image,
+                    {
+                        yPercent: -13,
+                        ease: "none",
+
+                        scrollTrigger: {
+                            trigger:
+                                image.closest(
+                                    ".journey-item"
+                                ),
+
+                            start:
+                                "top bottom",
+
+                            end:
+                                "bottom top",
+
+                            scrub: 1
+                        }
+                    }
+                );
+
+            }
+        );
+
+}
+
+
+
+/* ============================================================
+   JOURNEY ITEM REVEALS
+============================================================ */
+
+if (!prefersReducedMotion) {
+
+    document
+        .querySelectorAll(
+            ".journey-item"
+        )
+        .forEach(
+            (item) => {
+
+                gsap.from(
+                    item.querySelector(
+                        ".journey-content"
+                    ),
+                    {
+                        x: 70,
+                        opacity: 0,
+                        duration: 1,
+                        ease:
+                            "power3.out",
+
+                        scrollTrigger: {
+                            trigger: item,
+                            start:
+                                "top 80%",
+                            once: true
+                        }
+                    }
+                );
+
+
+                gsap.from(
+                    item.querySelector(
+                        ".journey-image"
+                    ),
+                    {
+                        x: 80,
+                        opacity: 0,
+                        scale: .92,
+                        duration: 1.2,
+                        ease:
+                            "power3.out",
+
+                        scrollTrigger: {
+                            trigger: item,
+                            start:
+                                "top 80%",
+                            once: true
+                        }
+                    }
+                );
+
+            }
+        );
+
+}
+
+
+
+/* ============================================================
+   PROJECT IMAGE PARALLAX
+============================================================ */
+
+if (!prefersReducedMotion) {
+
+    document
+        .querySelectorAll(
+            ".project-image img"
+        )
+        .forEach(
+            (image) => {
+
+                gsap.to(
+                    image,
+                    {
+                        yPercent: -8,
+                        ease: "none",
+
+                        scrollTrigger: {
+                            trigger:
+                                image.closest(
+                                    ".project-card"
+                                ),
+
+                            start:
+                                "top bottom",
+
+                            end:
+                                "bottom top",
+
+                            scrub: 1
+                        }
+                    }
+                );
+
+            }
+        );
+
+}
+
+
+
+/* ============================================================
+   PROJECT CARD ENTRANCE
+============================================================ */
+
+if (!prefersReducedMotion) {
+
+    document
+        .querySelectorAll(
+            ".project-card"
+        )
+        .forEach(
+            (card) => {
+
+                gsap.from(
+                    card,
+                    {
+                        opacity: 0,
+                        y: 80,
+                        duration: 1,
+                        ease:
+                            "power3.out",
+
+                        scrollTrigger: {
+                            trigger: card,
+                            start:
+                                "top 88%",
+                            once: true
+                        }
+                    }
+                );
+
+            }
+        );
+
+}
+
+
+
+/* ============================================================
+   PROJECT HOVER IMAGE
+============================================================ */
+
+document
+    .querySelectorAll(
+        ".project-card"
+    )
+    .forEach(
+        (card) => {
+
+            const image =
+                card.querySelector(
+                    ".project-image img"
+                );
+
+
+            card.addEventListener(
+                "mouseenter",
+                () => {
+
+                    if (!image) return;
+
+                    gsap.to(
+                        image,
+                        {
+                            scale: 1,
+                            duration: 1.1,
+                            ease:
+                                "power3.out"
+                        }
+                    );
+
+                }
+            );
+
+
+            card.addEventListener(
+                "mouseleave",
+                () => {
+
+                    if (!image) return;
+
+                    gsap.to(
+                        image,
+                        {
+                            scale: 1.08,
+                            duration: 1.1,
+                            ease:
+                                "power3.out"
+                        }
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+
+/* ============================================================
+   CAPABILITY REVEALS
+============================================================ */
+
+if (!prefersReducedMotion) {
+
+    gsap.from(
+        ".capability-item",
+        {
+            opacity: 0,
+            y: 60,
+            stagger: .12,
+            duration: .9,
+            ease:
+                "power3.out",
+
+            scrollTrigger: {
+                trigger:
+                    ".capability-list",
+                start:
+                    "top 80%",
+                once: true
+            }
+        }
+    );
+
+}
+
+
+
+/* ============================================================
+   SERVICE CARDS
+============================================================ */
+
+if (!prefersReducedMotion) {
+
+    gsap.from(
+        ".service-card",
+        {
+            opacity: 0,
+            y: 100,
+            stagger: .15,
+            duration: 1,
+            ease:
+                "power3.out",
+
+            scrollTrigger: {
+                trigger:
+                    ".service-list",
+                start:
+                    "top 80%",
+                once: true
+            }
+        }
+    );
+
+}
+
+
+
+/* ============================================================
+   TRANSFORMATION PARALLAX
+============================================================ */
+
+if (!prefersReducedMotion) {
+
+    gsap.to(
+        ".transformation-image img",
+        {
+            scale: 1,
+            yPercent: -5,
+            ease: "none",
+
+            scrollTrigger: {
+                trigger:
+                    ".transformation",
+                start:
+                    "top bottom",
+                end:
+                    "bottom top",
+                scrub: 1
+            }
+        }
+    );
+
+}
+
+
+
+/* ============================================================
+   TESTIMONIAL HORIZONTAL MOVEMENT
+============================================================ */
+
+if (!prefersReducedMotion) {
+
+    const testimonialTrack =
+        document.querySelector(
+            ".testimonial-track"
+        );
+
+
+    if (testimonialTrack) {
+
+        const cards =
+            testimonialTrack.children;
+
+
+        const totalWidth =
+            testimonialTrack.scrollWidth -
+            window.innerWidth;
+
+
+        gsap.to(
+            testimonialTrack,
+            {
+                x:
+                    () =>
+                        -Math.max(
+                            totalWidth * .55,
+                            0
+                        ),
+
+                ease: "none",
+
+                scrollTrigger: {
+                    trigger:
+                        ".testimonials",
+
+                    start:
+                        "top bottom",
+
+                    end:
+                        "bottom top",
+
+                    scrub: 1.2
+                }
+            }
+        );
+
     }
 
 }
 
-
-.hero-bottom {
-
-    display: grid;
-
-    grid-template-columns:
-        1fr 1fr 1fr;
-
-    align-items: end;
-
-    gap: 30px;
-
-}
-
-
-.hero-button {
-
-    width: fit-content;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 20px;
-
-    padding:
-        15px 20px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.18);
-
-    border-radius: 100px;
-
-    background:
-        rgba(255,255,255,.05);
-
-    backdrop-filter:
-        blur(20px);
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 9px;
-
-    text-transform: uppercase;
-
-}
-
-
-.hero-button .arrow {
-
-    color: var(--accent);
-
-    font-size: 17px;
-
-}
-
-
-.scroll-indicator {
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    gap: 12px;
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 8px;
-
-    text-transform: uppercase;
-
-    color: var(--dim);
-
-}
-
-
-.scroll-line {
-
-    width: 30px;
-    height: 1px;
-
-    background:
-        var(--accent);
-
-}
-
-
-.hero-tags {
-
-    display: flex;
-
-    justify-content: flex-end;
-
-    flex-wrap: wrap;
-
-    gap: 5px;
-
-}
-
-
-.hero-tags span {
-
-    padding:
-        7px 10px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-
-    border-radius: 100px;
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 7px;
-
-    text-transform: uppercase;
-
-    color: var(--dim);
-
-}
-
-
-/* ============================================================
-   ABOUT
-============================================================ */
-
-.about-heading {
-
-    display: grid;
-
-    grid-template-columns:
-        1.2fr .8fr;
-
-    gap: 8vw;
-
-    align-items: end;
-
-}
-
-
-.about-copy {
-
-    border-radius: 28px;
-
-    padding:
-        clamp(25px, 4vw, 50px);
-
-}
-
-
-.card-number {
-
-    display: block;
-
-    margin-bottom: 45px;
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 8px;
-
-    color: var(--accent);
-
-}
-
-
-.about-copy .small-text {
-
-    margin-top: 35px;
-
-    font-size: 13px;
-
-    line-height: 1.6;
-
-    color: var(--muted);
-
-}
-
-
-.about-image-wrap {
-
-    position: relative;
-
-    width: min(750px, 70vw);
-
-    height: min(800px, 65vw);
-
-    margin:
-        130px auto 0;
-
-    overflow: hidden;
-
-    border-radius: 35px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.12);
-
-}
-
-
-.about-image-wrap img {
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-
-    filter:
-        saturate(.75)
-        contrast(1.05);
-
-    transform:
-        scale(1.08);
-
-}
-
-
-.image-label {
-
-    position: absolute;
-
-    top: 20px;
-    left: 20px;
-    right: 20px;
-
-    z-index: 2;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 8px;
-
-    color: white;
-
-    text-transform: uppercase;
-
-}
-
-
-/* ============================================================
-   JOURNEY
-============================================================ */
-
-.journey-intro {
-
-    display: grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap: 50px;
-
-    align-items: end;
-
-    margin-bottom: 120px;
-
-}
-
-
-.journey-list {
-
-    border-top:
-        1px solid var(--line);
-
-}
-
-
-.journey-item {
-
-    min-height: 620px;
-
-    display: grid;
-
-    grid-template-columns:
-        90px 1fr 320px;
-
-    gap: 40px;
-
-    align-items: center;
-
-    border-bottom:
-        1px solid var(--line);
-
-    position: relative;
-
-}
-
-
-.journey-year {
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 11px;
-
-    color: var(--accent);
-
-}
-
-
-.journey-content {
-
-    position: relative;
-
-    max-width: 700px;
-
-}
-
-
-.journey-number {
-
-    margin-bottom: 25px;
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 9px;
-
-    color: var(--dim);
-
-}
-
-
-.journey-content h3 {
-
-    font-size:
-        clamp(45px, 6vw, 90px);
-
-    line-height: .84;
-
-    letter-spacing: -.07em;
-
-    font-weight: 400;
-
-}
-
-
-.journey-content p {
-
-    max-width: 400px;
-
-    margin-top: 35px;
-
-    font-size: 13px;
-
-    line-height: 1.55;
-
-    color: var(--muted);
-
-}
-
-
-.journey-image {
-
-    height: 400px;
-
-    overflow: hidden;
-
-    border-radius: 25px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.12);
-
-    background:
-        #12151a;
-
-}
-
-
-.journey-image img {
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-
-    transform:
-        scale(1.15);
-
-    filter:
-        saturate(.75);
-
-}
-
-
-/* ============================================================
-   PROJECTS
-============================================================ */
-
-.projects-heading {
-
-    display: grid;
-
-    grid-template-columns:
-        1.2fr .8fr;
-
-    gap: 60px;
-
-    align-items: end;
-
-    margin-bottom: 120px;
-
-}
-
-
-.project-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(12, 1fr);
-
-    gap:
-        90px 20px;
-
-}
-
-
-.project-card {
-
-    display: block;
-
-}
-
-
-.project-large {
-
-    grid-column:
-        span 7;
-
-}
-
-
-.project-small {
-
-    grid-column:
-        span 5;
-
-    margin-top: 130px;
-
-}
-
-
-.project-full {
-
-    grid-column:
-        3 / span 8;
-
-}
-
-
-.project-image {
-
-    position: relative;
-
-    overflow: hidden;
-
-    border-radius: 30px;
-
-    aspect-ratio: 1.2 / 1;
-
-    border:
-        1px solid
-        rgba(255,255,255,.12);
-
-    background:
-        #11141a;
-
-}
-
-
-.project-small .project-image {
-
-    aspect-ratio:
-        1 / 1.08;
-
-}
-
-
-.project-full .project-image {
-
-    aspect-ratio:
-        1.65 / 1;
-
-}
-
-
-.project-image img {
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-
-    transform:
-        scale(1.08);
-
-    transition:
-        transform 1.3s
-        cubic-bezier(.22,1,.36,1),
-
-        filter .8s ease;
-
-    filter:
-        saturate(.75)
-        brightness(.8);
-
-}
-
-
-.project-card:hover
-.project-image img {
-
-    transform:
-        scale(1);
-
-    filter:
-        saturate(1)
-        brightness(1);
-
-}
-
-
-.project-overlay {
-
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(0,0,0,.2),
-            transparent 50%,
-            rgba(0,0,0,.45)
-        );
-
-    pointer-events: none;
-
-}
-
-
-.project-index {
-
-    position: absolute;
-
-    top: 18px;
-    left: 18px;
-
-    width: 42px;
-    height: 42px;
-
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    border-radius: 50%;
-
-    background:
-        rgba(10,10,10,.3);
-
-    backdrop-filter:
-        blur(15px);
-
-    border:
-        1px solid
-        rgba(255,255,255,.18);
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 9px;
-
-}
-
-
-.project-arrow {
-
-    position: absolute;
-
-    right: 20px;
-    bottom: 18px;
-
-    width: 48px;
-    height: 48px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background:
-        var(--accent);
-
-    color:
-        #080a07;
-
-    font-size: 20px;
-
-    transform:
-        scale(.8);
-
-    opacity: 0;
-
-    transition:
-        transform .5s ease,
-        opacity .5s ease;
-
-}
-
-
-.project-card:hover
-.project-arrow {
-
-    transform:
-        scale(1);
-
-    opacity: 1;
-
-}
-
-
-.project-info {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    gap: 30px;
-
-    padding:
-        20px 3px;
-
-}
-
-
-.project-info h3 {
-
-    font-size: 25px;
-
-    letter-spacing: -.05em;
-
-    font-weight: 400;
-
-}
-
-
-.project-info p {
-
-    margin-top: 7px;
-
-    max-width: 360px;
-
-    font-size: 11px;
-
-    line-height: 1.4;
-
-    color: var(--dim);
-
-}
-
-
-.project-tags {
-
-    display: flex;
-
-    flex-wrap: wrap;
-
-    justify-content: flex-end;
-
-    align-content: flex-start;
-
-    gap: 5px;
-
-    max-width: 180px;
-
-}
-
-
-.project-tags span {
-
-    padding:
-        6px 8px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.1);
-
-    border-radius: 100px;
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 7px;
-
-    color: var(--dim);
-
-}
-
-
-/* ============================================================
-   CAPABILITIES
-============================================================ */
-
-.capabilities {
-
-    margin:
-        60px var(--padding) 0;
-
-    padding:
-        clamp(100px, 12vw, 180px)
-        clamp(25px, 4vw, 70px);
-
-    border-radius:
-        45px;
-
-    overflow: hidden;
-
-    background:
-        radial-gradient(
-            circle at 80% 10%,
-            rgba(157,124,255,.18),
-            transparent 30%
-        ),
-
-        radial-gradient(
-            circle at 10% 80%,
-            rgba(102,217,255,.1),
-            transparent 30%
-        ),
-
-        rgba(255,255,255,.025);
-
-    border:
-        1px solid
-        rgba(255,255,255,.13);
-
-    box-shadow:
-        inset 0 1px 0
-        rgba(255,255,255,.1),
-
-        0 50px 150px
-        rgba(0,0,0,.3);
-
-}
-
-
-.glass-background-card {
-
-    position: absolute;
-
-    width: 500px;
-    height: 500px;
-
-    right: -180px;
-    top: 100px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(217,255,69,.08);
-
-    filter:
-        blur(70px);
-
-}
-
-
-.capabilities-heading {
-
-    display: grid;
-
-    grid-template-columns:
-        1fr .7fr;
-
-    gap: 100px;
-
-    align-items: end;
-
-    margin-bottom: 130px;
-
-}
-
-
-.capabilities-heading .large-text {
-
-    color:
-        var(--muted);
-
-}
-
-
-.capability-list {
-
-    border-top:
-        1px solid var(--line);
-
-}
-
-
-.capability-item {
-
-    display: grid;
-
-    grid-template-columns:
-        60px 1.2fr .8fr;
-
-    gap: 40px;
-
-    padding:
-        45px 0;
-
-    border-bottom:
-        1px solid var(--line);
-
-    align-items: start;
-
-    transition:
-        padding .5s ease,
-        background .5s ease;
-
-}
-
-
-.capability-item:hover {
-
-    padding:
-        45px 20px;
-
-    background:
-        rgba(255,255,255,.025);
-
-}
-
-
-.capability-number {
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 9px;
-
-    color: var(--accent);
-
-}
-
-
-.capability-item h3 {
-
-    font-size:
-        clamp(30px, 4vw, 58px);
-
-    line-height: .9;
-
-    letter-spacing: -.06em;
-
-    font-weight: 400;
-
-}
-
-
-.capability-item p {
-
-    max-width: 400px;
-
-    font-size: 12px;
-
-    line-height: 1.6;
-
-    color: var(--muted);
-
-}
-
-
-/* ============================================================
-   SERVICES
-============================================================ */
-
-.services-heading {
-
-    display: grid;
-
-    grid-template-columns:
-        1fr .8fr;
-
-    gap: 60px;
-
-    align-items: end;
-
-    margin-bottom: 110px;
-
-}
-
-
-.service-list {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap: 15px;
-
-}
-
-
-.service-card {
-
-    min-height: 650px;
-
-    padding:
-        25px;
-
-    border-radius: 30px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    position: relative;
-
-    overflow: hidden;
-
-    transition:
-        transform .6s
-        cubic-bezier(.22,1,.36,1),
-
-        border-color .4s ease;
-
-}
-
-
-.service-card:hover {
-
-    transform:
-        translateY(-10px);
-
-    border-color:
-        rgba(217,255,69,.3);
-
-}
-
-
-.service-card.featured {
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(217,255,69,.12),
-            rgba(255,255,255,.035)
-        );
-
-}
-
-
-.service-top {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 8px;
-
-    color: var(--dim);
-
-}
-
-
-.service-card h3 {
-
-    margin-top: 100px;
-
-    font-size:
-        clamp(42px, 4vw, 65px);
-
-    line-height: .82;
-
-    letter-spacing: -.07em;
-
-    font-weight: 400;
-
-}
-
-
-.service-price {
-
-    margin-top: 35px;
-
-    display: flex;
-
-    align-items: baseline;
-
-    gap: 8px;
-
-}
-
-
-.service-price strong {
-
-    font-size: 28px;
-
-    font-weight: 400;
-
-    letter-spacing: -.05em;
-
-}
-
-
-.service-price span {
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 8px;
-
-    color: var(--dim);
-
-}
-
-
-.service-card > p {
-
-    margin-top: 25px;
-
-    font-size: 12px;
-
-    line-height: 1.55;
-
-    color: var(--muted);
-
-}
-
-
-.service-card ul {
-
-    list-style: none;
-
-    margin-top: 30px;
-
-}
-
-
-.service-card li {
-
-    padding:
-        10px 0;
-
-    border-bottom:
-        1px solid
-        rgba(255,255,255,.08);
-
-    font-size: 10px;
-
-    color: var(--muted);
-
-}
-
-
-.service-card li::before {
-
-    content: "↗";
-
-    color: var(--accent);
-
-    margin-right: 8px;
-
-}
-
-
-.service-button {
-
-    margin-top: auto;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    padding:
-        16px 18px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.15);
-
-    border-radius: 100px;
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 8px;
-
-    text-transform: uppercase;
-
-    transition:
-        background .4s ease,
-        color .4s ease;
-
-}
-
-
-.service-button:hover {
-
-    background:
-        var(--accent);
-
-    color:
-        #080a07;
-
-}
-
-
-/* ============================================================
-   TRANSFORMATION
-============================================================ */
-
-.transformation {
-
-    min-height: 100svh;
-
-    margin-top: 150px;
-
-    position: relative;
-
-    overflow: hidden;
-
-    border-radius:
-        45px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-}
-
-
-.transformation-image {
-
-    position: absolute;
-
-    inset: 0;
-
-}
-
-
-.transformation-image img {
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-
-    filter:
-        brightness(.3)
-        saturate(.6);
-
-    transform:
-        scale(1.08);
-
-}
-
-
-.image-glass {
-
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        radial-gradient(
-            circle at center,
-            transparent,
-            rgba(0,0,0,.75)
-        );
-
-}
-
-
-.transformation-content {
-
-    position: relative;
-
-    z-index: 2;
-
-    text-align: center;
-
-}
-
-
-.transformation-content .eyebrow {
-
-    color:
-        var(--accent);
-
-}
-
-
-.mega-title {
-
-    margin-top: 35px;
-
-    font-size:
-        clamp(70px, 13vw, 220px);
-
-    line-height: .7;
-
-    letter-spacing: -.1em;
-
-    font-weight: 400;
-
-}
-
-
-.mega-button {
-
-    margin:
-        80px auto 0;
-
-    width: fit-content;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 30px;
-
-    padding:
-        17px 24px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.25);
-
-    border-radius: 100px;
-
-    background:
-        rgba(255,255,255,.06);
-
-    backdrop-filter:
-        blur(20px);
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 9px;
-
-    text-transform: uppercase;
-
-}
-
-
-.mega-button span {
-
-    color:
-        var(--accent);
-
-    font-size: 18px;
-
-}
-
-
-/* ============================================================
-   TESTIMONIALS
-============================================================ */
-
-.testimonials {
-
-    overflow: hidden;
-
-}
-
-
-.testimonial-track {
-
-    display: flex;
-
-    gap: 15px;
-
-    width: max-content;
-
-    margin-top: 100px;
-
-}
-
-
-.testimonial {
-
-    width:
-        clamp(320px, 38vw, 520px);
-
-    min-height: 520px;
-
-    border-radius: 30px;
-
-    padding:
-        28px;
-
-    flex-shrink: 0;
-
-    position: relative;
-
-    display: flex;
-
-    flex-direction: column;
-
-}
-
-
-.testimonial-number {
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 9px;
-
-    color: var(--accent);
-
-}
-
-
-.quote {
-
-    margin-top: 60px;
-
-    font-size: 80px;
-
-    line-height: .4;
-
-    color: var(--accent);
-
-}
-
-
-.testimonial h3 {
-
-    margin-top: 40px;
-
-    font-size:
-        clamp(32px, 4vw, 50px);
-
-    line-height: .9;
-
-    letter-spacing: -.065em;
-
-    font-weight: 400;
-
-}
-
-
-.testimonial p {
-
-    margin-top: 30px;
-
-    font-size: 12px;
-
-    line-height: 1.6;
-
-    color: var(--muted);
-
-}
-
-
-.person {
-
-    margin-top: auto;
-
-    padding-top: 35px;
-
-    border-top:
-        1px solid
-        var(--line);
-
-}
-
-
-.person strong {
-
-    display: block;
-
-    font-size: 12px;
-
-    font-weight: 400;
-
-}
-
-
-.person span {
-
-    display: block;
-
-    margin-top: 6px;
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 8px;
-
-    color: var(--dim);
-
-}
 
 
 /* ============================================================
    FAQ
 ============================================================ */
 
-.faq-layout {
+const faqItems =
+    document.querySelectorAll(
+        ".faq-item"
+    );
 
-    display: grid;
 
-    grid-template-columns:
-        1fr 1fr;
+faqItems.forEach(
+    (item) => {
 
-    gap: 100px;
+        const button =
+            item.querySelector(
+                ".faq-question"
+            );
 
-}
 
+        button.addEventListener(
+            "click",
+            () => {
 
-.faq-list {
+                const isOpen =
+                    item.classList.contains(
+                        "open"
+                    );
 
-    border-top:
-        1px solid var(--line);
 
-}
+                faqItems.forEach(
+                    (other) => {
 
+                        other.classList.remove(
+                            "open"
+                        );
 
-.faq-item {
+                    }
+                );
 
-    border-bottom:
-        1px solid var(--line);
 
-}
+                if (!isOpen) {
 
+                    item.classList.add(
+                        "open"
+                    );
 
-.faq-question {
+                }
 
-    width: 100%;
+            }
+        );
 
-    padding:
-        30px 0;
+    }
+);
 
-    border: none;
-
-    background: transparent;
-
-    color: white;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    text-align: left;
-
-    cursor: none;
-
-}
-
-
-.faq-question span {
-
-    max-width: 600px;
-
-    font-size:
-        clamp(18px, 2vw, 26px);
-
-    letter-spacing: -.04em;
-
-}
-
-
-.faq-question b {
-
-    font-size: 25px;
-
-    font-weight: 300;
-
-    color: var(--accent);
-
-    transition:
-        transform .5s ease;
-
-}
-
-
-.faq-answer {
-
-    display: grid;
-
-    grid-template-rows:
-        0fr;
-
-    transition:
-        grid-template-rows .6s
-        cubic-bezier(.22,1,.36,1);
-
-}
-
-
-.faq-answer p {
-
-    overflow: hidden;
-
-    max-width: 600px;
-
-    font-size: 12px;
-
-    line-height: 1.65;
-
-    color: var(--muted);
-
-}
-
-
-.faq-item.open .faq-answer {
-
-    grid-template-rows:
-        1fr;
-
-}
-
-
-.faq-item.open .faq-answer p {
-
-    padding-bottom: 30px;
-
-}
-
-
-.faq-item.open .faq-question b {
-
-    transform:
-        rotate(45deg);
-
-}
 
 
 /* ============================================================
-   CONTACT
+   NAV COLOR / GLASS STATE
 ============================================================ */
 
-.contact {
+const nav =
+    document.querySelector(
+        ".nav"
+    );
 
-    min-height: 100svh;
 
-    margin-top: 100px;
+ScrollTrigger.create({
 
-    padding:
-        100px
-        var(--padding)
-        35px;
+    start: "top -80",
 
-    position: relative;
+    onEnter: () => {
 
-    overflow: hidden;
+        nav.classList.add(
+            "nav-scrolled"
+        );
 
-    display: flex;
+    },
 
-    flex-direction: column;
+    onLeaveBack: () => {
 
-    justify-content: space-between;
+        nav.classList.remove(
+            "nav-scrolled"
+        );
 
-    background:
-        radial-gradient(
-            circle at 50% 20%,
-            rgba(217,255,69,.15),
-            transparent 30%
-        ),
+    }
 
-        #0b0d0b;
+});
 
-    border-radius:
-        45px 45px 0 0;
-
-}
-
-
-.contact-glow {
-
-    position: absolute;
-
-    width: 600px;
-    height: 600px;
-
-    left: 50%;
-    top: 20%;
-
-    transform:
-        translateX(-50%);
-
-    border-radius: 50%;
-
-    background:
-        var(--accent);
-
-    opacity: .07;
-
-    filter:
-        blur(120px);
-
-}
-
-
-.contact-inner {
-
-    position: relative;
-
-    z-index: 2;
-
-    text-align: center;
-
-}
-
-
-.contact-inner .eyebrow {
-
-    color: var(--accent);
-
-}
-
-
-.contact-title {
-
-    margin-top: 45px;
-
-    font-size:
-        clamp(100px, 20vw, 340px);
-
-    line-height: .62;
-
-    letter-spacing: -.11em;
-
-    font-weight: 400;
-
-}
-
-
-.email-button {
-
-    margin:
-        100px auto 0;
-
-    width: fit-content;
-
-    display: flex;
-
-    gap: 30px;
-
-    align-items: center;
-
-    padding:
-        16px 23px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.18);
-
-    border-radius: 100px;
-
-    background:
-        rgba(255,255,255,.05);
-
-    backdrop-filter:
-        blur(20px);
-
-    font-size:
-        clamp(16px, 2vw, 25px);
-
-    letter-spacing: -.04em;
-
-}
-
-
-.email-button span {
-
-    color:
-        var(--accent);
-
-}
-
-
-footer {
-
-    position: relative;
-
-    z-index: 2;
-
-}
-
-
-.footer-top,
-.footer-bottom {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    gap: 20px;
-
-}
-
-
-.footer-top {
-
-    padding-bottom: 20px;
-
-    border-bottom:
-        1px solid
-        rgba(255,255,255,.1);
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 8px;
-
-    color: var(--dim);
-
-}
-
-
-.footer-bottom {
-
-    padding-top: 20px;
-
-    font-family:
-        "DM Mono",
-        monospace;
-
-    font-size: 8px;
-
-    text-transform: uppercase;
-
-    color: var(--dim);
-
-}
-
-
-.footer-bottom div {
-
-    display: flex;
-
-    gap: 20px;
-
-}
-
-
-.footer-bottom a:hover {
-
-    color: white;
-
-}
 
 
 /* ============================================================
-   REVEAL
+   AMBIENT MOUSE LIGHT
 ============================================================ */
 
-.reveal {
+if (
+    !prefersReducedMotion &&
+    window.innerWidth > 700
+) {
 
-    opacity: 0;
+    window.addEventListener(
+        "mousemove",
+        (event) => {
 
-    transform:
-        translateY(70px);
+            const x =
+                event.clientX /
+                window.innerWidth *
+                100;
+
+
+            const y =
+                event.clientY /
+                window.innerHeight *
+                100;
+
+
+            gsap.to(
+                ".ambient-one",
+                {
+                    x:
+                        (x - 50) * .4,
+                    y:
+                        (y - 50) * .3,
+                    duration: 2
+                }
+            );
+
+
+            gsap.to(
+                ".ambient-two",
+                {
+                    x:
+                        (x - 50) * -.3,
+                    y:
+                        (y - 50) * -.2,
+                    duration: 2.5
+                }
+            );
+
+        }
+    );
 
 }
+
 
 
 /* ============================================================
-   RESPONSIVE
+   SMOOTH SECTION TRANSITIONS
 ============================================================ */
 
-@media (max-width: 1000px) {
+if (!prefersReducedMotion) {
 
-    .nav-links {
-        display: none;
-    }
+    document
+        .querySelectorAll(
+            ".section-meta"
+        )
+        .forEach(
+            (meta) => {
 
+                gsap.from(
+                    meta,
+                    {
+                        opacity: 0,
+                        x: -30,
+                        duration: .8,
+                        ease:
+                            "power3.out",
 
-    .hero-top {
-        gap: 20px;
-    }
+                        scrollTrigger: {
+                            trigger: meta,
+                            start:
+                                "top 90%",
+                            once: true
+                        }
+                    }
+                );
 
-
-    .hero-title {
-        font-size:
-            clamp(70px, 15vw, 150px);
-    }
-
-
-    .hero-orb {
-        right: 2%;
-    }
-
-
-    .about-heading,
-    .projects-heading,
-    .capabilities-heading,
-    .services-heading,
-    .faq-layout {
-        grid-template-columns: 1fr;
-    }
-
-
-    .about-copy {
-        max-width: 600px;
-        margin-left: auto;
-    }
-
-
-    .journey-item {
-        grid-template-columns:
-            60px 1fr;
-    }
-
-
-    .journey-image {
-        grid-column: 2;
-        width: 300px;
-    }
-
-
-    .service-list {
-        grid-template-columns: 1fr;
-    }
-
-
-    .service-card {
-        min-height: 600px;
-    }
+            }
+        );
 
 }
 
 
-@media (max-width: 700px) {
 
-    body {
-        cursor: auto;
+/* ============================================================
+   ACTIVE NAVIGATION
+============================================================ */
+
+const sections =
+    document.querySelectorAll(
+        "section[id]"
+    );
+
+
+const navLinks =
+    document.querySelectorAll(
+        ".nav-links a"
+    );
+
+
+sections.forEach(
+    (section) => {
+
+        ScrollTrigger.create({
+
+            trigger: section,
+
+            start:
+                "top center",
+
+            end:
+                "bottom center",
+
+            onEnter: () => {
+
+                const id =
+                    section.id;
+
+
+                navLinks.forEach(
+                    (link) => {
+
+                        link.style.color =
+                            link.getAttribute(
+                                "href"
+                            ) === `#${id}`
+                                ? "#d9ff45"
+                                : "";
+
+                    }
+                );
+
+            },
+
+            onEnterBack: () => {
+
+                const id =
+                    section.id;
+
+
+                navLinks.forEach(
+                    (link) => {
+
+                        link.style.color =
+                            link.getAttribute(
+                                "href"
+                            ) === `#${id}`
+                                ? "#d9ff45"
+                                : "";
+
+                    }
+                );
+
+            }
+
+        });
+
     }
+);
 
 
-    .cursor {
-        display: none;
+
+/* ============================================================
+   IMAGE LOADING
+============================================================ */
+
+document
+    .querySelectorAll("img")
+    .forEach(
+        (image) => {
+
+            image.addEventListener(
+                "load",
+                () => {
+
+                    image.classList.add(
+                        "loaded"
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+
+/* ============================================================
+   REFRESH SCROLLTRIGGER
+============================================================ */
+
+window.addEventListener(
+    "load",
+    () => {
+
+        ScrollTrigger.refresh();
+
     }
+);
 
 
-    .nav {
-        top: 10px;
-        height: 55px;
+
+/* ============================================================
+   RESIZE
+============================================================ */
+
+let resizeTimer;
+
+
+window.addEventListener(
+    "resize",
+    () => {
+
+        clearTimeout(
+            resizeTimer
+        );
+
+
+        resizeTimer =
+            setTimeout(
+                () => {
+
+                    ScrollTrigger.refresh();
+
+                },
+                250
+            );
+
     }
-
-
-    .nav-cta {
-        height: 38px;
-    }
-
-
-    .hero {
-        padding-top: 110px;
-    }
-
-
-    .hero-top {
-        flex-direction: column;
-    }
-
-
-    .hero-intro {
-        width: 100%;
-    }
-
-
-    .hero-stats {
-        width: 100%;
-    }
-
-
-    .stat {
-        flex: 1;
-    }
-
-
-    .hero-title {
-        font-size:
-            clamp(65px, 18vw, 130px);
-    }
-
-
-    .hero-orb {
-        width: 100px;
-        height: 100px;
-        top: 30%;
-    }
-
-
-    .hero-bottom {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-
-    .scroll-indicator {
-        justify-content: flex-start;
-    }
-
-
-    .hero-tags {
-        justify-content: flex-start;
-    }
-
-
-    .about-image-wrap {
-        width: 100%;
-        height: 110vw;
-    }
-
-
-    .journey-intro {
-        grid-template-columns: 1fr;
-    }
-
-
-    .journey-item {
-        min-height: auto;
-        padding:
-            50px 0;
-        grid-template-columns:
-            45px 1fr;
-    }
-
-
-    .journey-content h3 {
-        font-size:
-            clamp(42px, 12vw, 70px);
-    }
-
-
-    .journey-image {
-        grid-column: 2;
-        width: 100%;
-        height: 300px;
-    }
-
-
-    .project-grid {
-        display: block;
-    }
-
-
-    .project-card {
-        margin:
-            0 0 70px;
-    }
-
-
-    .project-image,
-    .project-small .project-image,
-    .project-full .project-image {
-        aspect-ratio: 1 / 1.1;
-    }
-
-
-    .project-info {
-        flex-direction: column;
-    }
-
-
-    .project-tags {
-        justify-content: flex-start;
-    }
-
-
-    .capabilities {
-        margin:
-            30px 10px 0;
-        border-radius: 30px;
-    }
-
-
-    .capability-item {
-        grid-template-columns:
-            40px 1fr;
-        gap: 15px;
-    }
-
-
-    .capability-item p {
-        grid-column: 2;
-    }
-
-
-    .service-card {
-        min-height: 560px;
-    }
-
-
-    .transformation {
-        min-height: 80svh;
-        border-radius: 30px;
-    }
-
-
-    .mega-title {
-        font-size:
-            clamp(65px, 18vw, 120px);
-    }
-
-
-    .testimonial {
-        width: 82vw;
-        min-height: 480px;
-    }
-
-
-    .faq-layout {
-        gap: 70px;
-    }
-
-
-    .contact {
-        border-radius:
-            30px 30px 0 0;
-    }
-
-
-    .contact-title {
-        font-size:
-            clamp(90px, 25vw, 170px);
-    }
-
-
-    .email-button {
-        font-size: 14px;
-        margin-top: 70px;
-    }
-
-
-    .footer-bottom {
-        flex-direction: column;
-    }
-
-}
+);
