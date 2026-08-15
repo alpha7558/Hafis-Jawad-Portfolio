@@ -1,458 +1,881 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+    <meta charset="UTF-8">
 
-  <title>YOUR NAME — Creative Developer</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-  <meta
-    name="description"
-    content="YOUR NAME — Creative developer and digital designer."
-  >
+    <meta
+        name="description"
+        content="Creative Web Developer — Portfolio"
+    >
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>NESH — Webflow, Applied Differently.</title>
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap"
-    rel="stylesheet"
-  >
 
-  <!-- GSAP -->
-  <script
-    src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js">
-  </script>
+    <!-- =====================================================
+         FONTS
+    ====================================================== -->
 
-  <script
-    src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js">
-  </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-  <link rel="stylesheet" href="style.css">
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         GSAP
+    ====================================================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js">
+    </script>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js">
+    </script>
+
+
+    <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
-  <!-- =====================================================
-       CUSTOM CURSOR
-  ====================================================== -->
 
-  <div class="cursor">
-    <span class="cursor-text">VIEW</span>
-  </div>
+<!-- =========================================================
+     CUSTOM CURSOR
+========================================================== -->
+
+<div class="cursor">
+
+    <div class="cursor-ring"></div>
+
+    <span class="cursor-label">
+        VIEW
+    </span>
+
+</div>
 
 
-  <!-- =====================================================
-       NAVIGATION
-  ====================================================== -->
 
-  <header class="nav">
+<!-- =========================================================
+     AMBIENT BACKGROUND
+========================================================== -->
 
-    <a href="#home" class="nav-logo">
-      YOUR NAME
+<div class="ambient ambient-one"></div>
+
+<div class="ambient ambient-two"></div>
+
+<div class="ambient ambient-three"></div>
+
+
+
+<!-- =========================================================
+     NAVIGATION
+========================================================== -->
+
+<header class="nav">
+
+    <a
+        href="#home"
+        class="logo magnetic"
+    >
+        NESH<span>®</span>
     </a>
+
 
     <nav class="nav-links">
 
-      <a href="#about">
-        about me
-      </a>
+        <a href="#about">
+            about me
+        </a>
 
-      <a href="#projects">
-        projects
-      </a>
+        <a href="#projects">
+            projects
+        </a>
 
-      <a href="#services">
-        services
-      </a>
+        <a href="#capabilities">
+            what you get
+        </a>
 
-      <a href="#contact">
-        let's talk
-      </a>
+        <a href="#services">
+            services
+        </a>
+
+        <a href="#faq">
+            faq
+        </a>
 
     </nav>
 
-  </header>
 
-
-  <main>
-
-
-    <!-- ===================================================
-         HERO
-    ==================================================== -->
-
-    <section
-      class="hero"
-      id="home"
+    <a
+        href="#contact"
+        class="nav-cta magnetic"
+        data-cursor="LET'S TALK"
     >
+        Book a Call
+    </a>
 
-      <div class="hero-top">
+</header>
 
-        <div class="eyebrow">
-          Creative Developer
+
+
+<!-- =========================================================
+     MAIN
+========================================================== -->
+
+<main>
+
+
+
+<!-- =========================================================
+     HERO
+========================================================== -->
+
+<section
+    class="hero"
+    id="home"
+>
+
+    <div class="hero-top">
+
+        <div class="hero-intro glass-mini">
+
+            <span class="eyebrow">
+                Creative Web Developer
+            </span>
+
+            <p>
+                Working closely with teams to create
+                digital experiences that combine
+                creativity, technical excellence
+                and long-term value.
+            </p>
+
         </div>
 
-        <div class="hero-description">
-          Working closely with ambitious teams
-          to create digital experiences that combine
-          creativity, technology and performance.
-        </div>
-
-      </div>
-
-
-      <div class="hero-title-wrap">
-
-        <h1 class="hero-title">
-
-          <span>
-            Digital
-          </span>
-
-          <span>
-            Experiences.
-          </span>
-
-        </h1>
-
-      </div>
-
-
-      <div class="hero-bottom">
-
-        <div class="hero-scroll">
-          <span class="scroll-dot"></span>
-          Scroll to explore
-        </div>
 
         <div class="hero-stats">
 
-          <div>
-            <strong>25+</strong>
-            <span>Projects</span>
-          </div>
+            <div class="stat glass-mini">
 
-          <div>
-            <strong>04</strong>
-            <span>Years experience</span>
-          </div>
+                <strong>
+                    80+
+                </strong>
+
+                <span>
+                    Projects
+                </span>
+
+            </div>
+
+
+            <div class="stat glass-mini">
+
+                <strong>
+                    7+
+                </strong>
+
+                <span>
+                    Years experience
+                </span>
+
+            </div>
 
         </div>
 
-      </div>
-
-    </section>
+    </div>
 
 
 
-    <!-- ===================================================
-         ABOUT
-    ==================================================== -->
+    <div class="hero-title-container">
 
-    <section
-      class="about section"
-      id="about"
-    >
-
-      <div class="section-label">
-        About me (&)
-      </div>
+        <div class="hero-kicker">
+            The Webflow Expert.
+        </div>
 
 
-      <div class="about-grid">
+        <h1 class="hero-title">
 
-        <h2 class="huge-heading reveal">
-          The Web
-          <br>
-          Developer.
-          <br>
-          That's Me.
-        </h2>
+            <span>
+                Webflow,
+            </span>
+
+            <span>
+                Applied
+            </span>
+
+            <span>
+                Differently.
+            </span>
+
+        </h1>
 
 
-        <div class="about-copy">
+        <div class="hero-orb">
 
-          <p class="large-copy reveal">
-            I design and build digital experiences
-            that balance strong visual direction,
-            thoughtful interaction and solid technology.
-          </p>
+            <div class="orb-inner"></div>
 
-          <p class="body-copy reveal">
-            From the first idea to the final interaction,
-            I enjoy working across design, development,
-            motion and digital strategy.
-          </p>
+        </div>
 
-          <a
+    </div>
+
+
+
+    <div class="hero-bottom">
+
+        <a
             href="#contact"
-            class="pill-button magnetic"
-          >
-            Let's talk
-          </a>
-
-        </div>
-
-      </div>
-
-
-      <div class="about-image reveal">
-
-        <img
-          src="images/profile.jpg"
-          alt="YOUR NAME"
+            class="hero-button magnetic"
+            data-cursor="CONTACT"
         >
 
-      </div>
+            <span>
+                Book a Call
+            </span>
 
-    </section>
+            <span class="arrow">
+                ↗
+            </span>
 
-
-
-    <!-- ===================================================
-         JOURNEY
-    ==================================================== -->
-
-    <section
-      class="journey section"
-    >
-
-      <div class="section-label">
-        Start small grow big
-      </div>
+        </a>
 
 
-      <div class="journey-heading">
+        <div class="scroll-indicator">
 
-        <h2 class="huge-heading reveal">
-          My
-          <br>
-          Journey
+            <span class="scroll-line"></span>
+
+            <span>
+                Scroll to explore
+            </span>
+
+        </div>
+
+
+        <div class="hero-tags">
+
+            <span>
+                Creative
+            </span>
+
+            <span>
+                Reliable
+            </span>
+
+            <span>
+                Strategist
+            </span>
+
+            <span>
+                Builder
+            </span>
+
+            <span>
+                Efficient
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     ABOUT
+========================================================== -->
+
+<section
+    class="section about"
+    id="about"
+>
+
+    <div class="section-meta">
+
+        <span>
+            Start small grow big
+        </span>
+
+        <span>
+            About Me (&)
+        </span>
+
+    </div>
+
+
+    <div class="about-heading">
+
+        <h2 class="huge-title reveal">
+
+            The Webflow
+            <br>
+
+            Expert.
+
         </h2>
 
-        <p>
-          A few moments that shaped
-          how I approach the web today.
-        </p>
 
-      </div>
+        <div class="about-copy glass-card reveal">
 
+            <span class="card-number">
+                01 / ABOUT
+            </span>
 
-      <div class="timeline">
+            <p class="large-text">
 
+                A developer focused on turning
+                ambitious ideas into polished,
+                fast and memorable digital
+                experiences.
 
-        <!-- JOURNEY 01 -->
-
-        <article class="timeline-item">
-
-          <div class="timeline-year">
-            '22
-          </div>
-
-          <div class="timeline-main">
-
-            <div class="timeline-title">
-              Starting out
-            </div>
-
-            <p>
-              The beginning of my journey into
-              digital design and development.
             </p>
 
-            <div class="timeline-image">
 
-              <img
-                src="images/journey-01.jpg"
-                alt="Journey 01"
-              >
+            <p class="small-text">
 
-            </div>
+                Development is the core strength,
+                with equal attention given to
+                interaction, motion, performance
+                and the overall experience.
 
-          </div>
-
-        </article>
-
-
-
-        <!-- JOURNEY 02 -->
-
-        <article class="timeline-item">
-
-          <div class="timeline-year">
-            '23
-          </div>
-
-          <div class="timeline-main">
-
-            <div class="timeline-title">
-              First real projects
-            </div>
-
-            <p>
-              Turning experiments into real
-              websites and digital products.
             </p>
 
-            <div class="timeline-image">
+        </div>
 
-              <img
-                src="images/journey-02.jpg"
-                alt="Journey 02"
-              >
-
-            </div>
-
-          </div>
-
-        </article>
+    </div>
 
 
 
-        <!-- JOURNEY 03 -->
+    <div class="about-image-wrap reveal">
 
-        <article class="timeline-item">
+        <div class="image-label">
 
-          <div class="timeline-year">
-            '24
-          </div>
+            <span>
+                NESH
+            </span>
 
-          <div class="timeline-main">
+            <span>
+                CREATIVE DEVELOPER
+            </span>
 
-            <div class="timeline-title">
-              Leveling up
-            </div>
+        </div>
 
-            <p>
-              Motion, interaction and more
-              ambitious creative development.
-            </p>
 
-            <div class="timeline-image">
+        <img
+            src="images/profile.jpg"
+            alt="Creative developer"
+        >
 
-              <img
-                src="images/journey-03.jpg"
-                alt="Journey 03"
-              >
+    </div>
 
-            </div>
-
-          </div>
-
-        </article>
+</section>
 
 
 
-        <!-- JOURNEY 04 -->
+<!-- =========================================================
+     JOURNEY
+========================================================== -->
 
-        <article class="timeline-item">
+<section
+    class="section journey"
+    id="journey"
+>
 
-          <div class="timeline-year">
-            '26
-          </div>
+    <div class="section-meta">
 
-          <div class="timeline-main">
+        <span>
+            About Me (&)
+        </span>
 
-            <div class="timeline-title">
-              The journey continues
-            </div>
+        <span>
+            My Journey
+        </span>
 
-            <p>
-              Building bigger ideas and exploring
-              new technology.
-            </p>
-
-            <div class="timeline-image">
-
-              <img
-                src="images/journey-04.jpg"
-                alt="Journey 04"
-              >
-
-            </div>
-
-          </div>
-
-        </article>
-
-      </div>
-
-    </section>
+    </div>
 
 
+    <div class="journey-intro">
 
-    <!-- ===================================================
-         PROJECTS
-    ==================================================== -->
+        <h2 class="huge-title reveal">
 
-    <section
-      class="projects section"
-      id="projects"
-    >
+            My
+            <br>
+            Journey.
 
-      <div class="section-label">
-        Selected work
-      </div>
-
-
-      <div class="projects-heading">
-
-        <h2 class="huge-heading reveal">
-          Built to
-          <br>
-          Perform.
         </h2>
 
-        <p>
-          A selection of projects I've worked on,
-          from websites to interactive digital
-          experiences.
+
+        <p class="intro-text reveal">
+
+            Seven years of building, learning,
+            experimenting and gradually turning
+            web development into a craft.
+
         </p>
 
-      </div>
+    </div>
 
 
-      <div class="project-grid">
+
+    <div class="journey-list">
+
+
+        <!-- 2019 -->
+
+        <article
+            class="journey-item"
+            data-year="19"
+        >
+
+            <div class="journey-year">
+                '19
+            </div>
+
+
+            <div class="journey-content">
+
+                <div class="journey-number">
+                    01
+                </div>
+
+                <h3>
+                    Starting out
+                    <br>
+                    with my brother
+                </h3>
+
+                <p>
+                    Stefan introduced Webflow.
+                    The beginning was filled with
+                    questions, experiments and
+                    learning by doing.
+                </p>
+
+            </div>
+
+
+            <div class="journey-image">
+
+                <img
+                    src="images/journey-19.jpg"
+                    alt="Starting out"
+                >
+
+            </div>
+
+        </article>
+
+
+
+        <!-- 2020 -->
+
+        <article
+            class="journey-item"
+            data-year="20"
+        >
+
+            <div class="journey-year">
+                '20
+            </div>
+
+
+            <div class="journey-content">
+
+                <div class="journey-number">
+                    02
+                </div>
+
+                <h3>
+                    First freelance
+                    <br>
+                    steps
+                </h3>
+
+                <p>
+                    The first real client arrived,
+                    bringing the difference between
+                    personal experiments and
+                    professional work into focus.
+                </p>
+
+            </div>
+
+
+            <div class="journey-image">
+
+                <img
+                    src="images/journey-20.jpg"
+                    alt="First freelance steps"
+                >
+
+            </div>
+
+        </article>
+
+
+
+        <!-- 2021 -->
+
+        <article
+            class="journey-item"
+            data-year="21"
+        >
+
+            <div class="journey-year">
+                '21
+            </div>
+
+
+            <div class="journey-content">
+
+                <div class="journey-number">
+                    03
+                </div>
+
+                <h3>
+                    Beyond
+                    <br>
+                    what I knew
+                </h3>
+
+                <p>
+                    A challenging biotech project
+                    pushed the boundaries of what
+                    seemed possible in Webflow.
+                </p>
+
+            </div>
+
+
+            <div class="journey-image">
+
+                <img
+                    src="images/journey-21.jpg"
+                    alt="Beyond what I knew"
+                >
+
+            </div>
+
+        </article>
+
+
+
+        <!-- 2022 -->
+
+        <article
+            class="journey-item"
+            data-year="22"
+        >
+
+            <div class="journey-year">
+                '22
+            </div>
+
+
+            <div class="journey-content">
+
+                <div class="journey-number">
+                    04
+                </div>
+
+                <h3>
+                    Leveling
+                    <br>
+                    up
+                </h3>
+
+                <p>
+                    Animation and CMS work became
+                    fundamental parts of how each
+                    project was designed and built.
+                </p>
+
+            </div>
+
+
+            <div class="journey-image">
+
+                <img
+                    src="images/journey-22.jpg"
+                    alt="Leveling up"
+                >
+
+            </div>
+
+        </article>
+
+
+
+        <!-- 2023 -->
+
+        <article
+            class="journey-item"
+            data-year="23"
+        >
+
+            <div class="journey-year">
+                '23
+            </div>
+
+
+            <div class="journey-content">
+
+                <div class="journey-number">
+                    05
+                </div>
+
+                <h3>
+                    From trust
+                    <br>
+                    to referrals
+                </h3>
+
+                <p>
+                    Referrals began replacing the
+                    need to constantly pitch for
+                    the next opportunity.
+                </p>
+
+            </div>
+
+
+            <div class="journey-image">
+
+                <img
+                    src="images/journey-23.jpg"
+                    alt="From trust to referrals"
+                >
+
+            </div>
+
+        </article>
+
+
+
+        <!-- 2024 -->
+
+        <article
+            class="journey-item"
+            data-year="24"
+        >
+
+            <div class="journey-year">
+                '24
+            </div>
+
+
+            <div class="journey-content">
+
+                <div class="journey-number">
+                    06
+                </div>
+
+                <h3>
+                    A life-changing
+                    <br>
+                    year
+                </h3>
+
+                <p>
+                    A major personal chapter brought
+                    a deeper reason and perspective
+                    to the work.
+                </p>
+
+            </div>
+
+
+            <div class="journey-image">
+
+                <img
+                    src="images/journey-24.jpg"
+                    alt="A life-changing year"
+                >
+
+            </div>
+
+        </article>
+
+
+
+        <!-- 2026 -->
+
+        <article
+            class="journey-item"
+            data-year="26"
+        >
+
+            <div class="journey-year">
+                '26
+            </div>
+
+
+            <div class="journey-content">
+
+                <div class="journey-number">
+                    07
+                </div>
+
+                <h3>
+                    The journey
+                    <br>
+                    continues
+                </h3>
+
+                <p>
+                    Seven years in, the obsession
+                    continues while exploring how
+                    AI can fit into the future of
+                    creative development.
+                </p>
+
+            </div>
+
+
+            <div class="journey-image">
+
+                <img
+                    src="images/journey-26.jpg"
+                    alt="The journey continues"
+                >
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     SELECTED WORK
+========================================================== -->
+
+<section
+    class="section projects"
+    id="projects"
+>
+
+    <div class="section-meta">
+
+        <span>
+            Selected Work
+        </span>
+
+        <span>
+            09 Projects
+        </span>
+
+    </div>
+
+
+    <div class="projects-heading">
+
+        <h2 class="huge-title reveal">
+
+            Built in Webflow,
+            <br>
+
+            Made to Perform.
+
+        </h2>
+
+
+        <p class="intro-text reveal">
+
+            A collection of digital experiences
+            built across technology, healthcare,
+            blockchain, talent, property and more.
+
+        </p>
+
+    </div>
+
+
+
+    <div class="project-grid">
 
 
         <!-- PROJECT 01 -->
 
         <a
-          href="#"
-          class="project-card"
-          data-cursor="VIEW"
+            href="#"
+            class="project-card project-large"
+            data-cursor="VIEW"
         >
 
-          <div class="project-image">
+            <div class="project-image">
 
-            <img
-              src="images/project-01.jpg"
-              alt="Project 01"
-            >
+                <img
+                    src="images/project-01.jpg"
+                    alt="1910.ai"
+                >
 
-            <div class="project-number">
-              01
+                <div class="project-overlay"></div>
+
+                <span class="project-index">
+                    01
+                </span>
+
+                <span class="project-arrow">
+                    ↗
+                </span>
+
             </div>
 
-          </div>
 
-          <div class="project-info">
+            <div class="project-info">
 
-            <div>
-              Project One
+                <div>
+
+                    <h3>
+                        1910.ai
+                    </h3>
+
+                    <p>
+                        Therapeutics discovery platform
+                        combining multimodal data.
+                    </p>
+
+                </div>
+
+
+                <div class="project-tags">
+
+                    <span>
+                        Components
+                    </span>
+
+                    <span>
+                        GSAP
+                    </span>
+
+                    <span>
+                        SEO
+                    </span>
+
+                </div>
+
             </div>
-
-            <span>
-              Web / Development
-            </span>
-
-          </div>
 
         </a>
 
@@ -461,35 +884,63 @@
         <!-- PROJECT 02 -->
 
         <a
-          href="#"
-          class="project-card project-offset"
-          data-cursor="VIEW"
+            href="#"
+            class="project-card project-small"
+            data-cursor="VIEW"
         >
 
-          <div class="project-image">
+            <div class="project-image">
 
-            <img
-              src="images/project-02.jpg"
-              alt="Project 02"
-            >
+                <img
+                    src="images/project-02.jpg"
+                    alt="SemiconBio"
+                >
 
-            <div class="project-number">
-              02
+                <div class="project-overlay"></div>
+
+                <span class="project-index">
+                    02
+                </span>
+
+                <span class="project-arrow">
+                    ↗
+                </span>
+
             </div>
 
-          </div>
 
-          <div class="project-info">
+            <div class="project-info">
 
-            <div>
-              Project Two
+                <div>
+
+                    <h3>
+                        SemiconBio
+                    </h3>
+
+                    <p>
+                        Molecular electronics platform.
+                    </p>
+
+                </div>
+
+
+                <div class="project-tags">
+
+                    <span>
+                        CMS
+                    </span>
+
+                    <span>
+                        API
+                    </span>
+
+                    <span>
+                        Motion
+                    </span>
+
+                </div>
+
             </div>
-
-            <span>
-              Design / Motion
-            </span>
-
-          </div>
 
         </a>
 
@@ -498,35 +949,63 @@
         <!-- PROJECT 03 -->
 
         <a
-          href="#"
-          class="project-card"
-          data-cursor="VIEW"
+            href="#"
+            class="project-card project-small"
+            data-cursor="VIEW"
         >
 
-          <div class="project-image">
+            <div class="project-image">
 
-            <img
-              src="images/project-03.jpg"
-              alt="Project 03"
-            >
+                <img
+                    src="images/project-03.jpg"
+                    alt="Happy Ring"
+                >
 
-            <div class="project-number">
-              03
+                <div class="project-overlay"></div>
+
+                <span class="project-index">
+                    03
+                </span>
+
+                <span class="project-arrow">
+                    ↗
+                </span>
+
             </div>
 
-          </div>
 
-          <div class="project-info">
+            <div class="project-info">
 
-            <div>
-              Project Three
+                <div>
+
+                    <h3>
+                        Happy Ring
+                    </h3>
+
+                    <p>
+                        Health and wellness experience.
+                    </p>
+
+                </div>
+
+
+                <div class="project-tags">
+
+                    <span>
+                        CMS
+                    </span>
+
+                    <span>
+                        GSAP
+                    </span>
+
+                    <span>
+                        SEO
+                    </span>
+
+                </div>
+
             </div>
-
-            <span>
-              Creative Development
-            </span>
-
-          </div>
 
         </a>
 
@@ -535,35 +1014,64 @@
         <!-- PROJECT 04 -->
 
         <a
-          href="#"
-          class="project-card project-offset"
-          data-cursor="VIEW"
+            href="#"
+            class="project-card project-large"
+            data-cursor="VIEW"
         >
 
-          <div class="project-image">
+            <div class="project-image">
 
-            <img
-              src="images/project-04.jpg"
-              alt="Project 04"
-            >
+                <img
+                    src="images/project-04.jpg"
+                    alt="PSSLTD"
+                >
 
-            <div class="project-number">
-              04
+                <div class="project-overlay"></div>
+
+                <span class="project-index">
+                    04
+                </span>
+
+                <span class="project-arrow">
+                    ↗
+                </span>
+
             </div>
 
-          </div>
 
-          <div class="project-info">
+            <div class="project-info">
 
-            <div>
-              Project Four
+                <div>
+
+                    <h3>
+                        PSSLTD
+                    </h3>
+
+                    <p>
+                        Asset and inspection management
+                        platform for councils.
+                    </p>
+
+                </div>
+
+
+                <div class="project-tags">
+
+                    <span>
+                        CMS
+                    </span>
+
+                    <span>
+                        GSAP
+                    </span>
+
+                    <span>
+                        Localization
+                    </span>
+
+                </div>
+
             </div>
-
-            <span>
-              Web / Interaction
-            </span>
-
-          </div>
 
         </a>
 
@@ -572,35 +1080,64 @@
         <!-- PROJECT 05 -->
 
         <a
-          href="#"
-          class="project-card"
-          data-cursor="VIEW"
+            href="#"
+            class="project-card project-large"
+            data-cursor="VIEW"
         >
 
-          <div class="project-image">
+            <div class="project-image">
 
-            <img
-              src="images/project-05.jpg"
-              alt="Project 05"
-            >
+                <img
+                    src="images/project-05.jpg"
+                    alt="Lilipad"
+                >
 
-            <div class="project-number">
-              05
+                <div class="project-overlay"></div>
+
+                <span class="project-index">
+                    05
+                </span>
+
+                <span class="project-arrow">
+                    ↗
+                </span>
+
             </div>
 
-          </div>
 
-          <div class="project-info">
+            <div class="project-info">
 
-            <div>
-              Project Five
+                <div>
+
+                    <h3>
+                        Lilipad
+                    </h3>
+
+                    <p>
+                        Community-focused library
+                        experience for children.
+                    </p>
+
+                </div>
+
+
+                <div class="project-tags">
+
+                    <span>
+                        CMS
+                    </span>
+
+                    <span>
+                        GSAP
+                    </span>
+
+                    <span>
+                        SEO
+                    </span>
+
+                </div>
+
             </div>
-
-            <span>
-              Digital / Branding
-            </span>
-
-          </div>
 
         </a>
 
@@ -609,546 +1146,1548 @@
         <!-- PROJECT 06 -->
 
         <a
-          href="#"
-          class="project-card project-offset"
-          data-cursor="VIEW"
+            href="#"
+            class="project-card project-small"
+            data-cursor="VIEW"
         >
 
-          <div class="project-image">
+            <div class="project-image">
 
-            <img
-              src="images/project-06.jpg"
-              alt="Project 06"
-            >
+                <img
+                    src="images/project-06.jpg"
+                    alt="Omicron"
+                >
 
-            <div class="project-number">
-              06
+                <div class="project-overlay"></div>
+
+                <span class="project-index">
+                    06
+                </span>
+
+                <span class="project-arrow">
+                    ↗
+                </span>
+
             </div>
 
-          </div>
 
-          <div class="project-info">
+            <div class="project-info">
 
-            <div>
-              Project Six
+                <div>
+
+                    <h3>
+                        Omicron
+                    </h3>
+
+                    <p>
+                        Blockchain studio for Web 3.0.
+                    </p>
+
+                </div>
+
+
+                <div class="project-tags">
+
+                    <span>
+                        Webflow
+                    </span>
+
+                    <span>
+                        Motion
+                    </span>
+
+                </div>
+
             </div>
-
-            <span>
-              Web / Motion
-            </span>
-
-          </div>
 
         </a>
 
-      </div>
-
-    </section>
 
 
+        <!-- PROJECT 07 -->
 
-    <!-- ===================================================
-         CAPABILITIES
-    ==================================================== -->
+        <a
+            href="#"
+            class="project-card project-small"
+            data-cursor="VIEW"
+        >
 
-    <section class="capabilities section">
+            <div class="project-image">
 
-      <div class="section-label">
-        What you get
-      </div>
+                <img
+                    src="images/project-07.jpg"
+                    alt="Puck"
+                >
+
+                <div class="project-overlay"></div>
+
+                <span class="project-index">
+                    07
+                </span>
+
+                <span class="project-arrow">
+                    ↗
+                </span>
+
+            </div>
 
 
-      <div class="capabilities-heading">
+            <div class="project-info">
 
-        <h2 class="huge-heading reveal">
-          Strategy,
-          <br>
-          precision &
-          <br>
-          development.
+                <div>
+
+                    <h3>
+                        Puck
+                    </h3>
+
+                    <p>
+                        Inbound talent and automation.
+                    </p>
+
+                </div>
+
+
+                <div class="project-tags">
+
+                    <span>
+                        Components
+                    </span>
+
+                    <span>
+                        CMS
+                    </span>
+
+                    <span>
+                        GSAP
+                    </span>
+
+                </div>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- PROJECT 08 -->
+
+        <a
+            href="#"
+            class="project-card project-large"
+            data-cursor="VIEW"
+        >
+
+            <div class="project-image">
+
+                <img
+                    src="images/project-08.jpg"
+                    alt="Alosant"
+                >
+
+                <div class="project-overlay"></div>
+
+                <span class="project-index">
+                    08
+                </span>
+
+                <span class="project-arrow">
+                    ↗
+                </span>
+
+            </div>
+
+
+            <div class="project-info">
+
+                <div>
+
+                    <h3>
+                        Alosant
+                    </h3>
+
+                    <p>
+                        Resident experience platform
+                        for modern communities.
+                    </p>
+
+                </div>
+
+
+                <div class="project-tags">
+
+                    <span>
+                        Performance
+                    </span>
+
+                    <span>
+                        CMS
+                    </span>
+
+                    <span>
+                        API
+                    </span>
+
+                </div>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- PROJECT 09 -->
+
+        <a
+            href="#"
+            class="project-card project-full"
+            data-cursor="VIEW"
+        >
+
+            <div class="project-image">
+
+                <img
+                    src="images/project-09.jpg"
+                    alt="RAY AI"
+                >
+
+                <div class="project-overlay"></div>
+
+                <span class="project-index">
+                    09
+                </span>
+
+                <span class="project-arrow">
+                    ↗
+                </span>
+
+            </div>
+
+
+            <div class="project-info">
+
+                <div>
+
+                    <h3>
+                        RAY AI
+                    </h3>
+
+                    <p>
+                        Human-assisted AI experience
+                        designed to give people back
+                        time and energy.
+                    </p>
+
+                </div>
+
+
+                <div class="project-tags">
+
+                    <span>
+                        CMS
+                    </span>
+
+                    <span>
+                        GSAP
+                    </span>
+
+                    <span>
+                        Performance
+                    </span>
+
+                </div>
+
+            </div>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     CAPABILITIES
+========================================================== -->
+
+<section
+    class="section capabilities"
+    id="capabilities"
+>
+
+    <div class="glass-background-card"></div>
+
+
+    <div class="section-meta">
+
+        <span>
+            What You Get?
+        </span>
+
+        <span>
+            Capabilities Overview
+        </span>
+
+    </div>
+
+
+    <div class="capabilities-heading">
+
+        <h2 class="huge-title reveal">
+
+            Strategy,
+            <br>
+
+            precision,
+            <br>
+
+            development.
+
         </h2>
 
-        <p class="large-copy">
-          Everything needed to turn an idea
-          into a powerful digital experience
-          that feels effortless.
+
+        <p class="large-text reveal">
+
+            Strategy, precision and development
+            combined to turn a vision into a
+            powerful digital experience.
+
         </p>
 
-      </div>
-
-
-      <div class="capability-list">
-
-
-        <article class="capability">
-
-          <span>
-            01
-          </span>
-
-          <h3>
-            Web Development
-          </h3>
-
-          <p>
-            Fast, scalable websites with clean
-            structure and thoughtful implementation.
-          </p>
-
-        </article>
-
-
-        <article class="capability">
-
-          <span>
-            02
-          </span>
-
-          <h3>
-            Custom Integrations
-          </h3>
-
-          <p>
-            APIs, third-party services and
-            custom functionality built around
-            your requirements.
-          </p>
-
-        </article>
-
-
-        <article class="capability">
-
-          <span>
-            03
-          </span>
-
-          <h3>
-            SEO & Performance
-          </h3>
-
-          <p>
-            Technical optimization, speed,
-            accessibility and search-friendly
-            architecture.
-          </p>
-
-        </article>
-
-
-        <article class="capability">
-
-          <span>
-            04
-          </span>
-
-          <h3>
-            Motion & Interaction
-          </h3>
-
-          <p>
-            Smooth animations and interactions
-            that make the experience feel alive.
-          </p>
-
-        </article>
-
-
-        <article class="capability">
-
-          <span>
-            05
-          </span>
-
-          <h3>
-            Creative Development
-          </h3>
-
-          <p>
-            Experimental ideas translated into
-            polished, usable digital experiences.
-          </p>
-
-        </article>
-
-      </div>
-
-    </section>
+    </div>
 
 
 
-    <!-- ===================================================
-         SERVICES
-    ==================================================== -->
-
-    <section
-      class="services section"
-      id="services"
-    >
-
-      <div class="section-label">
-        Services
-      </div>
+    <div class="capability-list">
 
 
-      <h2 class="huge-heading reveal">
-        Solutions
-        <br>
-        That Deliver.
-      </h2>
+        <article class="capability-item">
 
-
-      <p class="services-intro">
-        Same attention to detail.
-        Different approaches depending
-        on what your project needs.
-      </p>
-
-
-      <div class="service-list">
-
-
-        <article class="service">
-
-          <span>
-            01
-          </span>
-
-          <div>
+            <span class="capability-number">
+                01
+            </span>
 
             <h3>
-              Starter Build
+                Webflow Development
             </h3>
 
             <p>
-              A focused website for brands
-              that need a strong digital presence.
+                Fast and scalable websites with
+                clean structure and a CMS setup
+                that keeps content manageable.
             </p>
-
-          </div>
-
-          <strong>
-            CUSTOM
-          </strong>
 
         </article>
 
 
-        <article class="service">
+        <article class="capability-item">
 
-          <span>
-            02
-          </span>
-
-          <div>
+            <span class="capability-number">
+                02
+            </span>
 
             <h3>
-              Custom Project
+                Custom Integrations
             </h3>
 
             <p>
-              Advanced interaction, animation,
-              integrations and complex experiences.
+                APIs, third-party tools and
+                tailored functionality that
+                expand what the platform can do.
             </p>
-
-          </div>
-
-          <strong>
-            CUSTOM
-          </strong>
 
         </article>
 
 
-        <article class="service">
+        <article class="capability-item">
 
-          <span>
-            03
-          </span>
-
-          <div>
+            <span class="capability-number">
+                03
+            </span>
 
             <h3>
-              Ongoing Support
+                SEO-Ready Setup
             </h3>
 
             <p>
-              Continuous improvements, maintenance,
-              new pages and performance optimization.
+                Technical structure, speed and
+                on-page foundations designed
+                to keep the site visible.
             </p>
-
-          </div>
-
-          <strong>
-            MONTHLY
-          </strong>
 
         </article>
 
-      </div>
 
-    </section>
+        <article class="capability-item">
+
+            <span class="capability-number">
+                04
+            </span>
+
+            <h3>
+                Creative & Interactive Motion
+            </h3>
+
+            <p>
+                Smooth motion and engaging
+                interactions powered by GSAP
+                and custom animation systems.
+            </p>
+
+        </article>
+
+
+        <article class="capability-item">
+
+            <span class="capability-number">
+                05
+            </span>
+
+            <h3>
+                Performance & Technical Optimization
+            </h3>
+
+            <p>
+                Faster, cleaner and more resilient
+                websites built around technical
+                performance best practices.
+            </p>
+
+        </article>
+
+    </div>
+
+</section>
 
 
 
-    <!-- ===================================================
-         CTA
-    ==================================================== -->
+<!-- =========================================================
+     SERVICES
+========================================================== -->
 
-    <section class="cta section">
+<section
+    class="section services"
+    id="services"
+>
 
-      <div class="section-label">
-        Have something in mind?
-      </div>
+    <div class="section-meta">
+
+        <span>
+            Services
+        </span>
+
+        <span>
+            Solutions That Deliver
+        </span>
+
+    </div>
 
 
-      <h2 class="cta-title reveal">
-        Let's
+    <div class="services-heading">
+
+        <h2 class="huge-title reveal">
+
+            Solutions
+            <br>
+
+            That Deliver.
+
+        </h2>
+
+
+        <p class="intro-text reveal">
+
+            The same attention to quality,
+            with different levels of scope
+            depending on what your project
+            needs.
+
+        </p>
+
+    </div>
+
+
+
+    <div class="service-list">
+
+
+        <!-- SUPPORT -->
+
+        <article class="service-card glass-card">
+
+            <div class="service-top">
+
+                <span>
+                    01
+                </span>
+
+                <span>
+                    ONGOING
+                </span>
+
+            </div>
+
+
+            <h3>
+                Ongoing
+                <br>
+                Support
+            </h3>
+
+
+            <div class="service-price">
+
+                <strong>
+                    $3,000
+                </strong>
+
+                <span>
+                    / 30 hours
+                </span>
+
+            </div>
+
+
+            <p>
+                A dedicated monthly development
+                block for continuous website
+                improvements and maintenance.
+            </p>
+
+
+            <ul>
+
+                <li>
+                    New pages, sections and features
+                </li>
+
+                <li>
+                    Campaign and content updates
+                </li>
+
+                <li>
+                    Maintenance and bug fixes
+                </li>
+
+                <li>
+                    Technical SEO and optimization
+                </li>
+
+                <li>
+                    Unused hours can roll over
+                </li>
+
+            </ul>
+
+
+            <a
+                href="#contact"
+                class="service-button magnetic"
+                data-cursor="START"
+            >
+                Get Started ↗
+            </a>
+
+        </article>
+
+
+
+        <!-- STARTER -->
+
+        <article class="service-card glass-card featured">
+
+            <div class="service-top">
+
+                <span>
+                    02
+                </span>
+
+                <span>
+                    STARTER
+                </span>
+
+            </div>
+
+
+            <h3>
+                Starter
+                <br>
+                Build
+            </h3>
+
+
+            <div class="service-price">
+
+                <strong>
+                    $5,000
+                </strong>
+
+            </div>
+
+
+            <p>
+                A focused Webflow website for
+                brands that need a polished
+                digital presence without
+                unnecessary complexity.
+            </p>
+
+
+            <ul>
+
+                <li>
+                    Up to 6 pages
+                </li>
+
+                <li>
+                    CMS setup
+                </li>
+
+                <li>
+                    Mid-level animation
+                </li>
+
+                <li>
+                    Technical SEO setup
+                </li>
+
+                <li>
+                    Fast launch
+                </li>
+
+                <li>
+                    Editor training
+                </li>
+
+            </ul>
+
+
+            <a
+                href="#contact"
+                class="service-button magnetic"
+                data-cursor="START"
+            >
+                Start a Project ↗
+            </a>
+
+        </article>
+
+
+
+        <!-- CUSTOM -->
+
+        <article class="service-card glass-card">
+
+            <div class="service-top">
+
+                <span>
+                    03
+                </span>
+
+                <span>
+                    CUSTOM
+                </span>
+
+            </div>
+
+
+            <h3>
+                Custom
+                <br>
+                Project
+            </h3>
+
+
+            <div class="service-price">
+
+                <strong>
+                    Let's Talk
+                </strong>
+
+            </div>
+
+
+            <p>
+                High-end development for complex
+                projects where every scope,
+                interaction and integration is
+                different.
+            </p>
+
+
+            <ul>
+
+                <li>
+                    Advanced interaction systems
+                </li>
+
+                <li>
+                    Scalable CMS architecture
+                </li>
+
+                <li>
+                    Complex layouts
+                </li>
+
+                <li>
+                    Modular components
+                </li>
+
+                <li>
+                    API and external integrations
+                </li>
+
+                <li>
+                    Post-launch support
+                </li>
+
+            </ul>
+
+
+            <a
+                href="#contact"
+                class="service-button magnetic"
+                data-cursor="CONTACT"
+            >
+                Book a Call ↗
+            </a>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     TRANSFORMATION CTA
+========================================================== -->
+
+<section class="transformation section">
+
+    <div class="transformation-image">
+
+        <img
+            src="images/cta.jpg"
+            alt="Digital experience"
+        >
+
+        <div class="image-glass"></div>
+
+    </div>
+
+
+    <div class="transformation-content">
+
+        <span class="eyebrow">
+            Have something in mind?
+        </span>
+
+
+        <h2 class="mega-title reveal">
+
+            Transform
+            <br>
+
+            Your Webflow
+            <br>
+
+            Experience.
+
+        </h2>
+
+
+        <a
+            href="#contact"
+            class="mega-button magnetic"
+            data-cursor="LET'S TALK"
+        >
+
+            Let's Talk
+
+            <span>
+                ↗
+            </span>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     TESTIMONIALS
+========================================================== -->
+
+<section
+    class="section testimonials"
+    id="clients"
+>
+
+    <div class="section-meta">
+
+        <span>
+            Testimonials
+        </span>
+
+        <span>
+            From People I've Worked With
+        </span>
+
+    </div>
+
+
+    <h2 class="huge-title reveal">
+
+        From People
         <br>
-        Talk.
-      </h2>
 
+        I've Worked With.
 
-      <a
-        href="mailto:hello@example.com"
-        class="cta-button magnetic"
-        data-cursor="EMAIL"
-      >
-        hello@example.com
-      </a>
-
-    </section>
+    </h2>
 
 
 
-    <!-- ===================================================
-         TESTIMONIALS
-    ==================================================== -->
-
-    <section class="testimonials section">
-
-      <div class="section-label">
-        From people I've worked with
-      </div>
+    <div class="testimonial-track">
 
 
-      <div class="testimonial">
+        <!-- 01 -->
 
-        <div class="quote-mark">
-          "
-        </div>
+        <article class="testimonial glass-card">
 
-        <blockquote>
-          The work doesn't just look good.
-          It feels considered, intentional
-          and complete.
-        </blockquote>
-
-        <div class="testimonial-person">
-          CLIENT NAME
-          <br>
-          Creative Director
-        </div>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- ===================================================
-         FAQ
-    ==================================================== -->
-
-    <section class="faq section">
-
-      <div class="section-label">
-        FAQ
-      </div>
-
-
-      <h2 class="huge-heading reveal">
-        Got any
-        <br>
-        questions?
-      </h2>
-
-
-      <div class="faq-list">
-
-
-        <div class="faq-item">
-
-          <button class="faq-question">
-
-            <span>
-              What do you specialize in?
+            <span class="testimonial-number">
+                01
             </span>
 
-            <b>
-              +
-            </b>
 
-          </button>
+            <div class="quote">
+                “
+            </div>
 
-          <div class="faq-answer">
+
+            <h3>
+                Trusted long-term
+                collaborator.
+            </h3>
+
 
             <p>
-              I specialize in creative development,
-              web design, motion and interactive
-              digital experiences.
+                A reliable partner who communicates
+                clearly, solves technical problems
+                quickly and consistently delivers
+                strong work.
             </p>
 
-          </div>
 
-        </div>
+            <div class="person">
+
+                <strong>
+                    Danette Beal
+                </strong>
+
+                <span>
+                    VP of Marketing — Alosant
+                </span>
+
+            </div>
+
+        </article>
 
 
-        <div class="faq-item">
 
-          <button class="faq-question">
+        <!-- 02 -->
 
-            <span>
-              Can you work from an existing design?
+        <article class="testimonial glass-card">
+
+            <span class="testimonial-number">
+                02
             </span>
 
-            <b>
-              +
-            </b>
 
-          </button>
+            <div class="quote">
+                “
+            </div>
 
-          <div class="faq-answer">
+
+            <h3>
+                Thinks through
+                the entire experience.
+            </h3>
+
 
             <p>
-              Yes. I can work from Figma,
-              an existing design system or
-              a rough creative direction.
+                A developer who considers motion,
+                pacing, narrative and technical
+                execution as one complete experience.
             </p>
 
-          </div>
 
-        </div>
+            <div class="person">
+
+                <strong>
+                    Petar Stojakovic
+                </strong>
+
+                <span>
+                    Founder — FiftySeven
+                </span>
+
+            </div>
+
+        </article>
 
 
-        <div class="faq-item">
 
-          <button class="faq-question">
+        <!-- 03 -->
 
-            <span>
-              Do you create custom animations?
+        <article class="testimonial glass-card">
+
+            <span class="testimonial-number">
+                03
             </span>
 
-            <b>
-              +
-            </b>
 
-          </button>
+            <div class="quote">
+                “
+            </div>
 
-          <div class="faq-answer">
+
+            <h3>
+                Reliable, skilled,
+                and easy to work with.
+            </h3>
+
 
             <p>
-              Yes. Animations can be designed
-              around the personality and goals
-              of the project.
+                Delivered projects on schedule,
+                helped the design team and regularly
+                suggested smarter solutions.
             </p>
 
-          </div>
 
-        </div>
+            <div class="person">
+
+                <strong>
+                    Klemen Vute
+                </strong>
+
+                <span>
+                    PM — Povio
+                </span>
+
+            </div>
+
+        </article>
 
 
-        <div class="faq-item">
 
-          <button class="faq-question">
+        <!-- 04 -->
 
-            <span>
-              How can we work together?
+        <article class="testimonial glass-card">
+
+            <span class="testimonial-number">
+                04
             </span>
 
-            <b>
-              +
-            </b>
 
-          </button>
+            <div class="quote">
+                “
+            </div>
 
-          <div class="faq-answer">
+
+            <h3>
+                The details
+                set him apart.
+            </h3>
+
 
             <p>
-              Send me a message describing your
-              project, goals and timeline.
+                Speed and quality combined with
+                attention to the small details
+                that can make a website exceptional.
             </p>
 
-          </div>
+
+            <div class="person">
+
+                <strong>
+                    Johanna Dahlroos
+                </strong>
+
+                <span>
+                    Co-Founder & Creative Director
+                    — Moat Agency
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- 05 -->
+
+        <article class="testimonial glass-card">
+
+            <span class="testimonial-number">
+                05
+            </span>
+
+
+            <div class="quote">
+                “
+            </div>
+
+
+            <h3>
+                Design-focused,
+                reliable development.
+            </h3>
+
+
+            <p>
+                Strong understanding of design
+                and a consistent focus on refining
+                the final client experience.
+            </p>
+
+
+            <div class="person">
+
+                <strong>
+                    Marko Ivanovic
+                </strong>
+
+                <span>
+                    Legacy Agency
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- 06 -->
+
+        <article class="testimonial glass-card">
+
+            <span class="testimonial-number">
+                06
+            </span>
+
+
+            <div class="quote">
+                “
+            </div>
+
+
+            <h3>
+                A developer with
+                a true product mindset.
+            </h3>
+
+
+            <p>
+                A combination of speed, quality,
+                collaboration and thoughtful
+                product-oriented development.
+            </p>
+
+
+            <div class="person">
+
+                <strong>
+                    Chrissy Cowdrey
+                </strong>
+
+                <span>
+                    Product / Web Designer
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- 07 -->
+
+        <article class="testimonial glass-card">
+
+            <span class="testimonial-number">
+                07
+            </span>
+
+
+            <div class="quote">
+                “
+            </div>
+
+
+            <h3>
+                A proven
+                expert you trust.
+            </h3>
+
+
+            <p>
+                Consistent professionalism,
+                disciplined execution and
+                dependable results.
+            </p>
+
+
+            <div class="person">
+
+                <strong>
+                    Marko Ilic
+                </strong>
+
+                <span>
+                    Founder — SeeDesign
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- 08 -->
+
+        <article class="testimonial glass-card">
+
+            <span class="testimonial-number">
+                08
+            </span>
+
+
+            <div class="quote">
+                “
+            </div>
+
+
+            <h3>
+                Exceptional leadership
+                and technical ownership.
+            </h3>
+
+
+            <p>
+                Strong ownership of infrastructure
+                and technical decisions throughout
+                the project.
+            </p>
+
+
+            <div class="person">
+
+                <strong>
+                    Bart-Jan Leyts
+                </strong>
+
+                <span>
+                    CEO — Autorank
+                </span>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     FAQ
+========================================================== -->
+
+<section
+    class="section faq"
+    id="faq"
+>
+
+    <div class="section-meta">
+
+        <span>
+            FAQ
+        </span>
+
+        <span>
+            Got any questions?
+        </span>
+
+    </div>
+
+
+    <div class="faq-layout">
+
+        <h2 class="huge-title reveal">
+
+            Got any
+            <br>
+
+            questions?
+
+        </h2>
+
+
+        <div class="faq-list">
+
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+
+                    <span>
+                        Why Webflow instead of custom code?
+                    </span>
+
+                    <b>
+                        +
+                    </b>
+
+                </button>
+
+
+                <div class="faq-answer">
+
+                    <p>
+                        Webflow gives teams a visual
+                        platform they can continue
+                        managing while still allowing
+                        custom development, integrations
+                        and highly tailored experiences.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+
+                    <span>
+                        Already have a Webflow site?
+                    </span>
+
+                    <b>
+                        +
+                    </b>
+
+                </button>
+
+
+                <div class="faq-answer">
+
+                    <p>
+                        Existing sites can be audited,
+                        cleaned up, optimized and expanded
+                        without necessarily starting over.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+
+                    <span>
+                        What's the process?
+                    </span>
+
+                    <b>
+                        +
+                    </b>
+
+                </button>
+
+
+                <div class="faq-answer">
+
+                    <p>
+                        The process starts with goals,
+                        scope and timeline, followed by
+                        staged development and regular
+                        feedback before launch.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+
+                    <span>
+                        Do you work under NDA?
+                    </span>
+
+                    <b>
+                        +
+                    </b>
+
+                </button>
+
+
+                <div class="faq-answer">
+
+                    <p>
+                        Yes. Confidential projects can
+                        be handled under an NDA when
+                        required.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+
+                    <span>
+                        Do you handle design too?
+                    </span>
+
+                    <b>
+                        +
+                    </b>
+
+                </button>
+
+
+                <div class="faq-answer">
+
+                    <p>
+                        Development is the primary focus,
+                        with strong attention to design
+                        quality and close collaboration
+                        with designers.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+
+                    <span>
+                        What does ongoing support look like?
+                    </span>
+
+                    <b>
+                        +
+                    </b>
+
+                </button>
+
+
+                <div class="faq-answer">
+
+                    <p>
+                        Ongoing support can cover new
+                        sections, improvements, campaigns,
+                        CMS changes, maintenance,
+                        performance and technical SEO.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+
+                    <span>
+                        How are revisions handled?
+                    </span>
+
+                    <b>
+                        +
+                    </b>
+
+                </button>
+
+
+                <div class="faq-answer">
+
+                    <p>
+                        Feedback is collected throughout
+                        development so changes can be
+                        made while the work is still
+                        flexible.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+
+                    <span>
+                        Not sure which plan fits?
+                    </span>
+
+                    <b>
+                        +
+                    </b>
+
+                </button>
+
+
+                <div class="faq-answer">
+
+                    <p>
+                        Start with a conversation about
+                        your project, goals and timeline.
+                        The appropriate scope can then
+                        be worked out together.
+                    </p>
+
+                </div>
+
+            </div>
 
         </div>
 
+    </div>
 
-      </div>
-
-    </section>
-
-  </main>
+</section>
 
 
 
-  <!-- =====================================================
-       FOOTER
-  ====================================================== -->
+<!-- =========================================================
+     CONTACT
+========================================================== -->
 
-  <footer
-    class="footer"
+<section
+    class="contact"
     id="contact"
-  >
+>
 
-    <div class="footer-top">
+    <div class="contact-glow"></div>
 
-      <span>
-        YOUR NAME
-      </span>
 
-      <span>
-        2026
-      </span>
+    <div class="contact-inner">
+
+        <span class="eyebrow">
+            Have something in mind?
+        </span>
+
+
+        <h2 class="contact-title">
+
+            Let's
+            <br>
+
+            Talk.
+
+        </h2>
+
+
+        <a
+            href="mailto:nenad@popadic.co"
+            class="email-button magnetic"
+            data-cursor="EMAIL"
+        >
+
+            nenad@popadic.co
+
+            <span>
+                ↗
+            </span>
+
+        </a>
 
     </div>
 
 
-    <div class="footer-title">
-      Let's
-      <br>
-      Build.
-    </div>
+
+    <footer>
+
+        <div class="footer-top">
+
+            <span>
+                NESH®
+            </span>
+
+            <span>
+                2026
+            </span>
+
+        </div>
 
 
-    <div class="footer-bottom">
+        <div class="footer-bottom">
 
-      <a href="mailto:hello@example.com">
-        hello@example.com
-      </a>
-
-      <div>
-
-        <a href="#">
-          Instagram
-        </a>
-
-        <a href="#">
-          LinkedIn
-        </a>
-
-        <a href="#">
-          GitHub
-        </a>
-
-      </div>
-
-    </div>
-
-  </footer>
+            <span>
+                Webflow · Development · Motion
+            </span>
 
 
-  <script src="script.js"></script>
+            <div>
+
+                <a href="#home">
+                    Home
+                </a>
+
+                <a href="#projects">
+                    Projects
+                </a>
+
+                <a href="#contact">
+                    Contact
+                </a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =========================================================
+     SCRIPT
+========================================================== -->
+
+<script src="script.js"></script>
 
 </body>
+
 </html>
